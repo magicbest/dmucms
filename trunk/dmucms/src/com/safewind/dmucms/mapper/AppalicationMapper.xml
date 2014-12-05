@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+<mapper namespace="com.safewind.dmucms.dao.AppalicationDao">
+   <resultMap  id="studentResultMap"  type="com.safewind.dmucms.model.Student" >
+       <result column="XH" property="studentId"/>
+       <result column="XM" property="studentName"/>
+       <result column="XYM" property="studentCollega"/>
+       <result column="ZYM" property="studentMajor"/>
+       <result column="BM" property="studentClass"/>
+       <result column="XB" property="studentSex"/>
+       <result column="MZMC" property="studentNation"/>
+       <result column="CSRQ" property="studentBirthDay"/>
+       <result column="STUDENT_EMAIL" property="studentEmail"/>
+       <result column="STUDENT_PHONE" property="studentPhone"/>
+       <result column="STUDENT_RESEARCH" property="studentResearch"/>
+   </resultMap>
+   
+   
+   <resultMap  id="projectResultMap"  type="com.safewind.dmucms.model.Project" >
+       <result column="PROJECT_REAL_ID" property="projectRealId"/>
+       <result column="PROJECT_NAME" property="projectName"/>
+       <result column="PROJECT_RANK" property="projectRank"/>
+       <result column="PROJECT_FROM" property="projectFrom"/>
+       <result column="PROJECT_FROM_NAME" property="projectFromName"/>
+       <result column="PROJECT_TUTOR_ID" property="projectTeacherId"/>
+       <result column="PROJECT_CONTENT" property="projectContent"/>
+       <result column="PROJECT_COST" property="projectCost"/>
+       <result column="PROJECT_SUBJECT" property="projectSubject"/>
+       <result column="PROJECT_SPECIAL" property="projectSpecial"/>
+       <result column="PROJECT_TUTOR_NAME" property="projectTeacherName"/>
+       <result column="PROJECT_TYPE" property="projectType"/>
+   </resultMap>
+   
+   
+   <resultMap  id="costResultMap"  type="com.safewind.dmucms.model.Cost" >
+       <result column="EQUIPMENT_COST" property="equipmentCost"/>
+       <result column="EQUIPMENT_USE" property="equipmentUse"/>
+       <result column="MATERIAL_COST" property="materialCost"/>
+       <result column="MATERIAL_USE" property="materialUse"/>
+       <result column="TEST_COST" property="testCost"/>
+       <result column="TEST_USE" property="testUse"/>
+       <result column="TRAFFIC_COST" property="trafficCost"/>
+       <result column="TRAFFIC_USE" property="trafficUse"/>
+       <result column="PUBLISH_COST" property="publishCost"/>
+       <result column="PUBLISH_USE" property="publishUse"/>
+       <result column="LABOUR_COST" property="labourCost"/>
+       <result column="LABOUR_USE" property="labourUse"/>
+       <result column="EXPERT_COST" property="expertCost"/>
+       <result column="EXPERT_USE" property="expertUse"/>
+   </resultMap>
+   
+   
+   <resultMap  id="teamMemberResultMap"  type="com.safewind.dmucms.model.TeamMember" >
+       <result column="XM" property="memberName"/>
+       <result column="XH" property="memberId"/>
+       <result column="BM" property="memberCalss"/>
+       <result column="XYM" property="memberCollega"/>
+       <result column="STUDENT_WORK" property="memberWork"/>
+   </resultMap>
+   
+   
+  <resultMap  id="businessTeacherResultMap"  type="com.safewind.dmucms.model.BusinessTeacher" >
+       <result column="BUSINESS_TEACHER_NAME" property="businessTeacherName"/>
+       <result column="BUSINESS_TEACHER_PHONE" property="businessTeacherPhone"/>
+       <result column="BUSINESS_TEACHER_COMPANY" property="businessTeacherCompany"/>
+       <result column="BUSINESS_TEACHER_TITLE" property="businessTeacherTitle"/>
+   </resultMap>
+   
+   
+   <select id="getStudentInputFlag"  parameterType="String" resultType="Integer" >
+      select  count(*) from  "DLMU_DXSCX"."PROJECT" where  "PROJECT_HEAD_ID" = #{studentId}
+   </select>
+   
+   <select id="getStudentBasicInfo"  parameterType="String" resultMap="studentResultMap" >       
+       select
+        "XH",
+        "XM",
+        "BM",
+        "ZYM",
+        "XYM" 
+    from
+        "DATACT"."VI_XG_DXS_XSXJ"
+    where 
+         XH = #{studentId}
+   </select>
+   
+   <insert id="saveProjectInfo"   parameterType="com.safewind.dmucms.model.Project">
+<!--        <selectKey resultType="int" order="AFTER">
+            select PROJECT_SEQUENCE.nextval FROM DUAL; 
+       </selectKey> -->
+       insert into "DLMU_DXSCX"."PROJECT"
+       (
+        "PROJECT_REAL_ID",
+        "PROJECT_NAME",
+        "PROJECT_HEAD_ID",
+        "PROJECT_RANK",
+        "PROJECT_FROM",
+        "PROJECT_FROM_NAME",
+        "PROJECT_TUTOR_ID" ,
+        "PROJECT_CONTENT",
+        "PROJECT_SPECIAL",
+        "PROJECT_SUBJECT",
+        "PROJECT_TYPE",
+        "PROJECT_YEAR"
+        )
+        values
+        (#{projectRealId,javaType=String, jdbcType=VARCHAR},
+         #{projectName,javaType=String, jdbcType=VARCHAR},
+         #{projectMasterId,javaType=String, jdbcType=VARCHAR},
+         #{projectRank,javaType=String, jdbcType=VARCHAR},
+         #{projectFrom,javaType=String, jdbcType=VARCHAR},
+         #{projectFromName,javaType=String, jdbcType=VARCHAR},
+         #{projectTeacherId,javaType=String, jdbcType=VARCHAR},
+         #{projectContent,javaType=String, jdbcType=VARCHAR},
+         #{projectSpecial,javaType=String, jdbcType=VARCHAR},
+         #{projectSubject,javaType=String, jdbcType=VARCHAR},
+         #{projectType,javaType=String, jdbcType=VARCHAR},
+         '2015'
+        )
+   </insert>
+   
+    <insert id="saveTeamInfo" >
+       insert into "DLMU_DXSCX"."TEAM"
+       (
+        "PROJECT_ID",
+        "STUDENT_ID",
+        "PROJECT_YEAR",
+        "STUDENT_ROLE",
+        "STUDENT_WORK" 
+        )
+        values
+        (#{projectId},
+         #{memberId},
+         '2015',
+         'M',
+         #{projectMemberWork}
+        )
+   </insert>
+   
+   
+   <insert id="saveCostInfo" parameterType="com.safewind.dmucms.model.Cost" >
+       insert into "DLMU_DXSCX"."COST"
+       (
+        "PROJECT_ID",
+        "PROJECT_YEAR",
+        "EQUIPMENT_COST",
+        "EQUIPMENT_USE",
+        "MATERIAL_COST",
+        "MATERIAL_USE",
+        "TEST_COST",
+        "TEST_USE",
+        "TRAFFIC_COST",
+        "TRAFFIC_USE",
+        "PUBLISH_COST",
+        "PUBLISH_USE",
+        "LABOUR_COST",
+        "LABOUR_USE",
+        "EXPERT_COST",
+        "EXPERT_USE" 
+        )
+        values
+        (
+          #{projectId},
+          '2015',
+         #{equipmentCost,javaType=String, jdbcType=VARCHAR},
+         #{equipmentUse,javaType=String, jdbcType=VARCHAR},
+         #{materialCost,javaType=String, jdbcType=VARCHAR},
+         #{materialUse,javaType=String, jdbcType=VARCHAR},
+         #{testCost,javaType=String, jdbcType=VARCHAR},
+         #{testUse,javaType=String, jdbcType=VARCHAR},
+         #{trafficCost,javaType=String, jdbcType=VARCHAR},
+         #{trafficUse,javaType=String, jdbcType=VARCHAR},
+         #{publishCost,javaType=String, jdbcType=VARCHAR},
+         #{publishUse,javaType=String, jdbcType=VARCHAR},
+         #{labourCost,javaType=String, jdbcType=VARCHAR},
+         #{labourUse,javaType=String, jdbcType=VARCHAR},
+         #{expertCost,javaType=String, jdbcType=VARCHAR},
+         #{expertUse,javaType=String, jdbcType=VARCHAR}
+        )
+   </insert>
+   
+   
+   <select id="queryProjectIdByUserId"  parameterType="String" resultType="Integer" >
+       select  "PROJECT_INCREAMENT_ID" from  "DLMU_DXSCX"."PROJECT" where  "PROJECT_HEAD_ID" = #{studentId}
+   </select>
+   
+   <insert id="saveStudentInfo"  parameterType="com.safewind.dmucms.model.Student" >
+     insert into "DLMU_DXSCX"."STUDENT"
+     (
+        "STUDENT_ID",
+        "STUDENT_EMAIL",
+        "STUDENT_PHONE",
+        "STUDENT_RESEARCH" 
+      )
+      values
+      (
+         #{studentId,javaType=String, jdbcType=VARCHAR},
+         #{studentEmail,javaType=String, jdbcType=VARCHAR},
+         #{studentPhone,javaType=String, jdbcType=VARCHAR},
+         #{studentResearch,javaType=String, jdbcType=VARCHAR}
+      )
+   </insert>
+   
+    <select id="getStudentTotalInfo"  parameterType="String" resultMap="studentResultMap" >
+    select * from 
+    (select *
+    from
+        "DATACT"."VI_XG_DXS_XSXJ"      
+    where "XH" = #{studentId}) t1
+    ,
+    (select  *
+    from
+        "DLMU_DXSCX"."STUDENT"
+    where "STUDENT_ID" = #{studentId}) t2
+   </select>
+   
+   <select id="getProjectInfo"  parameterType="int" resultMap="projectResultMap" >
+       select
+        "PROJECT_INCREAMENT_ID",
+        "PROJECT_REAL_ID",
+        "PROJECT_NAME",
+        "PROJECT_HEAD_ID",
+        "PROJECT_RANK",
+        "PROJECT_FROM",
+        "PROJECT_FROM_NAME",
+        "PROJECT_TUTOR_ID",
+        "PROJECT_CONTENT",
+        "PROJECT_COST",
+        "PROJECT_SUBJECT",
+        "PROJECT_SPECIAL",
+        PROJECT_TUTOR_NAME,
+        "PROJECT_TYPE",
+        "PROJECT_YEAR" 
+    from
+        "DLMU_DXSCX"."PROJECT"
+    where
+        PROJECT_INCREAMENT_ID = #{projectId}
+   </select>
+   
+   
+   <select id="getCostInfo"  parameterType="int" resultMap="costResultMap" >
+       select
+        "PROJECT_ID",
+        "EQUIPMENT_COST",
+        "EQUIPMENT_USE",
+        "MATERIAL_COST",
+        "MATERIAL_USE",
+        "TEST_COST",
+        "TEST_USE",
+        "TRAFFIC_COST",
+        "TRAFFIC_USE",
+        "PUBLISH_COST",
+        "PUBLISH_USE",
+        "LABOUR_COST",
+        "LABOUR_USE",
+        "EXPERT_COST",
+        "EXPERT_USE",
+        "PROJECT_YEAR" 
+    from
+        "DLMU_DXSCX"."COST"
+     where
+        PROJECT_ID = #{projectId} and  PROJECT_YEAR = '2015'
+   </select>
+   
+   
+   <select id="getTeamMemberInfo"  parameterType="int" resultMap="teamMemberResultMap" >
+      select
+       *
+      from
+         "DLMU_DXSCX"."TEAM" a
+      left join "DATACT"."VI_XG_DXS_XSXJ" b
+      on a.STUDENT_ID = b.XH
+      where  PROJECT_YEAR = '2015' and PROJECT_ID =  #{projectId}
+   </select>
+   
+   
+    <insert id="saveBusinessTeacherInfo"  parameterType="com.safewind.dmucms.model.BusinessTeacher" >
+     insert into "DLMU_DXSCX"."BUSINESSTEACHER"
+      (
+       "PROJECT_ID",
+        "BUSINESS_TEACHER_NAME",
+        "BUSINESS_TEACHER_PHONE",
+        "BUSINESS_TEACHER_COMPANY",
+        "BUSINESS_TEACHER_TITLE"  
+      )
+      values
+      (
+         #{projectId},
+         #{businessTeacherName,javaType=String, jdbcType=VARCHAR},
+         #{businessTeacherPhone,javaType=String, jdbcType=VARCHAR},
+         #{businessTeacherCompany,javaType=String, jdbcType=VARCHAR},
+         #{businessTeacherTitle,javaType=String, jdbcType=VARCHAR}
+      )
+   </insert>
+   
+   
+   <select id="getBusinessTeacher"  parameterType="int" resultMap="businessTeacherResultMap" >
+      select
+        "PROJECT_ID",
+        "BUSINESS_TEACHER_NAME",
+        "BUSINESS_TEACHER_PHONE",
+        "BUSINESS_TEACHER_COMPANY",
+        "BUSINESS_TEACHER_TITLE" 
+    from
+        "DLMU_DXSCX"."BUSINESSTEACHER"
+    where  PROJECT_ID = #{projectId}
+   </select>
+   
+</mapper>
