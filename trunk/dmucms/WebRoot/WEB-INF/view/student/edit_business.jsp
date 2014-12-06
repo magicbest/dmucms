@@ -31,7 +31,6 @@ $(function () {
 	$("#btn_addtr").click(function () {
 
 		var length = $("#dynamicTable tbody tr").length;
-		//alert(length);
 		if (length < show_count)    //点击时候，如果当前的数字小于递增结束的条件
 		{
 			$("#tab11 tbody tr").clone().appendTo("#dynamicTable tbody");   //在表格后面添加一行
@@ -45,7 +44,7 @@ $(function () {
 
 });
 function changeIndex() {
-	var i = ${fn:length(memberList)} + 1;
+	var i =  1;
 	$("#dynamicTable tbody tr").each(function () { //循环tab tbody下的tr
 		$(this).find("input[name='NO']").val(i++);//更新行号
 	});
@@ -205,7 +204,21 @@ function deltr(opp) {
 											<center><label>项目成员（不包括队长，最多四人）</label></center>
 										</div>	
 										<div style="width:720px;margin:20px auto;">
-										
+										    <table id="tab11" style="display: none">
+												<tbody>
+													<tr>
+														<td height="30" align="center" width="80">
+															<input type="text" name="NO" size="2" value="1" /></td>
+														<td align="center" width="150">
+															<input type="text" id="number" name="projectMemberId" /></td>
+														<td align="center" width="350">
+															<input type="text" name="projectMemberWork" maxlength="100" /></td>
+														<td>
+															<input type="button" id="Button1" onClick="deltr(this)" value="删除一名" class="btn btn-danger"/>
+														</td>
+													</tr>
+												</tbody>
+											</table>
 										   <table id="dynamicTable" width="700" border="0" cellspacing="0" cellpadding="0">
 												<thead>
 													<tr>
@@ -216,13 +229,7 @@ function deltr(opp) {
 													</tr>
 												</thead>
 												<tbody>
-													
-												</tbody>
-											</table>
-
-											<table id="tab11" >
-												<tbody>
-												  <c:forEach items="${memberList}" var="member" varStatus="index">
+													 <c:forEach items="${memberList}" var="member" varStatus="index">
 													<tr>
 														<td height="30" align="center" width="80">
 															<input type="text" name="NO" size="2" value="${index.count}" /></td>
@@ -237,6 +244,8 @@ function deltr(opp) {
 												   </c:forEach>
 												</tbody>
 											</table>
+
+											
 
 										</div>										
 									</div>
