@@ -4,9 +4,12 @@ package com.safewind.dmucms.controler;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +26,8 @@ import com.safewind.dmucms.util.UserAccoutUtil;
 
 @Controller
 public class ProjectApplicationControler {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ProjectApplicationControler.class);
 	
 	@Autowired
 	private IAppalicationService AppalicationServiceImpl ;
@@ -43,7 +48,7 @@ public class ProjectApplicationControler {
 	}
 	
 	
-	@RequestMapping(value = "/businessAppalication", method = RequestMethod.GET)
+	@RequestMapping(value = "/businessApplication", method = RequestMethod.GET)
 	public String loadBusinessPage(Model model) {
 		// 获取当前登录用户的静态方法
 		String studentId = UserAccoutUtil.getUserLoginId() ;
@@ -61,50 +66,81 @@ public class ProjectApplicationControler {
 	
 	@RequestMapping(value = "/innovationApplication", method = RequestMethod.POST)
 	public String saveApplication(
-			@RequestParam(value="projectMemberId") String[] projectMemberId ,@RequestParam(value="projectMemberWork")String[] projectMemberWork,Project project , Cost cost , Student student ,Model model) {
-		project.setProjectMasterId(UserAccoutUtil.getUserLoginId());
-		AppalicationServiceImpl.saveStudentInfo(student);
-		int temp = AppalicationServiceImpl.saveProjectInfo(project);
-		int projectId = AppalicationServiceImpl.queryProjectId(UserAccoutUtil.getUserLoginId());
-		AppalicationServiceImpl.saveTeamInfo(projectMemberId,projectId,projectMemberWork);
-		cost.setProjectId(projectId);
-		AppalicationServiceImpl.saveCostInfo(cost);
-		
+			@RequestParam(value="projectMemberId") String[] projectMemberId ,
+			@RequestParam(value="projectMemberWork")String[] projectMemberWork,
+			Project project , 
+			Cost cost , 
+			Student student ,Model model) {
+		AppalicationServiceImpl.saveInnovationApplication(projectMemberId,projectMemberWork,project,cost,student);		
 		return "student/save_success";
 	}
 	
 	
-	@RequestMapping(value = "/businessAppalication", method = RequestMethod.POST)
+	@RequestMapping(value = "/businessApplication", method = RequestMethod.POST)
 	public String saveBusinessApplication(
 			@RequestParam(value="projectMemberId") String[] projectMemberId ,@RequestParam(value="projectMemberWork")String[] projectMemberWork,Project project , BusinessTeacher businessTeacher , Cost cost , Student student ,Model model) {
-		project.setProjectMasterId(UserAccoutUtil.getUserLoginId());
-		AppalicationServiceImpl.saveStudentInfo(student);
-		int temp = AppalicationServiceImpl.saveProjectInfo(project);
-		int projectId = AppalicationServiceImpl.queryProjectId(UserAccoutUtil.getUserLoginId());
-		businessTeacher.setProjectId(projectId);
-		AppalicationServiceImpl.saveBusinessTeacherInfo(businessTeacher);
-		AppalicationServiceImpl.saveTeamInfo(projectMemberId,projectId,projectMemberWork);
-		cost.setProjectId(projectId);
-		AppalicationServiceImpl.saveCostInfo(cost);
 		
+		AppalicationServiceImpl.saveBusinessApplication(projectMemberId,projectMemberWork,project,businessTeacher,cost,student);
 		return "student/save_success";
 	}
 	
 	
-	@RequestMapping(value = "/editApplication", method = RequestMethod.GET)
-	public String editApplicationPage(Model model) {
-		return "student/edit_appalication";
+	@RequestMapping(value = "/appalication/{studentId}/edit", method = RequestMethod.GET)
+	public String editApplicationPage(@PathVariable String studentId,Model model) {
+		
+		logger.info("--------  进入修改页面  -------");
+		
+		studentId = UserAccoutUtil.getUserLoginId();
+	    int projectId = AppalicationServiceImpl.queryProjectId(studentId);
+		Student student = AppalicationServiceImpl.getStudentTotalInfo(studentId);
+		Project project = AppalicationServiceImpl.getProjectInfo(projectId);
+		
+		if("CY".equals(project.getProjectType()))
+		{
+			Cost cost  = AppalicationServiceImpl.getCostInfo(projectId);
+			BusinessTeacher businessTeacher = AppalicationServiceImpl.getBusinessTeacher(projectId);
+			List<TeamMember> memberList = AppalicationServiceImpl.getTeamMemberInfo(projectId);
+			
+			
+			model.addAttribute("memberList", memberList);
+			model.addAttribute("student", student);
+			model.addAttribute("project", project);
+			model.addAttribute("cost", cost);
+			model.addAttribute("businessTeacher", businessTeacher);
+			return "student/edit_business";
+		}
+		else {
+			Cost cost  = AppalicationServiceImpl.getCostInfo(projectId);
+			List<TeamMember> memberList = AppalicationServiceImpl.getTeamMemberInfo(projectId);
+			
+			logger.info("团队人数 ： " + memberList.size());
+			
+			model.addAttribute("memberList", memberList);
+			model.addAttribute("student", student);
+			model.addAttribute("project", project);
+			model.addAttribute("cost", cost);
+			return "student/edit_innovation";
+		}
 	}
 	
 	
-	@RequestMapping(value = "/updateApplication", method = RequestMethod.POST)
-	public String updateApplicationPage(Appalication appalication  , Model model) {
-		int updateResult = AppalicationServiceImpl.updateAppalication(appalication);
-		return "student/appalication_index";
+	@RequestMapping(value = "/appalication/{studentId}/edit", method = RequestMethod.POST)
+	public String updateApplicationPage(
+			@PathVariable String studentId,
+			@RequestParam(value="projectMemberId") String[] projectMemberId ,
+			@RequestParam(value="projectMemberWork")String[] projectMemberWork,
+			Project project ,
+			BusinessTeacher businessTeacher ,
+			Cost cost , 
+			Student student ) {
+		studentId = UserAccoutUtil.getUserLoginId();
+		logger.info("当前用户Id ： " + studentId);
+	    AppalicationServiceImpl.updateApplicationInfo(studentId,projectMemberId,projectMemberWork,project,businessTeacher,cost,student);
+		return "student/update_success";
 	}
 	
 	
-	@RequestMapping(value = "/viewAppalication", method = RequestMethod.GET)
+	@RequestMapping(value = "/viewApplication", method = RequestMethod.GET)
 	public String viewApplicationPage(Model model) {
 		String studentId =  UserAccoutUtil.getUserLoginId() ;
 		
