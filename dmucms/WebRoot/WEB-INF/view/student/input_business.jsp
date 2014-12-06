@@ -15,14 +15,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<title>大连海事大学大创管理系统</title>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-		<link rel="stylesheet" href="css/unicorn.main.css" />
-		<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />	
-		<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-         <script type="text/javascript" src="ckfinder/ckfinder.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-responsive.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/unicorn.main.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/unicorn.grey.css" class="skin-color" />	
+		<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+         <script type="text/javascript" src="${pageContext.request.contextPath}/ckfinder/ckfinder.js"></script>
 	     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	     <script src="js/jquery.min.js"></script>
+	     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript">
 $(function () {
 	var show_count = 4;   //要显示的条数
@@ -97,8 +97,8 @@ function deltr(opp) {
 					<a href="#"><i class="icon icon-th-list"></i> <span>项目管理</span> <span class="label">3</span></a>
 					<ul>
 						<li ><a href="${pageContext.request.contextPath}/innovationApplication">创新项目申请</a></li>
-						<li class="active"><a href="${pageContext.request.contextPath}/businessAppalication">创业项目申请</a></li>
-						<li><a href="${pageContext.request.contextPath}/viewAppalication" target="_blank">查看申请书</a></li>
+						<li class="active"><a href="${pageContext.request.contextPath}/businessApplication">创业项目申请</a></li>
+						<li><a href="${pageContext.request.contextPath}/viewApplication" target="_blank">查看申请书</a></li>
 					</ul>
 				</li>
 				
@@ -137,7 +137,7 @@ function deltr(opp) {
 								<h5>填写项目申请书</h5>
 							</div>
 							<div class="widget-content nopadding">
-								<form id="form-wizard" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/businessAppalication" />
+								<form id="form-wizard" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/businessApplication" />
 									
 									<div id="form-wizard-1" class="step">
 									    <div class="control-group">
@@ -454,11 +454,11 @@ function deltr(opp) {
 		
             
             
-            <script src="js/jquery.ui.custom.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.validate.js"></script>
-            <script src="js/jquery.wizard.js"></script>
-            <script src="js/unicorn.js"></script>
-            <script src="js/unicorn.wizard.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.ui.custom.js"></script>
+            <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.wizard.js"></script>
+            <script src="${pageContext.request.contextPath}/js/unicorn.js"></script>
+            <script src="${pageContext.request.contextPath}/js/unicorn.wizard.js"></script>
 	</body>
 </html>
