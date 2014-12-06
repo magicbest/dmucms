@@ -17,7 +17,7 @@ public interface AppalicationDao
 {
 	Student getStudentBasicInfo(@Param("studentId")String studentId);
 
-	int saveProjectInfo(Project project);
+	void saveProjectInfo(Project project);
 
 	int getStudentInputFlag(@Param("studentId")String studentId);
 
@@ -41,6 +41,16 @@ public interface AppalicationDao
 	void saveBusinessTeacherInfo(BusinessTeacher businessTeacher);
 
 	BusinessTeacher getBusinessTeacher(@Param("projectId")int projectId);
+
+	void updateProjectInfo(Project project);
+
+	void updateCostInfo(Cost cost);
+
+	void updateStudentInfo(Student student);
+
+	void deleteOldTeamInfo(@Param("projectId")int projectId);
+
+	void updateBusinessTeacherInfo(BusinessTeacher businessTeacher);
 
 	
 }
