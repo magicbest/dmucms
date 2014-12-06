@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a href="${pageContext.request.contextPath}/innovationApplication" class="btn btn-success">填写创新申请书</a>
                             <a href="${pageContext.request.contextPath}/businessApplication" class="btn btn-success">填写创业申请书</a>
                             <a href="${pageContext.request.contextPath}/viewApplication" class="btn btn-success">查看申请书</a>
-                            <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit" target="_blank" class="btn btn-success">修改申请书</a>
+                            <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit"  class="btn btn-success">修改申请书</a>
                        
 						    </center>
 					</div>
