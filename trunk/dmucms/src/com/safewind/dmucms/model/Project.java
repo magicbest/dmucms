@@ -1,6 +1,7 @@
 package com.safewind.dmucms.model;
 
 public class Project {
+	private Integer projectId ;
 	private String  projectRealId ;
 	private String  projectType;
 	private String  projectName;
@@ -16,6 +17,12 @@ public class Project {
 	private String  projectSpecial;
 	
 	
+	public Integer getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
 	public String getProjectRealId() {
 		return projectRealId;
 	}
