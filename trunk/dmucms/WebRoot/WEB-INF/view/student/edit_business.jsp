@@ -4,6 +4,7 @@
 <%@ taglib uri="http://ckeditor.com" prefix="ckeditor" %>
 <%@page import="java.util.*"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -26,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 $(function () {
 	var show_count = 4;   //要显示的条数
-	var count = 1;    //递增的开始值，这里是你的ID
+	var count = ${fn:length(memberList)} + 1 ;    //递增的开始值，这里是你的ID
 	$("#btn_addtr").click(function () {
 
 		var length = $("#dynamicTable tbody tr").length;
@@ -37,14 +38,14 @@ $(function () {
 			changeIndex();//更新行号
 		}
 		if (length >= show_count) {
-		alert("最多只能有四名队员（不包含队长）");
+		    alert("最多只能有四名队员（不包含队长）");
 	    } 
 	});
 
 
 });
 function changeIndex() {
-	var i = 1;
+	var i = ${fn:length(memberList)} + 1;
 	$("#dynamicTable tbody tr").each(function () { //循环tab tbody下的tr
 		$(this).find("input[name='NO']").val(i++);//更新行号
 	});
@@ -59,9 +60,6 @@ function deltr(opp) {
 	
 }
 </script>
-
-
-
 	</head>
 	<body>
 		
@@ -69,28 +67,6 @@ function deltr(opp) {
 		<div id="header">
 			<h1><a href="#">大创客户端</a></h1>		
 		</div>
-		<!--搜索按钮
-		<div id="search">
-			<input type="text" placeholder="Search here..." /><button type="submit" class="tip-right" title="Search"><i class="icon-search icon-white"></i></button>
-		</div>
-		-->
-		<!--右上按钮
-		<div id="user-nav" class="navbar navbar-inverse">
-            <ul class="nav btn-group">
-                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
-                <li class="btn btn-inverse dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a class="sAdd" title="" href="#">new message</a></li>
-                        <li><a class="sInbox" title="" href="#">inbox</a></li>
-                        <li><a class="sOutbox" title="" href="#">outbox</a></li>
-                        <li><a class="sTrash" title="" href="#">trash</a></li>
-                    </ul>
-                </li>
-                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-                <li class="btn btn-inverse"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
-            </ul>
-        </div>
-		-->
             
 		<div id="sidebar">
 			<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> Wizard</a>
@@ -99,8 +75,8 @@ function deltr(opp) {
 				<li class="submenu active open">
 					<a href="#"><i class="icon icon-th-list"></i> <span>项目管理</span> <span class="label">3</span></a>
 					<ul>
-						<li class="active"><a href="${pageContext.request.contextPath}/innovationApplication">创新项目申请</a></li>
-						<li><a href="${pageContext.request.contextPath}/businessApplication">创业项目申请</a></li>
+						<li ><a href="${pageContext.request.contextPath}/innovationApplication">创新项目申请</a></li>
+						<li class="active"><a href="${pageContext.request.contextPath}/businessApplication">创业项目申请</a></li>
 						<li><a href="${pageContext.request.contextPath}/viewApplication" target="_blank">查看申请书</a></li>
 					</ul>
 				</li>
@@ -140,32 +116,31 @@ function deltr(opp) {
 								<h5>填写项目申请书</h5>
 							</div>
 							<div class="widget-content nopadding">
-								<form id="form-wizard" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/innovationApplication" />
+								<form id="form-wizard" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit" />
 									
 									<div id="form-wizard-1" class="step">
 									    <div class="control-group">
 											<label class="control-label">项目名称</label>
 											<div class="controls">
-												<input id="projectName" type="text" name="projectName" maxlength="100"/>
-												<input  type="hidden" name="projectType" value="CX"  />
+												<input id="projectName" type="text" name="projectName"  value="${project.projectName}"  maxlength="100"/>
+												<input  type="hidden" name="projectType" value="CY"  />
 											</div>
 										</div>
-										<div class="control-group">
+										 <div class="control-group">
 										<label class="control-label">项目简介（100字以内）</label>
 										   <div class="controls">
-											<textarea maxlength="100" name="projectSpecial"  style="height:70px;" id="required"></textarea>
+											<textarea maxlength="100" name="projectSpecial" style="height:70px;" id="required"> ${project.projectSpecial} </textarea>
 										   </div>
 									    </div>	
 										<div class="control-group">
 										<center><h3>立项依据</h3></center>
 										   <div >
-											<textarea id="editor1"  name="projectContent" >（一）研究目的<br/>（二）研究内容<br/>（三）国、内外研究现状和发展动态<br/>（四）创新点与项目特色<br/>（五）技术路线、拟解决的问题及预期成果<br/>（六）项目研究进度安排<br/>（七）已有基础
-						<br>&nbsp;&nbsp;&nbsp;1．与本项目有关的研究积累和已取得的成绩<br/>&nbsp;&nbsp;&nbsp;2．已具备的条件，尚缺少的条件及解决方法</textarea>
+											<textarea id="editor1"  name="projectContent"  >${project.projectContent}</textarea>
 						                     <ckf:setupCKEditor  basePath="/dmucms/ckfinder/"  editor="editor1"/>
 					                         <ckeditor:replace  replace="editor1" basePath="/dmucms/ckeditor/" />
 										   </div>
 									    </div>	
-                                        										
+                                       										
 									</div>
 									
 									<div id="form-wizard-2" class="step">
@@ -178,28 +153,51 @@ function deltr(opp) {
 										<div class="control-group">
 											<label class="control-label">负责人邮箱</label>
 											<div class="controls">
-												<input id="email" name="studentEmail"  type="text" name="email2" />
+												<input id="email" name="studentEmail" value="${student.studentEmail}" type="text" name="email2" />
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label">负责人电话</label>
 											<div class="controls">
-											<input type="text" name="studentPhone" id="number" />
+											<input type="text" name="studentPhone"  value="${student.studentPhone}" id="number" />
 										    </div>
 										</div>
 										<div class="control-group">
 										<label class="control-label">负责人参与科研情况<br/>(300字以内）</label>
 										   <div class="controls">
-											<textarea  name="studentResearch"  maxlength="300" style="height:100px;"></textarea>
+											<textarea  name="studentResearch"   maxlength="300" style="height:100px;">${student.studentResearch}</textarea>
 										   </div>
 									    </div>
 										<div class="control-group">
-											<label class="control-label">指导教师教工号（重要）</label>
-											<div class="controls">
-											<input type="text" name="projectTeacherId" id="number" />
+											   <label class="control-label">指导教师教工号（重要）</label>
+											   <div class="controls">
+											    <input type="text" name="projectTeacherId" value="${project.projectTeacherId}" id="number" />
 										    </div>
 										</div>
 										
+										<div class="control-group">
+										<hr/>
+										<label class="control-label">企业导师<br/>
+										（没有可以不填）
+										</label>
+										<div class="controls">
+										 <table>
+											<tr height="30">
+											  <td width="100">姓名</td>
+											  <td width="210"><input type="text" name="businessTeacherName" value="${businessTeacher.businessTeacherName}"  size="29" /></td>
+											  <td width="100">手机</td>
+											  <td><input type="text" name="businessTeacherPhone" size="30"  value="${businessTeacher.businessTeacherPhone}" id="number_only"/></td>
+											</tr>
+											<tr height="30">
+											  <td width="100">单位</td>
+											  <td width="210"><input type="text" name="businessTeacherCompany"  value="${businessTeacher.businessTeacherCompany}" size="29" /></td>
+											  <td width="100">职务/职称</td>
+											  <td><input type="text" name="businessTeacherTitle" value="${businessTeacher.businessTeacherTitle}" size="30" /></td>
+											</tr>
+										</table>
+										</div>
+										</div>
+																				
 										
 									</div>
 									<div id="form-wizard-3" class="step">
@@ -207,24 +205,8 @@ function deltr(opp) {
 											<center><label>项目成员（不包括队长，最多四人）</label></center>
 										</div>	
 										<div style="width:720px;margin:20px auto;">
-
-											<table id="tab11" style="display: none">
-												<tbody>
-													<tr>
-														<td height="30" align="center" width="80">
-															<input type="text" name="NO" size="2" value="1" /></td>
-														<td align="center" width="150">
-															<input type="text" id="number" name="projectMemberId" /></td>
-														<td align="center" width="350">
-															<input type="text" name="projectMemberWork" maxlength="100" /></td>
-														<td>
-															<input type="button" id="Button1" onClick="deltr(this)" value="删除一名" class="btn btn-danger"/>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											
-											<table id="dynamicTable" width="700" border="0" cellspacing="0" cellpadding="0">
+										
+										   <table id="dynamicTable" width="700" border="0" cellspacing="0" cellpadding="0">
 												<thead>
 													<tr>
 														<td height="30" align="center" bgcolor="#D1EEEE" width="80">ID</td>
@@ -238,12 +220,31 @@ function deltr(opp) {
 												</tbody>
 											</table>
 
+											<table id="tab11" >
+												<tbody>
+												  <c:forEach items="${memberList}" var="member" varStatus="index">
+													<tr>
+														<td height="30" align="center" width="80">
+															<input type="text" name="NO" size="2" value="${index.count}" /></td>
+														<td align="center" width="150">
+															<input type="text" id="number" name="projectMemberId" value="${member.memberId}" /></td>
+														<td align="center" width="350">
+															<input type="text" name="projectMemberWork" value="${member.memberWork}"  maxlength="100" /></td>
+														<td>
+															<input type="button" id="Button1" onClick="deltr(this)" value="删除一名" class="btn btn-danger"/>
+														</td>
+													</tr>
+												   </c:forEach>
+												</tbody>
+											</table>
+
 										</div>										
 									</div>
 									<div id="form-wizard-4" class="step">
 										
 										<div class="control-group">
 										<label class="control-label">所属学科门类</label>
+										<small>已选择：${project.projectSubject}</small>
 										<div class="controls">
 											<select name="projectSubject">
 												<option value="未填写">请选择学科门类
@@ -341,22 +342,22 @@ function deltr(opp) {
 									<div class="control-group">
 										<label class="control-label">项目来源</label>
 										<div class="controls">
-											<label><input checked="true" type="radio" name="projectFrom" value="学生自主选题，来源于自己对课题的长期积累与兴趣" />学生自主选题，来源于自己对课题的长期积累与兴趣</label>
-											<label><input  type="radio" name="projectFrom" value="来源于教师科研项目选题"/>来源于教师科研项目选题</label>
-											<label><input  type="radio" name="projectFrom" value="学生承担社会、企业委托项目选题"/>学生承担社会、企业委托项目选题</label>
+											<label><input checked="true" type="radio" name="projectFrom" <c:if test="${project.projectFrom == '学生自主选题，来源于自己对课题的长期积累与兴趣'}">checked="checked"</c:if> value="学生自主选题，来源于自己对课题的长期积累与兴趣" />学生自主选题，来源于自己对课题的长期积累与兴趣</label>
+											<label><input  type="radio"  name="projectFrom"  <c:if test="${project.projectFrom == '来源于教师科研项目选题'}">checked="checked"</c:if> value="来源于教师科研项目选题"/>来源于教师科研项目选题</label>
+											<label><input  type="radio" name="projectFrom" <c:if test="${project.projectFrom == '学生承担社会、企业委托项目选题'}">checked="checked"</c:if> value="学生承担社会、企业委托项目选题"/>学生承担社会、企业委托项目选题</label>
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">项目来源名称</label>
 										<div class="controls">
-											<label><input type="radio" name="projectFromName" value="863项目" /> 863项目</label>
-											<label><input type="radio" name="projectFromName" value="973项目" /> 973项目</label>
-											<label><input type="radio" name="projectFromName" value="国家自然科学基金项目"/>国家自然科学基金项目</label>
-											<label><input type="radio" name="projectFromName" value="省级自然科学基金项目"/>省级自然科学基金项目</label>
-											<label><input type="radio" name="projectFromName" value="教师横向科研项目"/>教师横向科研项目</label>
-											<label><input type="radio" name="projectFromName" value="企业委托项目"/>企业委托项目</label>
-											<label><input type="radio" name="projectFromName" value="社会委托项目"/>社会委托项目</label>
-											<label><input checked="true" type="radio" name="projectFromName" value="其他项目"/>其他项目</label>
+											<label><input type="radio" name="projectFromName" <c:if test="${project.projectFromName == '863项目'}">checked="checked"</c:if>  value="863项目" /> 863项目</label>
+											<label><input type="radio" name="projectFromName" <c:if test="${project.projectFromName == '973项目'}">checked="checked"</c:if>  value="973项目" /> 973项目</label>
+											<label><input type="radio" name="projectFromName" <c:if test="${project.projectFromName == '国家自然科学基金项目'}">checked="checked"</c:if>  value="国家自然科学基金项目"/>国家自然科学基金项目</label>
+											<label><input type="radio" name="projectFromName" <c:if test="${project.projectFromName == '省级自然科学基金项目'}">checked="checked"</c:if>  value="省级自然科学基金项目"/>省级自然科学基金项目</label>
+											<label><input type="radio" name="projectFromName" <c:if test="${project.projectFromName == '教师横向科研项目'}">checked="checked"</c:if>  value="教师横向科研项目"/>教师横向科研项目</label>
+											<label><input type="radio" name="projectFromName" <c:if test="${project.projectFromName == '企业委托项目'}">checked="checked"</c:if>  value="企业委托项目"/>企业委托项目</label>
+											<label><input type="radio" name="projectFromName" <c:if test="${project.projectFromName == '社会委托项目'}">checked="checked"</c:if>  value="社会委托项目"/>社会委托项目</label>
+											<label><input checked="true" type="radio" name="projectFromName" <c:if test="${project.projectFromName == '其他项目'}">checked="checked"</c:if> value="其他项目"/>其他项目</label>
 										</div>
 									</div>
 										
@@ -374,38 +375,38 @@ function deltr(opp) {
 											</tr>
 											<tr>
 												<td>1.设备费</td>
-												<td><input type="text" name="equipmentCost" size="11" id="number"/></td>
-												<td><input type="text" name="equipmentUse" size="45" maxlength="100"/></td>
+												<td><input type="text" name="equipmentCost" value="${cost.equipmentCost}" size="11" id="number"/></td>
+												<td><input type="text" name="equipmentUse"  value="${cost.equipmentUse}" size="45" maxlength="100"/></td>
 											</tr>
 											<tr>
 												<td>2.材料费</td>
-												<td><input type="text" name="materialCost" size="11" id="number"/></td>
-												<td><input type="text" name="materialUse" size="45" maxlength="100"/></td>      
+												<td><input type="text" name="materialCost"  value="${cost.materialCost}"  size="11" id="number"/></td>
+												<td><input type="text" name="materialUse"   value="${cost.materialUse}" size="45" maxlength="100"/></td>      
 											</tr>
 											<tr>
 												<td>3.测试/化验/加工费</td>
-												<td><input type="text" name="testCost" size="11" id="number"/></td>
-												<td><input type="text" name="testUse" size="45" maxlength="100"/></td>        
+												<td><input type="text" name="testCost"  value="${cost.testCost}" size="11" id="number"/></td>
+												<td><input type="text" name="testUse" value="${cost.testUse}" size="45" maxlength="100"/></td>        
 											</tr>
 											<tr>
 												<td>4.差旅费</td>
-												<td><input type="text" name="trafficCost" size="11" id="number"/></td>
-												<td><input type="text" name="trafficUse" size="45" maxlength="100"/></td>     
+												<td><input type="text" name="trafficCost"  value="${cost.trafficCost}" size="11" id="number"/></td>
+												<td><input type="text" name="trafficUse" value="${cost.trafficUse}" size="45" maxlength="100"/></td>     
 											</tr>
 											<tr>
 												<td>5.出版/文献/信息传播/知识产权事务费</td>
-												<td><input type="text" name="publishCost" size="11" id="number"/></td>
-												<td><input type="text" name="publishUse" size="45" maxlength="100"/></td>       
+												<td><input type="text" name="publishCost" value="${cost.publishCost}"  size="11" id="number"/></td>
+												<td><input type="text" name="publishUse"  value="${cost.publishUse}" size="45" maxlength="100"/></td>       
 											</tr>
 											<tr>
 												<td>6.劳务费</td>
-												<td><input type="text" name="labourCost" size="11" id="number"/></td>
-												<td><input type="text" name="labourUse" size="45" maxlength="100"/></td>       
+												<td><input type="text" name="labourCost" value="${cost.labourCost}" size="11" id="number"/></td>
+												<td><input type="text" name="labourUse"  value="${cost.labourUse}" size="45" maxlength="100"/></td>       
 											</tr>
 											<tr>
 												<td>7.专家咨询费</td>
-												<td><input type="text" name="expertCost" size="11" id="number"/></td>
-												<td><input type="text" name="expertUse" size="45" maxlength="100"/></td>     
+												<td><input type="text" name="expertCost" value="${cost.expertCost}"  size="11" id="number"/></td>
+												<td><input type="text" name="expertUse"  value="${cost.expertUse}" size="45" maxlength="100"/></td>     
 											</tr>
 										</table>
 										<div>&nbsp;</div>										
@@ -413,7 +414,7 @@ function deltr(opp) {
 									
 									<div class="form-actions">
 											<input id="back" class="btn btn-primary" type="reset" value="Back" />
-											<input id="next" class="btn btn-primary" type="submit" onclick="submitCheck()"  value="Next" />
+											<input id="next" class="btn btn-primary" type="submit" value="Next" />
 											<div id="status"></div>
 									</div>
 									<div id="submitted"></div>
