@@ -39,5 +39,9 @@
        <property name="basePackage" value="com.safewind.dmucms"/>  
        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
     </bean>
-   
+    
+    
+    <bean   id="transactionManager"    class="org.springframework.jdbc.datasource.DataSourceTransactionManager"   p:dataSource-ref="dataSource" />  
+    <tx:annotation-driven  transaction-manager="transactionManager" /> 
+    
 </beans>    
