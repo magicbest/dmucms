@@ -182,7 +182,7 @@
    </insert>
    
    
-   <select id="queryProjectIdByUserId"  parameterType="String" resultType="Integer" >
+   <select id="queryProjectIdByUserId"  parameterType="String" resultType="int" >
        select  "PROJECT_INCREAMENT_ID" from  "DLMU_DXSCX"."PROJECT" where  "PROJECT_HEAD_ID" = #{studentId}
    </select>
    
@@ -308,4 +308,63 @@
     where  PROJECT_ID = #{projectId}
    </select>
    
+   <update id="updateProjectInfo" parameterType="com.safewind.dmucms.model.Project">
+       update "DLMU_DXSCX"."PROJECT"
+       SET
+        "PROJECT_NAME" =  #{projectName,javaType=String, jdbcType=VARCHAR},
+        "PROJECT_FROM" =  #{projectFrom,javaType=String, jdbcType=VARCHAR},
+        "PROJECT_FROM_NAME" = #{projectFromName,javaType=String, jdbcType=VARCHAR},
+        "PROJECT_TUTOR_ID"  = #{projectTeacherId,javaType=String, jdbcType=VARCHAR},
+        "PROJECT_CONTENT" = #{projectContent,javaType=String, jdbcType=VARCHAR},
+        "PROJECT_SPECIAL" = #{projectSpecial,javaType=String, jdbcType=VARCHAR},
+        "PROJECT_SUBJECT" = #{projectSubject,javaType=String, jdbcType=VARCHAR}
+       where 
+         "PROJECT_INCREAMENT_ID" = #{projectId}
+   </update>
+   
+   <update id="updateCostInfo" parameterType="com.safewind.dmucms.model.Cost">
+      update "DLMU_DXSCX"."COST"
+      set
+        "EQUIPMENT_COST" = #{equipmentCost,javaType=String, jdbcType=VARCHAR},
+        "EQUIPMENT_USE" = #{equipmentUse,javaType=String, jdbcType=VARCHAR},
+        "MATERIAL_COST" = #{materialCost,javaType=String, jdbcType=VARCHAR},
+        "MATERIAL_USE" = #{materialUse,javaType=String, jdbcType=VARCHAR},
+        "TEST_COST" = #{testCost,javaType=String, jdbcType=VARCHAR},
+        "TEST_USE" = #{testUse,javaType=String, jdbcType=VARCHAR},
+        "TRAFFIC_COST" = #{trafficCost,javaType=String, jdbcType=VARCHAR},
+        "TRAFFIC_USE" = #{trafficUse,javaType=String, jdbcType=VARCHAR},
+        "PUBLISH_COST" = #{publishCost,javaType=String, jdbcType=VARCHAR},
+        "PUBLISH_USE" = #{publishUse,javaType=String, jdbcType=VARCHAR},
+        "LABOUR_COST" = #{labourCost,javaType=String, jdbcType=VARCHAR},
+        "LABOUR_USE" = #{labourUse,javaType=String, jdbcType=VARCHAR},
+        "EXPERT_COST" = #{expertCost,javaType=String, jdbcType=VARCHAR},
+        "EXPERT_USE"  = #{expertUse,javaType=String, jdbcType=VARCHAR} 
+      where 
+        "PROJECT_ID" = #{projectId}
+   </update>
+   
+   <update id="updateStudentInfo" parameterType="com.safewind.dmucms.model.Student">
+      update  "DLMU_DXSCX"."STUDENT"
+      set
+        "STUDENT_EMAIL" = #{studentEmail,javaType=String, jdbcType=VARCHAR},
+        "STUDENT_PHONE" =  #{studentPhone,javaType=String, jdbcType=VARCHAR},
+        "STUDENT_RESEARCH"  = #{studentResearch,javaType=String, jdbcType=VARCHAR}
+        where "STUDENT_ID" = #{studentId}
+   </update>
+   
+   <update id="updateBusinessTeacherInfo" parameterType="com.safewind.dmucms.model.BusinessTeacher">
+     update "DLMU_DXSCX"."BUSINESSTEACHER"
+     set
+        "BUSINESS_TEACHER_NAME" = #{businessTeacherName,javaType=String, jdbcType=VARCHAR},
+        "BUSINESS_TEACHER_PHONE" =  #{businessTeacherPhone,javaType=String, jdbcType=VARCHAR},
+        "BUSINESS_TEACHER_COMPANY" = #{businessTeacherCompany,javaType=String, jdbcType=VARCHAR},
+        "BUSINESS_TEACHER_TITLE"  = #{businessTeacherTitle,javaType=String, jdbcType=VARCHAR}
+      where  
+        "PROJECT_ID" = #{projectId}
+   </update>
+    
+    <delete id="deleteOldTeamInfo" parameterType="int" >
+       delete from "DLMU_DXSCX"."TEAM" where "PROJECT_ID" =  #{projectId}
+    </delete>
+    
 </mapper>
