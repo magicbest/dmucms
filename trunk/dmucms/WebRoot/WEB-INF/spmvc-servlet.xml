@@ -25,6 +25,8 @@
     </bean>
     
     
+    
+    
    <mvc:view-controller path="error/404" view-name="404"/>
    <mvc:view-controller path="error/500" view-name="500"/>
    <mvc:view-controller path="error/uncaughtException" view-name="uncaughtException"/>
