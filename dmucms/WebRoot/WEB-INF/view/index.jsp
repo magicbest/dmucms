@@ -78,39 +78,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="header">
 			<h1><a href="#">大创客户端</a></h1>		
 		</div>
-		<!--搜索按钮
-		<div id="search">
-			<input type="text" placeholder="Search here..." /><button type="submit" class="tip-right" title="Search"><i class="icon-search icon-white"></i></button>
-		</div>
-		-->
-		<!--右上按钮
-		<div id="user-nav" class="navbar navbar-inverse">
-            <ul class="nav btn-group">
-                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
-                <li class="btn btn-inverse dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a class="sAdd" title="" href="#">new message</a></li>
-                        <li><a class="sInbox" title="" href="#">inbox</a></li>
-                        <li><a class="sOutbox" title="" href="#">outbox</a></li>
-                        <li><a class="sTrash" title="" href="#">trash</a></li>
-                    </ul>
-                </li>
-                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-                <li class="btn btn-inverse"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
-            </ul>
-        </div>
-		-->
             
 		<div id="sidebar">
 			<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> Wizard</a>
 			<ul>
 				<li><a href="${pageContext.request.contextPath}"><i class="icon icon-home"></i> <span>主页</span></a></li>
 				<li class="submenu active open">
-					<a href="#"><i class="icon icon-th-list"></i> <span>项目管理</span> <span class="label">3</span></a>
+					<a href="#"><i class="icon icon-th-list"></i> <span>项目管理</span> <span class="label">4</span></a>
 					<ul>
 						<li ><a href="${pageContext.request.contextPath}/innovationApplication">创新项目申请</a></li>
-						<li ><a href="${pageContext.request.contextPath}/businessAppalication">创业项目申请</a></li>
-						<li><a href="${pageContext.request.contextPath}/viewAppalication" target="_blank">查看申请书</a></li>
+						<li ><a href="${pageContext.request.contextPath}/businessApplication">创业项目申请</a></li>
+						<li><a href="${pageContext.request.contextPath}/viewApplication" target="_blank">查看申请书</a></li>
+						<li><a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit" target="_blank">修改申请书</a></li>
 					</ul>
 				</li>
 				
@@ -145,8 +124,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<center>
 							
 							<a href="${pageContext.request.contextPath}/innovationApplication" class="btn btn-success">填写创新申请书</a>
-                            <a href="${pageContext.request.contextPath}/businessAppalication" class="btn btn-success">填写创业申请书</a>
-                            <a href="${pageContext.request.contextPath}/viewAppalication" class="btn btn-success">查看申请书</a>
+                            <a href="${pageContext.request.contextPath}/businessApplication" class="btn btn-success">填写创业申请书</a>
+                            <a href="${pageContext.request.contextPath}/viewApplication" class="btn btn-success">查看申请书</a>
+                            <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit" target="_blank" class="btn btn-success">修改申请书</a>
+                       
 						    </center>
 					</div>
 				</div>
