@@ -2,7 +2,8 @@ package com.safewind.dmucms.service;
 
 import java.util.List;
 
-import com.safewind.dmucms.model.Appalication;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
@@ -13,9 +14,7 @@ public interface IAppalicationService
 {
 	public Student getStudentBasicInfo(String studentId);
 
-	public int saveProjectInfo(Project project);
-
-	public int updateAppalication(Appalication appalication);
+	public void saveProjectInfo(Project project);
 
 	public int getStudentInputFlag(String studentId);
 
@@ -38,6 +37,20 @@ public interface IAppalicationService
 	public void saveBusinessTeacherInfo(BusinessTeacher businessTeacher);
 
 	public BusinessTeacher getBusinessTeacher(int projectId);
+	
+	@Transactional
+	public void updateApplicationInfo(String studentId,
+			String[] projectMemberId, String[] projectMemberWork,
+			Project project, BusinessTeacher businessTeacher, Cost cost,
+			Student student);
 
-
+	@Transactional
+	public void saveBusinessApplication(String[] projectMemberId,
+			String[] projectMemberWork, Project project,
+			BusinessTeacher businessTeacher, Cost cost, Student student);
+	
+	@Transactional
+	public void saveInnovationApplication(String[] projectMemberId,
+			String[] projectMemberWork, Project project, Cost cost,
+			Student student);
 }
