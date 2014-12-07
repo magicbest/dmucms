@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.safewind.dmucms.model.Appalication;
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
@@ -90,36 +88,43 @@ public class ProjectApplicationControler {
 		
 		logger.info("--------  �����޸�ҳ��  -------");
 		
-		studentId = UserAccoutUtil.getUserLoginId();
-	    int projectId = AppalicationServiceImpl.queryProjectId(studentId);
-		Student student = AppalicationServiceImpl.getStudentTotalInfo(studentId);
-		Project project = AppalicationServiceImpl.getProjectInfo(projectId);
-		
-		if("CY".equals(project.getProjectType()))
+		int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
+		if(inputFlag == 0)
 		{
-			Cost cost  = AppalicationServiceImpl.getCostInfo(projectId);
-			BusinessTeacher businessTeacher = AppalicationServiceImpl.getBusinessTeacher(projectId);
-			List<TeamMember> memberList = AppalicationServiceImpl.getTeamMemberInfo(projectId);
+			return "student/no_appalication";
+		}else {
 			
+			studentId = UserAccoutUtil.getUserLoginId();
+		    int projectId = AppalicationServiceImpl.queryProjectId(studentId);
+			Student student = AppalicationServiceImpl.getStudentTotalInfo(studentId);
+			Project project = AppalicationServiceImpl.getProjectInfo(projectId);
 			
-			model.addAttribute("memberList", memberList);
-			model.addAttribute("student", student);
-			model.addAttribute("project", project);
-			model.addAttribute("cost", cost);
-			model.addAttribute("businessTeacher", businessTeacher);
-			return "student/edit_business";
-		}
-		else {
-			Cost cost  = AppalicationServiceImpl.getCostInfo(projectId);
-			List<TeamMember> memberList = AppalicationServiceImpl.getTeamMemberInfo(projectId);
-			
-			logger.info("�Ŷ����� �� " + memberList.size());
-			
-			model.addAttribute("memberList", memberList);
-			model.addAttribute("student", student);
-			model.addAttribute("project", project);
-			model.addAttribute("cost", cost);
-			return "student/edit_innovation";
+			if("CY".equals(project.getProjectType()))
+			{
+				Cost cost  = AppalicationServiceImpl.getCostInfo(projectId);
+				BusinessTeacher businessTeacher = AppalicationServiceImpl.getBusinessTeacher(projectId);
+				List<TeamMember> memberList = AppalicationServiceImpl.getTeamMemberInfo(projectId);
+				
+				
+				model.addAttribute("memberList", memberList);
+				model.addAttribute("student", student);
+				model.addAttribute("project", project);
+				model.addAttribute("cost", cost);
+				model.addAttribute("businessTeacher", businessTeacher);
+				return "student/edit_business";
+			}
+			else {
+				Cost cost  = AppalicationServiceImpl.getCostInfo(projectId);
+				List<TeamMember> memberList = AppalicationServiceImpl.getTeamMemberInfo(projectId);
+				
+				logger.info("�Ŷ����� �� " + memberList.size());
+				
+				model.addAttribute("memberList", memberList);
+				model.addAttribute("student", student);
+				model.addAttribute("project", project);
+				model.addAttribute("cost", cost);
+				return "student/edit_innovation";
+			}
 		}
 	}
 	
