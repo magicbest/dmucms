@@ -179,13 +179,37 @@ public class ProjectApplicationControler {
 	}
 	
 	
-	/*@RequestMapping(value = "/appalication/{studentId}/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/appalication/{studentId}/delete", method = RequestMethod.GET)
 	public String deleteApplication(@PathVariable String studentId,Model model) {
-		
 		studentId = UserAccoutUtil.getUserLoginId();
-		int projectId = AppalicationServiceImpl.queryProjectId(studentId);
-		AppalicationServiceImpl.deleteApplication(projectId);
-		return studentId;	
-	}*/
+		int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
+		if(inputFlag == 0)
+		{
+			return "student/no_appalication";
+		}
+		else {
+			studentId = UserAccoutUtil.getUserLoginId();
+			int projectId = AppalicationServiceImpl.queryProjectId(studentId);
+			AppalicationServiceImpl.deleteApplication(studentId,projectId);
+			return "student/delete_success";	
+		}
+
+	}
+	
+	@RequestMapping(value = "/appalication/{studentId}/submit", method = RequestMethod.GET)
+	public String submitApplication(@PathVariable String studentId,Model model) {
+		studentId = UserAccoutUtil.getUserLoginId();
+		int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
+		if(inputFlag == 0)
+		{
+			return "student/no_appalication";
+		}
+		else {
+			int projectId = AppalicationServiceImpl.queryProjectId(studentId);
+			AppalicationServiceImpl.submitApplication(projectId);
+			return "student/delete_success";	
+		}
+
+	}
 	
 }
