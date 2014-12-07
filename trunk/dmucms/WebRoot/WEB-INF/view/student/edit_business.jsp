@@ -238,7 +238,7 @@ function deltr(opp) {
 										
 										<div class="control-group">
 										<label class="control-label">所属学科门类</label>
-										<small>已选择：${project.projectSubject}</small>
+										
 										<div class="controls">
 											<select name="projectSubject">
 											    <option selected="selected" value="${project.projectSubject}"/>${project.projectSubject}
