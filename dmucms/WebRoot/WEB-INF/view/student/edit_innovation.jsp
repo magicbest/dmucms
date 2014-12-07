@@ -231,11 +231,9 @@ function deltr(opp) {
 										
 										<div class="control-group">
 										<label class="control-label">所属学科门类</label>
-										<small>已选择：${project.projectSubject}</small>
 										<div class="controls">
 											<select name="projectSubject">
-												<option value="未填写">请选择学科门类
-												<option  value="0101哲学"/>0101哲学
+											    <option selected="selected" value="${project.projectSubject}"/>${project.projectSubject}
 												<option value="0201理论经济学"/>0201理论经济学		  
 												<option value="0202经济学"/>0202经济学			  
 												<option value="0301法学"/>0301法学
