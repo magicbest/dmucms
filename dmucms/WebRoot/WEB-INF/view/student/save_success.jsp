@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<center>
 							
 							
-                            <a href="${pageContext.request.contextPath}/viewApplication" class="btn btn-success">查看申请书</a>
+                            <a href="${pageContext.request.contextPath}/viewApplication" class="btn btn-success" target="_blank">查看申请书</a>
 						    </center>
 					</div>
 				</div>

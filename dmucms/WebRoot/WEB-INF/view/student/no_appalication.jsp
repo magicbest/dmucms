@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		<div id="header">
-			<h1><a href="#">大创客户端</a></h1>		
+			<h1><a href="${pageContext.request.contextPath}">大创客户端</a></h1>		
 		</div>
 		<!--搜索按钮
 		<div id="search">
