@@ -34,7 +34,7 @@ public class ProjectApplicationControler {
 	
 	@RequestMapping(value = "/innovationApplication", method = RequestMethod.GET)
 	public String loadInnovationPage(Model model) {
-		// »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§µÄ¾²Ì¬·½·¨
+		// ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Â¼ï¿½Ã»ï¿½ï¿½Ä¾ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½
 		String studentId = UserAccoutUtil.getUserLoginId() ;
 		int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
 		if(inputFlag == 0)
@@ -50,7 +50,7 @@ public class ProjectApplicationControler {
 	
 	@RequestMapping(value = "/businessApplication", method = RequestMethod.GET)
 	public String loadBusinessPage(Model model) {
-		// »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§µÄ¾²Ì¬·½·¨
+		// ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Â¼ï¿½Ã»ï¿½ï¿½Ä¾ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½
 		String studentId = UserAccoutUtil.getUserLoginId() ;
 		int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
 		if(inputFlag == 0)
@@ -88,7 +88,7 @@ public class ProjectApplicationControler {
 	@RequestMapping(value = "/appalication/{studentId}/edit", method = RequestMethod.GET)
 	public String editApplicationPage(@PathVariable String studentId,Model model) {
 		
-		logger.info("--------  ½øÈëÐÞ¸ÄÒ³Ãæ  -------");
+		logger.info("--------  ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½Ò³ï¿½ï¿½  -------");
 		
 		studentId = UserAccoutUtil.getUserLoginId();
 	    int projectId = AppalicationServiceImpl.queryProjectId(studentId);
@@ -113,7 +113,7 @@ public class ProjectApplicationControler {
 			Cost cost  = AppalicationServiceImpl.getCostInfo(projectId);
 			List<TeamMember> memberList = AppalicationServiceImpl.getTeamMemberInfo(projectId);
 			
-			logger.info("ÍÅ¶ÓÈËÊý £º " + memberList.size());
+			logger.info("ï¿½Å¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ " + memberList.size());
 			
 			model.addAttribute("memberList", memberList);
 			model.addAttribute("student", student);
@@ -134,7 +134,7 @@ public class ProjectApplicationControler {
 			Cost cost , 
 			Student student ) {
 		studentId = UserAccoutUtil.getUserLoginId();
-		logger.info("µ±Ç°ÓÃ»§Id £º " + studentId);
+		logger.info("ï¿½ï¿½Ç°ï¿½Ã»ï¿½Id ï¿½ï¿½ " + studentId);
 	    AppalicationServiceImpl.updateApplicationInfo(studentId,projectMemberId,projectMemberWork,project,businessTeacher,cost,student);
 		return "student/update_success";
 	}
@@ -177,5 +177,15 @@ public class ProjectApplicationControler {
 			}
 		}
 	}
+	
+	
+	/*@RequestMapping(value = "/appalication/{studentId}/delete", method = RequestMethod.GET)
+	public String deleteApplication(@PathVariable String studentId,Model model) {
+		
+		studentId = UserAccoutUtil.getUserLoginId();
+		int projectId = AppalicationServiceImpl.queryProjectId(studentId);
+		AppalicationServiceImpl.deleteApplication(projectId);
+		return studentId;	
+	}*/
 	
 }
