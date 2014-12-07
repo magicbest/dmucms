@@ -52,7 +52,17 @@ public interface AppalicationDao
 
 	void updateBusinessTeacherInfo(BusinessTeacher businessTeacher);
 
-	void deleteApplicationByProId(@Param("projectId")int projectId);
+	String queryProjectType(@Param("projectId") int projectId);
 
-	
+	void deleteStudentInfo(@Param("studentId") String studentId);
+
+	void deleteProjectInfo(@Param("projectId") int projectId);
+
+	void deleteCostInfo(@Param("projectId") int projectId);
+
+	void deleteTeamInfo(@Param("projectId") int projectId);
+
+	void deleteBusinessTeacherInfo(@Param("projectId")int projectId);
+
+	void updateProjectStatus(@Param("projectId")int projectId);
 }
