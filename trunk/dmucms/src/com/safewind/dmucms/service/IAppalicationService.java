@@ -53,4 +53,6 @@ public interface IAppalicationService
 	public void saveInnovationApplication(String[] projectMemberId,
 			String[] projectMemberWork, Project project, Cost cost,
 			Student student);
+
+	public void deleteApplication(int projectId);
 }
