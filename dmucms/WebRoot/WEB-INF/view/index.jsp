@@ -101,15 +101,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="container-fluid">
 				<div class="row-fluid">
 					<div class="span12">
-						    <center><h3>现在系统处于测试阶段，测试阶段不允许修改。但是您的数据我们会保存，测试结束后可以修改。如果有Bug,请发邮件至safewind@163.com,谢谢您的配合（测试时间为一到两天）</h3></center>
-						     <center><h3 style="color:red">2011级本科生以及去年大创项目不合格（包括校级）的负责人不能作为今年大创项目的负责人。如果申报了，我们后期会删除。</h3></center>
+					         
+						    <center>
+						    <a href="http://202.118.83.44:8080/grade" class="btn btn-primary" target="_blank">查看2013年国家级优秀项目</a>
+						    <a href="http://202.118" class="btn btn-primary" target="_blank">操作说明下载</a>
+						    </center>
+						     <hr/>
+						    <center>
+						    <a href="http://my.dlmu.edu.cn/oa/downloadattachment/45148/附件1关于实施大学生创新创业训练计划项目的有关要求.docx" class="btn btn-info" >关于实施大学生创新创业训练计划项目的有关要求.docx</a>
+						    <a href="http://my.dlmu.edu.cn/oa/downloadattachment/45149/附件2立项评审标准.doc" class="btn btn-info">立项评审标准.doc</a>
+						     <a href="http://my.dlmu.edu.cn/oa/downloadattachment/45150/附件3一级学科名称及代码.doc" class="btn btn-info" >一级学科名称及代码.doc</a>
+						    </center>
+						   
+						    <hr/>
 							<center>
 							
 							<a href="${pageContext.request.contextPath}/innovationApplication" class="btn btn-success">填写创新申请书</a>
                             <a href="${pageContext.request.contextPath}/businessApplication" class="btn btn-success">填写创业申请书</a>
                             <a href="${pageContext.request.contextPath}/viewApplication" class="btn btn-success">查看申请书</a>
                             <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit"  class="btn btn-success">修改申请书</a>
-                       
+                             <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit"  class="btn btn-success">提交给老师</a>
 						    </center>
 					</div>
 				</div>
