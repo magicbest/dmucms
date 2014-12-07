@@ -118,10 +118,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 							<a href="${pageContext.request.contextPath}/innovationApplication" class="btn btn-success">填写创新申请书</a>
                             <a href="${pageContext.request.contextPath}/businessApplication" class="btn btn-success">填写创业申请书</a>
-                            <a href="${pageContext.request.contextPath}/viewApplication" class="btn btn-success">查看申请书</a>
+                            <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/view" class="btn btn-success">查看申请书</a>
                             <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit"  class="btn btn-success">修改申请书</a>
-                            <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit"  class="btn btn-success">删除申请书</a>
-                             <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit"  class="btn btn-success">提交给老师</a>
+                            <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/delete"  class="btn btn-success">删除申请书</a>
+                             <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/submit"  class="btn btn-success">提交给老师</a>
 						    </center>
 					</div>
 				</div>
