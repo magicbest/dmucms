@@ -14,8 +14,7 @@ CKEDITOR.editorConfig = function( config ) {
 	  config.image_previewText=' '; //预览区域显示内容
 	  config.height='500';
 	config.toolbar = 'Full'
-    
-	  config.toolbar_Full =
+    config.toolbar_Full =
 		  [
 		      ['Maximize'],
 		      ['Preview'],
