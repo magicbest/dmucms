@@ -78,25 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="header">
 			<h1><a href="#">大创客户端</a></h1>		
 		</div>
-            
-		<div id="sidebar">
-			<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> Wizard</a>
-			<ul>
-				<li><a href="${pageContext.request.contextPath}"><i class="icon icon-home"></i> <span>主页</span></a></li>
-				<li class="submenu active open">
-					<a href="#"><i class="icon icon-th-list"></i> <span>项目管理</span> <span class="label">4</span></a>
-					<ul>
-						<li ><a href="${pageContext.request.contextPath}/innovationApplication">创新项目申请</a></li>
-						<li ><a href="${pageContext.request.contextPath}/businessApplication">创业项目申请</a></li>
-						<li><a href="${pageContext.request.contextPath}/viewApplication" target="_blank">查看申请书</a></li>
-						<li><a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit" target="_blank">修改申请书</a></li>
-					</ul>
-				</li>
-				
-			</ul>
-		
-		</div>
-		
+		<%@ include file="student/sidebar.html"%>
 		<div id="style-switcher">
 			<i class="icon-arrow-left icon-white"></i>
 			<span>Style:</span>
