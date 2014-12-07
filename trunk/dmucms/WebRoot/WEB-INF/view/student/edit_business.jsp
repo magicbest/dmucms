@@ -85,7 +85,7 @@ function deltr(opp) {
 				</div>
 			</div>
 			<div id="breadcrumb">
-				<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>主页</a>
+				<a href="${pageContext.request.contextPath}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>主页</a>
 				<a href="#">项目管理</a>
 				<a href="#" class="current">项目申请</a>
 			</div>
