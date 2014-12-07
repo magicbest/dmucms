@@ -140,9 +140,11 @@ public class ProjectApplicationControler {
 	}
 	
 	
-	@RequestMapping(value = "/viewApplication", method = RequestMethod.GET)
-	public String viewApplicationPage(Model model) {
-		String studentId =  UserAccoutUtil.getUserLoginId() ;
+	@RequestMapping(value = "/appalication/{studentId}/view", method = RequestMethod.GET)
+	public String viewApplicationPage(@PathVariable String studentId,Model model) {
+
+
+		studentId =  UserAccoutUtil.getUserLoginId() ;
 		
 		int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
 		
@@ -207,7 +209,7 @@ public class ProjectApplicationControler {
 		else {
 			int projectId = AppalicationServiceImpl.queryProjectId(studentId);
 			AppalicationServiceImpl.submitApplication(projectId);
-			return "student/delete_success";	
+			return "student/submit_success";	
 		}
 
 	}
