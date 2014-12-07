@@ -54,5 +54,7 @@ public interface IAppalicationService
 			String[] projectMemberWork, Project project, Cost cost,
 			Student student);
 
-	public void deleteApplication(int projectId);
+	public void deleteApplication(String studentId,int projectId);
+
+	public void submitApplication(int projectId);
 }
