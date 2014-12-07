@@ -367,4 +367,8 @@
        delete from "DLMU_DXSCX"."TEAM" where "PROJECT_ID" =  #{projectId}
     </delete>
     
+    <delete id="deleteApplicationByProId" parameterType="int" >
+      
+    </delete>
+    
 </mapper>
