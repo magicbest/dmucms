@@ -29,8 +29,8 @@
        <result column="PROJECT_COST" property="projectCost"/>
        <result column="PROJECT_SUBJECT" property="projectSubject"/>
        <result column="PROJECT_SPECIAL" property="projectSpecial"/>
-       <result column="PROJECT_TUTOR_NAME" property="projectTeacherName"/>
        <result column="PROJECT_TYPE" property="projectType"/>
+       <result column="TEACHER_NAME" property="projectTeacherName"/>
    </resultMap>
    
    
@@ -232,9 +232,13 @@
         "PROJECT_SPECIAL",
         PROJECT_TUTOR_NAME,
         "PROJECT_TYPE",
+        "XM" TEACHER_NAME ,
         "PROJECT_YEAR" 
     from
-        "DLMU_DXSCX"."PROJECT"
+        "DLMU_DXSCX"."PROJECT" a
+    left join "DATACT"."VI_XG_DXS_JZG"  b
+    on
+    a.PROJECT_TUTOR_ID = b.GH
     where
         PROJECT_INCREAMENT_ID = #{projectId}
    </select>
