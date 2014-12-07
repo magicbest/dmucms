@@ -52,5 +52,7 @@ public interface AppalicationDao
 
 	void updateBusinessTeacherInfo(BusinessTeacher businessTeacher);
 
+	void deleteApplicationByProId(@Param("projectId")int projectId);
+
 	
 }
