@@ -141,8 +141,9 @@ function deltr(opp) {
 										<div class="control-group">
 										<center><h3>立项依据</h3></center>
 										   <div >
-											<textarea id="editor1"  name="projectContent" >（一）研究目的<br/>（二）研究内容<br/>（三）国、内外研究现状和发展动态<br/>（四）创新点与项目特色<br/>（五）技术路线、拟解决的问题及预期成果<br/>（六）项目研究进度安排<br/>（七）已有基础
-						<br>&nbsp;&nbsp;&nbsp;1．与本项目有关的研究积累和已取得的成绩<br/>&nbsp;&nbsp;&nbsp;2．已具备的条件，尚缺少的条件及解决方法</textarea>
+											<textarea id="editor1"  name="projectContent" >（一）项目来源<br/>（二）行业及市场前景<br/>（行业历史与前景，市场规模及增长趋势，行业竞争对手，未来市场销售预测等）<br/>（三）创新点与项目特色<br/>
+（项目情况，技术水平，产品或模式的创新性、先进性和独特性，竞争优势）<br/>（四）生产或运营<br/>（生产或运营方式，材料、劳动力、设备需求，质量保证，生产成本）<br/>（五）投融资方案<br/>（六）管理模式<br/>（合作计划，实施方案，机构设置，人员管理，销售策略等）<br/>风险预测及应对措施<br/>效益预测（未来三到五年的销售收入、利润、资产回报率等）
+											</textarea>
 						                     <ckf:setupCKEditor  basePath="/dmucms/ckfinder/"  editor="editor1"/>
 					                         <ckeditor:replace  replace="editor1" basePath="/dmucms/ckeditor/" />
 										   </div>

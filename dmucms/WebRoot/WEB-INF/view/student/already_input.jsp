@@ -81,9 +81,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    <center><h3>已经填报！（一个学生只能申报一项）</h3></center>
 						   
 							<center>
-							
-							
                             <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/view" class="btn btn-success" target="_blank">查看申请书</a>
+                            <a href="#deleteAlert"  class="btn btn-success" data-toggle="modal">删除申请书</a>
 						    </center>
 					</div>
 				</div>

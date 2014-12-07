@@ -20,7 +20,7 @@
 				<li><a
 					href="#deleteAlert" data-toggle="modal">删除申请书</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/submit">提交给老师</a></li>
+					href="#submitTeacherAlert" data-toggle="modal">提交给导师</a></li>
 			</ul>
 		</li>
         <li class="submenu active"><a href="#"><i
@@ -33,7 +33,7 @@
 				<li><a
 					href="http://my.dlmu.edu.cn/oa/downloadattachment/45150/附件3一级学科名称及代码.doc">学科名称及代码</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit">操作说明</a></li>
+					href="http://202.118.89.12:8080/files/操作说明.doc">操作说明</a></li>
 				
 			</ul>
 		</li>
@@ -49,6 +49,19 @@
 	</div>
 	<div class="modal-footer">
 		<a  class="btn btn-primary" href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/delete">确认</a>
+		<a data-dismiss="modal" class="btn" href="#">取消</a>
+	</div>
+</div>
+<div id="submitTeacherAlert" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button">×</button>
+		<h3>确认提交给导师</h3>
+	</div>
+	<div class="modal-body">
+		<p>提交给导师后，导师将可以看到您的项目并审批，确认提交吗？</p>
+	</div>
+	<div class="modal-footer">
+		<a  class="btn btn-primary" href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/submit">确认</a>
 		<a data-dismiss="modal" class="btn" href="#">取消</a>
 	</div>
 </div>

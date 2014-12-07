@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    }//myBrowser() end  
 		      
 		    //以下是调用上面的函数  
-		      
+		    
 		    if(myBrowser()=="Chrome"||myBrowser()=="FF"||myBrowser()=="IE8"||myBrowser()=="IE9"||myBrowser()=="IE10"||myBrowser()=="IE11"||myBrowser()=="IE12"){ }  
 			else{
 			     window.location.href="errors/browser.html";
@@ -101,10 +101,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="container-fluid">
 				<div class="row-fluid">
 					<div class="span12">
-					         
+					        <center><h4>当前登录账号：<%=request.getRemoteUser() %></h4><h5>（切换账号请关闭浏览器所有窗口后重新打开）</h5></center>
+					         <hr/>
+					         <center style="color:red"><h4>使用本系统前务必认真阅读每一个相关文件及操作说明，遇到的问题如果在文件中有将不予解答。<br/>请使用火狐、Chrome或者IE8以上浏览器。<br/>交流QQ群号：242294855</h4></center>
+					         <hr/>
 						    <center>
 						    <a href="http://202.118.83.44:8080/grade" class="btn btn-primary" target="_blank">查看2013年国家级优秀项目</a>
-						    <a href="http://202.118" class="btn btn-primary" target="_blank">操作说明下载</a>
+						    <a href="http://202.118.89.12:8080/files/操作说明.doc" class="btn btn-primary" target="_blank">操作说明下载</a>
 						    </center>
 						     <hr/>
 						    <center>
@@ -118,10 +121,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 							<a href="${pageContext.request.contextPath}/innovationApplication" class="btn btn-success">填写创新申请书</a>
                             <a href="${pageContext.request.contextPath}/businessApplication" class="btn btn-success">填写创业申请书</a>
-                            <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/view" class="btn btn-success">查看申请书</a>
+                            <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/view" class="btn btn-success" target="_blank">查看申请书</a>
                             <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit"  class="btn btn-success">修改申请书</a>
-                            <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/delete"  class="btn btn-success">删除申请书</a>
-                             <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/submit"  class="btn btn-success">提交给老师</a>
+                            <a href="#deleteAlert"  class="btn btn-success" data-toggle="modal">删除申请书</a>
+                             <a href="#submitTeacherAlert"  class="btn btn-success" data-toggle="modal">提交给导师</a>
 						    </center>
 					</div>
 				</div>

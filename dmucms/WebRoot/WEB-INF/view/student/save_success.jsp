@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<div id="breadcrumb">
-				<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>主页</a>
+				<a href="${pageContext.request.contextPath}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>主页</a>
 				
 			</div>
 			<div class="container-fluid">
@@ -80,10 +80,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="span12">
 						    <center><h3>保存成功！</h3></center>
 						   
-							<center>
-							
-							
+							<center>	
                             <a href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/view" class="btn btn-success" target="_blank">查看申请书</a>
+                             <a href="#submitTeacherAlert"  class="btn btn-success" data-toggle="modal">提交给导师</a>
 						    </center>
 					</div>
 				</div>

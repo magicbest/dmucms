@@ -154,9 +154,11 @@
 <div class="hu44">&nbsp;</div>
 <div  align="center">
 <p style="font-size:xx-large"><a name="h3" id="h3"></a>二、立项依据</p>
-<div align="center">
-  ${project.projectContent}
-</div>
+<table width="800" border="1px"  cellpadding="0" cellspacing="0">
+<tr><td>
+  ${project.projectContent}</td>
+  </tr>
+</table>
 </div>
 
 <div id="contect" align="center">
