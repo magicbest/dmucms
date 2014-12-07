@@ -129,7 +129,7 @@ function deltr(opp) {
 									
 									<div id="form-wizard-2" class="step">
 										<div class="control-group">
-											<label class="control-label">项目负责人及学号</label>
+											<label class="control-label">项目负责人学号</label>
 											<div class="controls">
 												  <input  type="text" name="studentId"  value="<%=request.getRemoteUser()%>"  readonly="readonly" /> 
 											</div>
