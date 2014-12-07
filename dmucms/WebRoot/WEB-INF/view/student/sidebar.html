@@ -18,7 +18,7 @@
 				<li><a
 					href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/edit">修改申请书</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/delete">删除申请书</a></li>
+					href="#deleteAlert" data-toggle="modal">删除申请书</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/submit">提交给老师</a></li>
 			</ul>
@@ -38,4 +38,17 @@
 			</ul>
 		</li>
 	</ul>
+</div>
+<div id="deleteAlert" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button">×</button>
+		<h3>确认删除</h3>
+	</div>
+	<div class="modal-body">
+		<p>删除是不可撤销的，确认删除吗？</p>
+	</div>
+	<div class="modal-footer">
+		<a  class="btn btn-primary" href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/delete">确认</a>
+		<a data-dismiss="modal" class="btn" href="#">取消</a>
+	</div>
 </div>
