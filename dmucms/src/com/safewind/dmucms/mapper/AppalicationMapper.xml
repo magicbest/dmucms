@@ -371,8 +371,40 @@
        delete from "DLMU_DXSCX"."TEAM" where "PROJECT_ID" =  #{projectId}
     </delete>
     
-    <delete id="deleteApplicationByProId" parameterType="int" >
-      
+    <delete id="deleteProjectInfo" parameterType="int" >
+      delete from "DLMU_DXSCX"."PROJECT" where "PROJECT_INCREAMENT_ID" =  #{projectId}
     </delete>
+    
+    <delete id="deleteTeamInfo" parameterType="int" >
+      delete from "DLMU_DXSCX"."TEAM" where "PROJECT_ID" = #{projectId}
+    </delete>
+    
+    <delete id="deleteCostInfo" parameterType="int" >
+      delete from "DLMU_DXSCX"."COST" where "PROJECT_ID" =  #{projectId}
+    </delete>
+    
+    <delete id="deleteBusinessTeacherInfo"  parameterType="int" >
+      delete from "DLMU_DXSCX"."BUSINESSTEACHER" where "PROJECT_ID" =  #{projectId};
+    </delete>
+    
+     <delete id="deleteStudentInfo"  parameterType="String" >
+       delete from "DLMU_DXSCX"."STUDENT" where "STUDENT_ID" =  #{studentId}
+    </delete>
+    
+    <select id="queryProjectType"  parameterType="int" resultType="String" >
+    select
+        "PROJECT_TYPE" 
+    from
+        "DLMU_DXSCX"."PROJECT"
+    where PROJECT_INCREAMENT_ID = #{projectId}
+    </select>
+    
+    <update id="updateProjectStatus" parameterType="int" >
+       update  "DLMU_DXSCX"."PROJECT"
+       set
+         "PROJECT_STATUS" = 1
+       where 
+          PROJECT_INCREAMENT_ID = #{projectId} 
+    </update>
     
 </mapper>
