@@ -157,4 +157,10 @@ public class AppalicationServiceImpl implements IAppalicationService {
 		saveCostInfo(cost);
 	}
 
+	@Override
+	public void deleteApplication(int projectId)
+	{
+		appalicationDao.deleteApplicationByProId(projectId);
+	}
+
 }
