@@ -158,9 +158,28 @@ public class AppalicationServiceImpl implements IAppalicationService {
 	}
 
 	@Override
-	public void deleteApplication(int projectId)
+	public void deleteApplication(String studentId,int projectId)
 	{
-		appalicationDao.deleteApplicationByProId(projectId);
+		String projectType = appalicationDao.queryProjectType(projectId);
+		if("CX".equals(projectType))
+		{
+			appalicationDao.deleteProjectInfo(projectId);
+			appalicationDao.deleteCostInfo(projectId);
+			appalicationDao.deleteTeamInfo(projectId);
+			appalicationDao.deleteStudentInfo(studentId);
+		}else{
+			appalicationDao.deleteProjectInfo(projectId);
+			appalicationDao.deleteCostInfo(projectId);
+			appalicationDao.deleteTeamInfo(projectId);
+			appalicationDao.deleteBusinessTeacherInfo(projectId);
+			appalicationDao.deleteStudentInfo(studentId);
+		}
+	}
+
+	@Override
+	public void submitApplication(int projectId)
+	{
+		appalicationDao.updateProjectStatus(projectId);
 	}
 
 }
