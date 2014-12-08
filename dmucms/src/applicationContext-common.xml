@@ -39,4 +39,10 @@
        <property name="basePackage" value="com.safewind.dmucms"/>  
        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
     </bean>
+    
+ <!-- 自动扫描组件,这里不扫描 controller   -->
+<context:component-scan base-package="com.safewind.dmucms">
+  <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+    
 </beans>    
