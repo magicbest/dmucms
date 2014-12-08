@@ -60,7 +60,19 @@ function deltr(opp) {
 }
 </script>
 
-
+<script type="text/javascript">
+  function submitCheck()
+  {
+	  var submitFlag =  document.getElementById("next").value;
+	  if(submitFlag == 'Submit')
+		  {
+		       var submitButton = document.getElementById("next"); 
+		       var backButton = document.getElementById("back"); 
+		       submitButton.disabled=true;
+		       backButton.disabled=true;
+		  }
+  }
+</script>
 
 	</head>
 	<body>
