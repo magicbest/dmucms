@@ -137,7 +137,7 @@ public class ProjectApplicationControler {
 			Cost cost , 
 			Student student ) {
 		studentId = UserAccoutUtil.getUserLoginId();
-		logger.info("��ǰ�û�Id �� " + studentId);
+		logger.info("当前登录学生 : " + studentId);
 	    AppalicationServiceImpl.updateApplicationInfo(studentId,projectMemberId,projectMemberWork,project,businessTeacher,cost,student);
 		return "student/update_success";
 	}
