@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.safewind.dmucms.dao.AppalicationDao;
 import com.safewind.dmucms.model.Appalication;
@@ -92,7 +93,7 @@ public class AppalicationServiceImpl implements IAppalicationService {
 		return appalicationDao.getBusinessTeacher(projectId);
 	}
 
-	@Override
+	@Transactional
 	public void updateApplicationInfo(String studentId,
 			String[] projectMemberId, String[] projectMemberWork,
 			Project project, BusinessTeacher businessTeacher, Cost cost,
@@ -129,7 +130,7 @@ public class AppalicationServiceImpl implements IAppalicationService {
 		}
 	}
 
-	
+	@Transactional
 	public void saveBusinessApplication(String[] projectMemberId,
 			String[] projectMemberWork, Project project,
 			BusinessTeacher businessTeacher, Cost cost, Student student) {
@@ -144,7 +145,7 @@ public class AppalicationServiceImpl implements IAppalicationService {
 		saveCostInfo(cost);
 	}
 
-	@Override
+	@Transactional
 	public void saveInnovationApplication(String[] projectMemberId,
 			String[] projectMemberWork, Project project, Cost cost,
 			Student student) {
@@ -157,7 +158,7 @@ public class AppalicationServiceImpl implements IAppalicationService {
 		saveCostInfo(cost);
 	}
 
-	@Override
+	@Transactional
 	public void deleteApplication(String studentId,int projectId)
 	{
 		String projectType = appalicationDao.queryProjectType(projectId);
