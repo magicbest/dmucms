@@ -195,7 +195,6 @@ public class ProjectApplicationControler {
 			return "student/no_appalication";
 		}
 		else {
-			studentId = UserAccoutUtil.getUserLoginId();
 			int projectId = AppalicationServiceImpl.queryProjectId(studentId);
 			AppalicationServiceImpl.deleteApplication(studentId,projectId);
 			return "student/delete_success";	
