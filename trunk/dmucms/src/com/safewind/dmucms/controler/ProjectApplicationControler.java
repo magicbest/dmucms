@@ -32,7 +32,6 @@ public class ProjectApplicationControler {
 	
 	@RequestMapping(value = "/innovationApplication", method = RequestMethod.GET)
 	public String loadInnovationPage(Model model) {
-		// ��ȡ��ǰ��¼�û��ľ�̬����
 		String studentId = UserAccoutUtil.getUserLoginId() ;
 		int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
 		if(inputFlag == 0)
@@ -48,7 +47,7 @@ public class ProjectApplicationControler {
 	
 	@RequestMapping(value = "/businessApplication", method = RequestMethod.GET)
 	public String loadBusinessPage(Model model) {
-		// ��ȡ��ǰ��¼�û��ľ�̬����
+		// 获取当前登录用户
 		String studentId = UserAccoutUtil.getUserLoginId() ;
 		int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
 		if(inputFlag == 0)
@@ -86,7 +85,7 @@ public class ProjectApplicationControler {
 	@RequestMapping(value = "/appalication/{studentId}/edit", method = RequestMethod.GET)
 	public String editApplicationPage(@PathVariable String studentId,Model model) {
 		
-		logger.info("--------  �����޸�ҳ��  -------");
+		logger.info("--------  进入修改页面 -------");
 		
 		int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
 		if(inputFlag == 0)
@@ -117,7 +116,7 @@ public class ProjectApplicationControler {
 				Cost cost  = AppalicationServiceImpl.getCostInfo(projectId);
 				List<TeamMember> memberList = AppalicationServiceImpl.getTeamMemberInfo(projectId);
 				
-				logger.info("�Ŷ����� �� " + memberList.size());
+				logger.info("成员数量 ：" + memberList.size());
 				
 				model.addAttribute("memberList", memberList);
 				model.addAttribute("student", student);
