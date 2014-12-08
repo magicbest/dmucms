@@ -115,7 +115,6 @@ public class ProjectApplicationControler {
 			else {
 				Cost cost  = AppalicationServiceImpl.getCostInfo(projectId);
 				List<TeamMember> memberList = AppalicationServiceImpl.getTeamMemberInfo(projectId);
-				
 				logger.info("成员数量 ：" + memberList.size());
 				
 				model.addAttribute("memberList", memberList);
