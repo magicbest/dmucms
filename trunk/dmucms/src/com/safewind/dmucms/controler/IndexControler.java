@@ -17,7 +17,12 @@ public class IndexControler {
 		   if(userId.length() == 8)
 		   {
 			   return "teacher/index";
-		   }else{
+		   }
+		   
+		   /*else if(userId.substring(0, 5).equals("222011")){
+			   return "student/grade4";
+		   }*/
+		   else{
 			   return "student/index";
 		   }
 	   }
