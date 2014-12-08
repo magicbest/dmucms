@@ -384,7 +384,7 @@
     </delete>
     
     <delete id="deleteBusinessTeacherInfo"  parameterType="int" >
-      delete from "DLMU_DXSCX"."BUSINESSTEACHER" where "PROJECT_ID" =  #{projectId};
+      delete from "DLMU_DXSCX"."BUSINESSTEACHER" where "PROJECT_ID" = #{projectId}
     </delete>
     
      <delete id="deleteStudentInfo"  parameterType="String" >
