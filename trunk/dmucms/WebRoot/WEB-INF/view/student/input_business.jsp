@@ -60,6 +60,19 @@ function deltr(opp) {
 }
 </script>
 
+<script type="text/javascript">
+  function submitCheck()
+  {
+	  var submitFlag =  document.getElementById("next").value;
+	  if(submitFlag == 'Submit')
+		  {
+		       var submitButton = document.getElementById("next"); 
+		       var backButton = document.getElementById("back"); 
+		       submitButton.disabled=true;
+		       backButton.disabled=true;
+		  }
+  }
+</script>
 
 
 	</head>
@@ -422,7 +435,7 @@ function deltr(opp) {
 									
 									<div class="form-actions">
 											<input id="back" class="btn btn-primary" type="reset" value="Back" />
-											<input id="next" class="btn btn-primary" type="submit" value="Next" />
+											<input id="next" class="btn btn-primary" type="submit" onclick="submitCheck()"  value="Next" />
 											<div id="status"></div>
 									</div>
 									<div id="submitted"></div>
