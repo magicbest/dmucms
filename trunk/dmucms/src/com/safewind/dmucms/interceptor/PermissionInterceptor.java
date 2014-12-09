@@ -26,7 +26,9 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter  {
 		    
 		    if(permissionCheck == null)
 		    {   
-		    	logger.info(" 没有申明权限 ,  所有级别权限放行  ！ ");
+		    	
+		    	return true ;
+		    	/*logger.info(" 没有申明权限 ,  所有级别权限放行  ！ ");
 		    	  if(userId.substring(0, 6).equals("222011"))
 				   {
 					   logger.info("----对大四学生进行请求隔离----");
@@ -36,7 +38,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter  {
 					   return false ;
 				   }else {
 					   return true ;
-				}
+				}*/
 		    }else {
 		    	if(userId.substring(0, 6).equals("222011"))
 				   {
