@@ -70,9 +70,10 @@ function deltr(opp) {
 		       var backButton = document.getElementById("back"); 
 		       submitButton.disabled=true;
 		       backButton.disabled=true;
+		       //document.getElementById("form-wizard").submit();    
 		  }
   }
-</script>
+</script> 
 
 	</head>
 	<body>
@@ -81,28 +82,6 @@ function deltr(opp) {
 		<div id="header">
 			<h1><a href="#">大创客户端</a></h1>		
 		</div>
-		<!--搜索按钮
-		<div id="search">
-			<input type="text" placeholder="Search here..." /><button type="submit" class="tip-right" title="Search"><i class="icon-search icon-white"></i></button>
-		</div>
-		-->
-		<!--右上按钮
-		<div id="user-nav" class="navbar navbar-inverse">
-            <ul class="nav btn-group">
-                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
-                <li class="btn btn-inverse dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a class="sAdd" title="" href="#">new message</a></li>
-                        <li><a class="sInbox" title="" href="#">inbox</a></li>
-                        <li><a class="sOutbox" title="" href="#">outbox</a></li>
-                        <li><a class="sTrash" title="" href="#">trash</a></li>
-                    </ul>
-                </li>
-                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-                <li class="btn btn-inverse"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
-            </ul>
-        </div>
-		-->
             
 		<%@ include file="sidebar.html"%>
 		
@@ -137,7 +116,7 @@ function deltr(opp) {
 								<h5>填写项目申请书</h5>
 							</div>
 							<div class="widget-content nopadding">
-								<form id="form-wizard" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/innovationApplication" />
+								<form id="form-wizard"  onsubmit="submitCheck()"  class="form-horizontal" method="post" action="${pageContext.request.contextPath}/innovationApplication" />
 									
 									<div id="form-wizard-1" class="step">
 									    <div class="control-group">
@@ -410,7 +389,7 @@ function deltr(opp) {
 									
 									<div class="form-actions">
 											<input id="back" class="btn btn-primary" type="reset" value="Back" />
-											<input id="next" class="btn btn-primary" type="submit" onclick="submitCheck()"  value="Next" />
+											<input id="next" class="btn btn-primary" type="submit"  value="Next" />
 											<div id="status"></div>
 									</div>
 									<div id="submitted"></div>

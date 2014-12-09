@@ -138,7 +138,7 @@ function deltr(opp) {
 								<h5>填写项目申请书</h5>
 							</div>
 							<div class="widget-content nopadding">
-								<form id="form-wizard" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/businessApplication" />
+								<form id="form-wizard" onsubmit="submitCheck()" class="form-horizontal" method="post" action="${pageContext.request.contextPath}/businessApplication" />
 									
 									<div id="form-wizard-1" class="step">
 									    <div class="control-group">
@@ -435,7 +435,7 @@ function deltr(opp) {
 									
 									<div class="form-actions">
 											<input id="back" class="btn btn-primary" type="reset" value="Back" />
-											<input id="next" class="btn btn-primary" type="submit" onclick="submitCheck()"  value="Next" />
+											<input id="next" class="btn btn-primary" type="submit"  value="Next" />
 											<div id="status"></div>
 									</div>
 									<div id="submitted"></div>
