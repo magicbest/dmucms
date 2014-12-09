@@ -47,7 +47,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter  {
 					   }else{
 						   int userRoleLevel = (int) session.getAttribute("userRoleLevel") ;
 						   boolean isProjectMannager = (boolean) session.getAttribute("isProjectMannager");
-						   logger.info("当前用户 : " + userId + "session中是否为负责人 ： "  +  isProjectMannager);
+						   logger.info("当前用户 : " + userId + "  session中是否为负责人 ： "  +  isProjectMannager);
 						   if(userRoleLevel < permissionCheck.permissionLevel() || !(permissionCheck.isProjectMannagerCheck() == isProjectMannager))
 						   {
 							   StringBuilder sbder = new StringBuilder();
