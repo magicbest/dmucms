@@ -16,13 +16,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	<link rel="stylesheet" type="text/css" href="css/dandelion.css"  media="screen" />
 
   </head>
   
   <body>
-     404
+    <div id="da-wrapper" class="fluid">
+    
+        <!-- Content -->
+        <div id="da-content">
+            
+            <!-- Container -->
+            <div class="da-container clearfix">
+            
+            	<div id="da-error-wrapper">
+                	
+                   	<div id="da-error-pin"></div>
+                    <div id="da-error-code">
+                    	error <span>404</span>                    </div>
+                
+                	<h1 class="da-error-heading">页面消失在了五维空间~</h1>
+                    <p><a href="${pageContext.request.contextPath}">返回主页看看吧 </a></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div id="da-footer">
+        	<div class="da-container clearfix">
+           	<p> 2014 safewind. All Rights Reserved.</div>
+        </div>
+    </div>
   </body>
 </html>
