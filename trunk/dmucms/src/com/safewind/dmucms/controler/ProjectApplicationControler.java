@@ -4,6 +4,8 @@ package com.safewind.dmucms.controler;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.safewind.dmucms.annotation.PermissionCheck;
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
@@ -67,21 +71,23 @@ public class ProjectApplicationControler {
 			@RequestParam(value="projectMemberWork")String[] projectMemberWork,
 			Project project , 
 			Cost cost , 
-			Student student ,Model model) {
-		AppalicationServiceImpl.saveInnovationApplication(projectMemberId,projectMemberWork,project,cost,student);		
+			Student student ,Model model,HttpSession session) {
+		AppalicationServiceImpl.saveInnovationApplication(projectMemberId,projectMemberWork,project,cost,student);
+		session.setAttribute("isProjectMannager", true);
 		return "student/save_success";
 	}
 	
 	
 	@RequestMapping(value = "/businessApplication", method = RequestMethod.POST)
 	public String saveBusinessApplication(
-			@RequestParam(value="projectMemberId") String[] projectMemberId ,@RequestParam(value="projectMemberWork")String[] projectMemberWork,Project project , BusinessTeacher businessTeacher , Cost cost , Student student ,Model model) {
+			@RequestParam(value="projectMemberId") String[] projectMemberId ,@RequestParam(value="projectMemberWork")String[] projectMemberWork,Project project , BusinessTeacher businessTeacher , Cost cost , Student student ,Model model,HttpSession session) {
 		
 		AppalicationServiceImpl.saveBusinessApplication(projectMemberId,projectMemberWork,project,businessTeacher,cost,student);
+		session.setAttribute("isProjectMannager", true);
 		return "student/save_success";
 	}
 	
-	
+	@PermissionCheck(isProjectMannagerCheck= true , permissionLevel = 1)
 	@RequestMapping(value = "/appalication/{studentId}/edit", method = RequestMethod.GET)
 	public String editApplicationPage(@PathVariable String studentId,Model model) {
 		
@@ -126,7 +132,7 @@ public class ProjectApplicationControler {
 		}
 	}
 	
-	
+	@PermissionCheck(isProjectMannagerCheck= true , permissionLevel = 1)
 	@RequestMapping(value = "/appalication/{studentId}/edit", method = RequestMethod.POST)
 	public String updateApplicationPage(
 			@PathVariable String studentId,
@@ -142,7 +148,7 @@ public class ProjectApplicationControler {
 		return "student/update_success";
 	}
 	
-	
+	@PermissionCheck(isProjectMannagerCheck= true , permissionLevel = 1)
 	@RequestMapping(value = "/appalication/{studentId}/view", method = RequestMethod.GET)
 	public String viewApplicationPage(@PathVariable String studentId,Model model) {
 
@@ -183,7 +189,7 @@ public class ProjectApplicationControler {
 		}
 	}
 	
-	
+	@PermissionCheck(isProjectMannagerCheck= true , permissionLevel = 1)
 	@RequestMapping(value = "/appalication/{studentId}/delete", method = RequestMethod.GET)
 	public String deleteApplication(@PathVariable String studentId,Model model) {
 		studentId = UserAccoutUtil.getUserLoginId();
@@ -200,6 +206,7 @@ public class ProjectApplicationControler {
 
 	}
 	
+	@PermissionCheck(isProjectMannagerCheck= true , permissionLevel = 1)
 	@RequestMapping(value = "/appalication/{studentId}/submit", method = RequestMethod.GET)
 	public String submitApplication(@PathVariable String studentId,Model model) {
 		studentId = UserAccoutUtil.getUserLoginId();
