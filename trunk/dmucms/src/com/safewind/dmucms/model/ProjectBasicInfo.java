@@ -1,12 +1,42 @@
 package com.safewind.dmucms.model;
 
 public class ProjectBasicInfo {
+	private Integer projectId ;
     private String projectName ;
     private String projectMannagerName ;
+    private String projectMannagerId;
+    private String projectMannagerPhone ;
     private String projectRank;
     private String projectCost;
     private String projectStatus;
-    public String getProjectName() {
+    
+   
+    
+    public String getProjectMannagerId()
+	{
+		return projectMannagerId;
+	}
+	public void setProjectMannagerId(String projectMannagerId)
+	{
+		this.projectMannagerId = projectMannagerId;
+	}
+	public Integer getProjectId()
+	{
+		return projectId;
+	}
+	public void setProjectId(Integer projectId)
+	{
+		this.projectId = projectId;
+	}
+	public String getProjectMannagerPhone()
+	{
+		return projectMannagerPhone;
+	}
+	public void setProjectMannagerPhone(String projectMannagerPhone)
+	{
+		this.projectMannagerPhone = projectMannagerPhone;
+	}
+	public String getProjectName() {
         return projectName;
     }
     public void setProjectName(String projectName) {
