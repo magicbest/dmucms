@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.safewind.dmucms.dao.TeacherReviewDao">
+   <resultMap  id="projectLsitResultMap"  type="com.safewind.dmucms.model.ProjectBasicInfo" >
+       <result column="name" property="userName" />
+   </resultMap>
+   
+   <insert id="saveTeacherBasicInfo" >
+      
+   </insert>
+   
+    <select id="queryProjectListByTeacherId" parameterType="String"  resultMap="projectLsitResultMap">
+       
+    </select>
+    
+    <update id="updateReviewStudentProject">
+    </update>
+   
+</mapper>
