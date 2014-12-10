@@ -1,7 +1,12 @@
 package com.safewind.dmucms.domain;
 
-public class Team {
-	private Integer project_Id ;
+import java.io.Serializable;
+
+public class Team  implements Serializable{
+
+    private static final long serialVersionUID = -7771526514885245854L;
+    
+    private Integer project_Id ;
 	private String  student_Id;
 	private String  student_role;
 	public Integer getProject_Id() {

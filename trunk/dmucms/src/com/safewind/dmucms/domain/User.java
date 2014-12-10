@@ -1,7 +1,12 @@
 package com.safewind.dmucms.domain;
 
-public class User  {
-	private Integer userId ;
+import java.io.Serializable;
+
+public class User implements Serializable {
+    
+    private static final long serialVersionUID = 9042140107612396113L;
+    
+    private Integer userId ;
 	private String  userName ;
 	public Integer getUserId() {
 		return userId;
