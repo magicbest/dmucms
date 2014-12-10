@@ -39,13 +39,14 @@ public class TeacherReviewControler {
         teacherId = UserAccoutUtil.getUserLoginId();
         teacher.setTeacherId(teacherId);
         TeacherReviewServiceImpl.saveTeacherBasicInfo(teacher);
-        return "teacher/index";
+        return "redirect:/";
     }
     
     @RequestMapping(value = "/teacher/{teacherId}/viewProjectList", method = RequestMethod.GET)
     public String viewStudentProjectList(@PathVariable String teacherId,Model model) {
         teacherId = UserAccoutUtil.getUserLoginId();
         List<ProjectBasicInfo> projectList = TeacherReviewServiceImpl.getProjectListByTeacherId(teacherId);
+        logger.info("项目数量 ： "  +  projectList.size());
         model.addAttribute("projectList", projectList);
         return "teacher/project_list";
     }
@@ -54,11 +55,11 @@ public class TeacherReviewControler {
     public String viewStudentProjectDetail(
             @PathVariable String teacherId,
             @PathVariable String shamStudentId,
-            @RequestParam(value="studentId") String studentId,
+            @RequestParam(value="projectMannagerId") String studentId,
+            @RequestParam(value="projectId") Integer projectId,
             Model model) {
         teacherId = UserAccoutUtil.getUserLoginId();
         logger.debug("老师教工号 ： "  + teacherId + "  --学生学号 ： " + studentId);
-        int projectId = AppalicationServiceImpl.queryProjectId(studentId);
         Student student = AppalicationServiceImpl.getStudentTotalInfo(studentId);
         Project project = AppalicationServiceImpl.getProjectInfo(projectId);
         if ("CY".equals(project.getProjectType())) {
@@ -83,12 +84,15 @@ public class TeacherReviewControler {
     }
     
     
-    @RequestMapping(value = "/teacher/{teacherId}/review/{shamProjectId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/teacher/{teacherId}/review/{shamProjectId}", method = RequestMethod.GET)
     public String passStudentProject(
             @PathVariable String teacherId,
             @PathVariable String shamProjectId,
             TeacherReview teacherReview,
             Model model) {
+    	teacherReview.setProjectId(161);
+    	teacherReview.setProjectResult(2);
+    	teacherReview.setTeacherComment("项目很好");
         teacherId = UserAccoutUtil.getUserLoginId();
         TeacherReviewServiceImpl.reviewStudentProject(teacherReview);
         return "redirect:/teacher/"+ teacherId +"/viewProjectList";
