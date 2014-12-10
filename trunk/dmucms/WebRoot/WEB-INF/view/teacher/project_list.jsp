@@ -1,7 +1,6 @@
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://ckeditor.com" prefix="ckeditor" %>
 <%@ taglib uri = "http://ckfinder.com" prefix="ckf" %>
-<%@ taglib uri="http://ckeditor.com" prefix="ckeditor" %>
 <%@page import="java.util.*"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -15,14 +14,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<title>大连海事大学大创管理系统</title>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-		<link rel="stylesheet" href="css/unicorn.main.css" />
-		<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />	
-		<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-         <script type="text/javascript" src="ckfinder/ckfinder.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-responsive.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/unicorn.main.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/unicorn.grey.css" class="skin-color" />	
 	     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	     <script src="js/jquery.min.js"></script>
+	     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	     <script>       
 		    function myBrowser(){  
 		    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
@@ -112,26 +109,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
+										    <th>序号</th>
 											<th>项目名称</th>
 											<th>项目负责人</th>
 											<th>负责人电话</th>
 											<th>项目等级</th>
+											<th>项目经费</th>
 											<th>项目状态</th>
 											<th>项目详情</th>
 											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
+									   <c:forEach items="${projectList}" var="project" varStatus="index">
 										<tr>
-											<td>1111111</td>
-											<td>Row 2</td>
-											<td>Row 3</td>
-											<td>Row 4</td>
-											<td>Row 4</td>
-											<td><a href="#" class="btn btn-info btn-mini">查看</a></td>
-											<td><a href="#passAlert" data-toggle="modal" class="btn btn-success btn-mini">通过</a></td>
+										    <td >${index.count}</td>
+											<td  ><c:out value="${project.projectName}" /></td>
+											<td><c:out value="${project.projectMannagerName}" /></td>
+											<td><c:out value="${project.projectMannagerPhone}" /></td>
+											<td>
+											  <c:if test="${project.projectRank == null}">校级</c:if> 
+											  <c:if test="${project.projectRank != null}">${project.projectRank}</c:if>
+											 </td>
+											<td>
+											  <c:if test="${project.projectCost == null}">1000</c:if> 
+											  <c:if test="${project.projectCost != null}">${project.projectCost}</c:if>
+											 </td>
+											<td> 
+											  <c:if test="${project.projectStatus == '0'}">未提交</c:if> 
+											  <c:if test="${project.projectStatus == '1'}">已提交</c:if> 
+										   </td>
+											<td>
+											   <form method="post"  action="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser() %>/view/${project.projectMannagerId}">
+											        <input type="hidden"  name="projectMannagerId" value="${project.projectMannagerId}">
+											        <input type="hidden"  name="projectId" value="${project.projectId}">
+											        <input type="submit"  class="btn btn-info btn-mini" value="查看" >
+											   </form>
+											</td>
+											<td>
+											  <c:if test="${project.projectStatus == '0'}">
+											     <a href="#passAlert" data-toggle="modal" class="btn btn-success btn-mini">通过</a>
+											   </c:if>
+											</td>
 										</tr>
-										
+									  </c:forEach>
 									</tbody>
 								</table>							
 							</div>
@@ -140,19 +161,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div id="passAlert" class="modal hide">
 					<div class="modal-header">
-						<button data-dismiss="modal" class="close" type="button">×</button>
+						<button data-dismiss="modal" class="close" type="button"></button>
 						<h3>确认通过</h3>
 					</div>
 					<div class="modal-body">
-						<p>您确认通过该学生的项目么</p>
-						<textarea rows="3" style="width:530"></textarea>
+						<p>确认通过该学生的项目,请输入对该项目的评语.</p>
+						<textarea rows="3" name="teacherComment"  style="width:500px;"></textarea>
 					</div>
 					<div class="modal-footer">
 						<a  class="btn btn-primary" href="${pageContext.request.contextPath}/#">确认</a>
 						<a data-dismiss="modal" class="btn" href="#">取消</a>
 					</div>
               </div>
-				<div class="row-fluid">
+                                
+			  <div class="row-fluid">
 					<div id="footer" class="span12">
 						2014 &copy;  <a target="blank" href="https://safewind.dlmu.edu.cn">safewind</a>
 					</div>
@@ -163,12 +185,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
             
             
-            <script src="js/jquery.ui.custom.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.validate.js"></script>
-            <script src="js/jquery.wizard.js"></script>
-            <script src="js/unicorn.js"></script>
-            <script src="js/unicorn.wizard.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.ui.custom.js"></script>
+            <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.wizard.js"></script>
+            <script src="${pageContext.request.contextPath}/js/unicorn.js"></script>
+            <script src="${pageContext.request.contextPath}/js/unicorn.wizard.js"></script>
 	</body>
 </html>
 

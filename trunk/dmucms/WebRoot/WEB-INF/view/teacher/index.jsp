@@ -15,14 +15,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<title>大连海事大学大创管理系统</title>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-		<link rel="stylesheet" href="css/unicorn.main.css" />
-		<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />	
-		<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-         <script type="text/javascript" src="ckfinder/ckfinder.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-responsive.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/unicorn.main.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/unicorn.grey.css" class="skin-color" />	
 	     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	     <script src="js/jquery.min.js"></script>
+	     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	     <script>       
 		    function myBrowser(){  
 		    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
@@ -110,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    <a href="http://202.118.89.12:8080/files/操作说明.doc" class="btn btn-primary" target="_blank">操作说明下载</a>
 						    </center>  -->
 						    <center>
-							<a href="${pageContext.request.contextPath}/#" class="btn btn-success">审核申请书</a>
+							<a href="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser()%>/viewProjectList" class="btn btn-success">审核申请书</a>
 						    </center>	    						   
 						    <hr/>
 						    <center>
@@ -132,12 +130,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
             
             
-            <script src="js/jquery.ui.custom.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.validate.js"></script>
-            <script src="js/jquery.wizard.js"></script>
-            <script src="js/unicorn.js"></script>
-            <script src="js/unicorn.wizard.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.ui.custom.js"></script>
+            <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.wizard.js"></script>
+            <script src="${pageContext.request.contextPath}/js/unicorn.js"></script>
+            <script src="${pageContext.request.contextPath}/js/unicorn.wizard.js"></script>
 	</body>
 </html>
 
