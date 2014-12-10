@@ -10,18 +10,16 @@ import java.lang.annotation.RetentionPolicy;
 @Target(ElementType.METHOD)
 @Documented
 public @interface PermissionCheck {
-	
-	/**
-	 * 是否是项目负责人
-	 * @return
-	 */
-	boolean isProjectMannagerCheck()  default true;
-	
-	/**
-	 * 1 级权限  学生
-	 * 2 级权限  指导教师
-	 * 3 级权限  教学院长
-	 * 4 级权限  中心权限(最高权限)
-	 */
-	int permissionLevel()   default 1 ; 
+
+    /**
+     * 是否是项目负责人
+     * 
+     * @return
+     */
+    boolean isProjectMannagerCheck() default true;
+
+    /**
+     * 1 级权限 学生 2 级权限 指导教师 3 级权限 教学院长 4 级权限 中心权限(最高权限)
+     */
+    int permissionLevel() default 1;
 }
