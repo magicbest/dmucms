@@ -45,9 +45,9 @@
     
        <mvc:interceptors>
         <mvc:interceptor>
-          <!--   <mvc:exclude-mapping path="/permissionDenied" />-->           
             <mvc:mapping path="/*" />
 			<mvc:mapping path="/appalication/**" />
+			<mvc:exclude-mapping path="/permissionDenied" />
 			<bean class="com.safewind.dmucms.interceptor.PermissionInterceptor"></bean>
 		</mvc:interceptor>
 	  </mvc:interceptors>
