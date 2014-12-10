@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.Mapper;
 
-import com.safewind.dmucms.model.Appalication;
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
@@ -65,4 +64,6 @@ public interface AppalicationDao
 	void deleteBusinessTeacherInfo(@Param("projectId")int projectId);
 
 	void updateProjectStatus(@Param("projectId")int projectId);
+
+    int queryTeacherInputFlag(@Param("teacherId")String userId);
 }
