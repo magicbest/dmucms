@@ -1,0 +1,45 @@
+<%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div id="sidebar">
+	<a href="#" class="visible-phone"><i class="icon icon-th-list"></i>
+		打开列表</a>
+	<ul>
+		<li><a href="${pageContext.request.contextPath}"><i
+				class="icon icon-home"></i> <span>主页</span></a></li>
+		<li class="submenu active open"><a href="#"><i
+				class="icon icon-th-list"></i> <span>项目审核</span> <span class="label">6</span></a>
+			<ul>
+				<li><a
+					href="${pageContext.request.contextPath}/#">审核申请书</a></li>
+				
+			
+			</ul>
+		</li>
+        <li class="submenu active"><a href="#"><i
+				class="icon icon-th-list"></i> <span>相关文件下载</span> <span class="label">4</span></a>
+			<ul>
+				<li><a
+					href="http://my.dlmu.edu.cn/oa/downloadattachment/45148/附件1关于实施大学生创新创业训练计划项目的有关要求.docx">相关要求</a></li>
+				<li><a
+					href="http://my.dlmu.edu.cn/oa/downloadattachment/45149/附件2立项评审标准.doc">立项评审标准</a></li>
+				<li><a
+					href="http://my.dlmu.edu.cn/oa/downloadattachment/45150/附件3一级学科名称及代码.doc">学科名称及代码</a></li>
+				<li><a
+					href="http://202.118.89.12:8080/files/操作说明.doc">操作说明</a></li>
+				
+			</ul>
+		</li>
+	</ul>
+</div>
+<div id="deleteAlert" class="modal hide">
+	<div class="modal-header">
+		<button data-dismiss="modal" class="close" type="button">×</button>
+		<h3>确认删除</h3>
+	</div>
+	<div class="modal-body">
+		<p>删除是不可撤销的，确认删除吗？</p>
+	</div>
+	<div class="modal-footer">
+		<a  class="btn btn-primary" href="${pageContext.request.contextPath}/appalication/<%=request.getRemoteUser()%>/delete">确认</a>
+		<a data-dismiss="modal" class="btn" href="#">取消</a>
+	</div>
+</div>

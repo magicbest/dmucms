@@ -101,26 +101,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="container-fluid">
 				<div class="row-fluid">
 					<div class="span12">
-					        <center><h4>当前登录账号：<%=request.getRemoteUser() %></h4><h5>（切换账号请关闭浏览器所有窗口后重新打开）</h5></center>
-					         <hr/>
-					         <center style="color:red"><h4>现阶段为学生申报，导师审核阶段。请各位导师审核学生的项目申请书，如果没有问题请审核通过，并给予相应意见。<br/>如果不通过，请电话告知学生进行修改。<hr/>请使用火狐、Chrome或者IE8以上浏览器。<br/>交流QQ群号：242294855</h4></center>
-					         <hr/>
-						   <!--  <center>
-						    <a href="http://202.118.83.44:8080/grade" class="btn btn-primary" target="_blank">查看2013年国家级优秀项目</a>
-						    <a href="http://202.118.89.12:8080/files/操作说明.doc" class="btn btn-primary" target="_blank">操作说明下载</a>
-						    </center>  -->
-						    <center>
-							<a href="${pageContext.request.contextPath}/#" class="btn btn-success">审核申请书</a>
-						    </center>	    						   
-						    <hr/>
-						    <center>
-						    <a href="http://my.dlmu.edu.cn/oa/downloadattachment/45148/附件1关于实施大学生创新创业训练计划项目的有关要求.docx" class="btn btn-info" >关于实施大学生创新创业训练计划项目的有关要求.docx</a>
-						    <a href="http://my.dlmu.edu.cn/oa/downloadattachment/45149/附件2立项评审标准.doc" class="btn btn-info">立项评审标准.doc</a>
-						     <a href="http://my.dlmu.edu.cn/oa/downloadattachment/45150/附件3一级学科名称及代码.doc" class="btn btn-info" >一级学科名称及代码.doc</a>
-						    </center>						
+					       <div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="icon-th"></i>
+								</span>
+								<h5>项目列表</h5>
+							</div>
+							<div class="widget-content nopadding">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>项目名称</th>
+											<th>项目负责人</th>
+											<th>负责人电话</th>
+											<th>项目等级</th>
+											<th>项目状态</th>
+											<th>项目详情</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1111111</td>
+											<td>Row 2</td>
+											<td>Row 3</td>
+											<td>Row 4</td>
+											<td>Row 4</td>
+											<td><a href="#" class="btn btn-info btn-mini">查看</a></td>
+											<td><a href="#passAlert" data-toggle="modal" class="btn btn-success btn-mini">通过</a></td>
+										</tr>
+										
+									</tbody>
+								</table>							
+							</div>
+						</div>					
 					</div>
 				</div>
-				
+				<div id="passAlert" class="modal hide">
+					<div class="modal-header">
+						<button data-dismiss="modal" class="close" type="button">×</button>
+						<h3>确认通过</h3>
+					</div>
+					<div class="modal-body">
+						<p>您确认通过该学生的项目么</p>
+						<textarea rows="3" style="width:530"></textarea>
+					</div>
+					<div class="modal-footer">
+						<a  class="btn btn-primary" href="${pageContext.request.contextPath}/#">确认</a>
+						<a data-dismiss="modal" class="btn" href="#">取消</a>
+					</div>
+              </div>
 				<div class="row-fluid">
 					<div id="footer" class="span12">
 						2014 &copy;  <a target="blank" href="https://safewind.dlmu.edu.cn">safewind</a>
