@@ -2,8 +2,6 @@ package com.safewind.dmucms.service;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
@@ -56,4 +54,6 @@ public interface IAppalicationService
 	public void deleteApplication(String studentId,int projectId);
 
 	public void submitApplication(int projectId);
+
+    public int queryTeacherInputFlag(String userId);
 }
