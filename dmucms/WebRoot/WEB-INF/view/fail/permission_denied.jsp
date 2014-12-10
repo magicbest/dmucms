@@ -24,5 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
        <h2 align="center" >${permissionInfo}</h2>
+       <h3 align="center" > <a href="${pageContext.request.contextPath}" > 返回首页 </a> </h3>
   </body>
 </html>
