@@ -40,8 +40,7 @@
 	<table align="center"
 		style="border-collapse:collapse; margin-top:150px;" border=1
 		bordercolor="#6699cc" cellPadding=4 width="600px;">
-		<form onsubmit="return CheckForm();" action="/better/TeacherSer"
-			name="teacherInfoForm" method="post">
+		<form onsubmit="return CheckForm();" action="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser() %>/saveBasicInfo"  name="teacherInfoForm" method="post">
 			<tr>
 				<td><table style="border-collapse:collapse;" border=1
 						bordercolor="#6699cc" cellPadding=4 width="600px;">
