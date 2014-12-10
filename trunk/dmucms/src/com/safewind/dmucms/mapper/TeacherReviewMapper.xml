@@ -1,21 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   
+
 <mapper namespace="com.safewind.dmucms.dao.TeacherReviewDao">
-   <resultMap  id="projectLsitResultMap"  type="com.safewind.dmucms.model.ProjectBasicInfo" >
-       <result column="name" property="userName" />
-   </resultMap>
-   
-   <insert id="saveTeacherBasicInfo" >
-      
-   </insert>
-   
-    <select id="queryProjectListByTeacherId" parameterType="String"  resultMap="projectLsitResultMap">
-       
-    </select>
-    
-    <update id="updateReviewStudentProject">
-    </update>
-   
+
+    <resultMap id="projectLsitResultMap" type="com.safewind.dmucms.model.ProjectBasicInfo" > 
+       <result column="PROJECT_INCREAMENT_ID" property="projectId" />
+       <result column="PROJECT_NAME" property="projectName" /> 
+       <result column="XM" property="projectMannagerName" /> 
+       <result column="PROJECT_HEAD_ID" property="projectMannagerId" />
+       <result column="STUDENT_PHONE" property="projectMannagerPhone" /> 
+       <result column="PROJECT_COST" property="projectRank" /> 
+       <result column="PROJECT_RANK" property="projectCost" /> 
+       <result column="PROJECT_STATUS" property="projectStatus" /> 
+    </resultMap>
+
+	<insert id="saveTeacherBasicInfo" parameterType="com.safewind.dmucms.domain.Teacher">
+		INSERT INTO
+		"DLMU_DXSCX"."TEACHER"
+		(
+		"TEACHER_ID",
+		"TEACHER_PHONE",
+		"TEACHER_POSITION",
+		"TEACHER_TITLE",
+		"TEACHER_DEGREE",
+		"TEACHER_RESEARCH"
+		)
+		values
+		(
+		#{teacherId,javaType=String,
+		jdbcType=VARCHAR},
+		#{teacherPhone,javaType=String, jdbcType=VARCHAR},
+		#{teacherPosition,javaType=String, jdbcType=VARCHAR},
+		#{teacherTitle,javaType=String, jdbcType=VARCHAR},
+		#{teacherDegree,javaType=String, jdbcType=VARCHAR},
+		#{teacherResearch,javaType=String, jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<select id="queryProjectListByTeacherId" parameterType="String"
+		resultMap="projectLsitResultMap">
+		select
+		a.PROJECT_INCREAMENT_ID ,
+		a.PROJECT_NAME ,
+		b.XM ,
+		a.PROJECT_HEAD_ID,
+		c.STUDENT_PHONE,
+		a.PROJECT_COST ,
+		a.PROJECT_RANK ,
+		a.PROJECT_STATUS
+		from
+		"DLMU_DXSCX"."PROJECT" a
+		LEFT JOIN
+		"DATACT"."VI_XG_DXS_XSXJ" b
+		on (a.PROJECT_HEAD_ID = b.XH)
+		LEFT JOIN "DLMU_DXSCX"."STUDENT" C
+		on(b.XH = c.STUDENT_ID)
+		where
+		a.PROJECT_TUTOR_ID = #{teacherId}
+
+	</select>
+
+	<update id="updateReviewStudentProject" parameterType="com.safewind.dmucms.model.TeacherReview">
+	   update 
+	     "DLMU_DXSCX"."PROJECT"
+	   set 
+	      PROJECT_STATUS = #{projectResult} ,
+	      TEACHER_COMMENT = #{teacherComment}
+	   where
+	      PROJECT_INCREAMENT_ID = #{projectId}
+	</update>
+
 </mapper>

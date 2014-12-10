@@ -407,7 +407,7 @@
           PROJECT_INCREAMENT_ID = #{projectId} 
     </update>
     
-    <select id="queryTeacherInputFlag" parameterType="String" >
+    <select id="queryTeacherInputFlag" parameterType="String" resultType="int"  >
        select  count(*) from  "DLMU_DXSCX"."TEACHER" where  "TEACHER_ID" = #{teacherId}
     </select>
     
