@@ -1,7 +1,12 @@
 package com.safewind.dmucms.domain;
 
-public class Student {
-	private String studentId ;
+import java.io.Serializable;
+
+public class Student implements Serializable {
+    
+    private static final long serialVersionUID = 8578630350916483035L;
+    
+    private String studentId ;
 	private String studentName ;
 	private String studentCollega;
 	private String studentMajor ;
