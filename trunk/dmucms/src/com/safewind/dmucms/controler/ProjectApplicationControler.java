@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.safewind.dmucms.annotation.PermissionCheck;
+import com.safewind.dmucms.annotation.StudentPermissionCheck;
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
@@ -73,7 +72,7 @@ public class ProjectApplicationControler {
         return "student/save_success";
     }
 
-    @PermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
+    @StudentPermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
     @RequestMapping(value = "/appalication/{studentId}/edit", method = RequestMethod.GET)
     public String editApplicationPage(@PathVariable String studentId, Model model) {
 
@@ -114,7 +113,7 @@ public class ProjectApplicationControler {
         }
     }
 
-    @PermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
+    @StudentPermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
     @RequestMapping(value = "/appalication/{studentId}/edit", method = RequestMethod.POST)
     public String updateApplicationPage(@PathVariable String studentId, @RequestParam(value = "projectMemberId") String[] projectMemberId,
             @RequestParam(value = "projectMemberWork") String[] projectMemberWork, Project project, BusinessTeacher businessTeacher,
@@ -126,7 +125,7 @@ public class ProjectApplicationControler {
         return "student/update_success";
     }
 
-    @PermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
+    @StudentPermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
     @RequestMapping(value = "/appalication/{studentId}/view", method = RequestMethod.GET)
     public String viewApplicationPage(@PathVariable String studentId, Model model) {
 
@@ -163,7 +162,7 @@ public class ProjectApplicationControler {
         }
     }
 
-    @PermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
+    @StudentPermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
     @RequestMapping(value = "/appalication/{studentId}/delete", method = RequestMethod.GET)
     public String deleteApplication(@PathVariable String studentId, Model model) {
         studentId = UserAccoutUtil.getUserLoginId();
@@ -178,7 +177,7 @@ public class ProjectApplicationControler {
 
     }
 
-    @PermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
+    @StudentPermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
     @RequestMapping(value = "/appalication/{studentId}/submit", method = RequestMethod.GET)
     public String submitApplication(@PathVariable String studentId, Model model) {
         studentId = UserAccoutUtil.getUserLoginId();
