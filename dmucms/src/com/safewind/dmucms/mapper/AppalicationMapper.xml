@@ -411,4 +411,8 @@
        select  count(*) from  "DLMU_DXSCX"."TEACHER" where  "TEACHER_ID" = #{teacherId}
     </select>
     
+    <select id="queryProjectStatus" parameterType="int" resultType="int"  >
+       select  PROJECT_STATUS  from  "DLMU_DXSCX"."PROJECT" where  PROJECT_INCREAMENT_ID = #{projectId} 
+    </select>
+    
 </mapper>
