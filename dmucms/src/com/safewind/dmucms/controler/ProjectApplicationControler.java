@@ -85,6 +85,11 @@ public class ProjectApplicationControler {
 
             studentId = UserAccoutUtil.getUserLoginId();
             int projectId = AppalicationServiceImpl.queryProjectId(studentId);
+            int projectStatus = AppalicationServiceImpl.queryProjectStatus(projectId);
+            if(projectStatus >= 2)
+            {
+            	return "student/edit_refuse";
+            }
             Student student = AppalicationServiceImpl.getStudentTotalInfo(studentId);
             Project project = AppalicationServiceImpl.getProjectInfo(projectId);
 
