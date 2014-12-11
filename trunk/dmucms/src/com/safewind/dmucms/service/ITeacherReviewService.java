@@ -14,4 +14,6 @@ public interface ITeacherReviewService {
 
     void reviewStudentProject(TeacherReview teacherReview);
 
+    int getIsProjectTeacher(String userId);
+
 }

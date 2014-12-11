@@ -9,19 +9,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.safewind.dmucms.annotation.PermissionCheck;
+import com.safewind.dmucms.annotation.StudentPermissionCheck;
 import com.safewind.dmucms.util.UserAccoutUtil;
 
-public class PermissionInterceptor extends HandlerInterceptorAdapter {
+public class StudentPermissionInterceptor extends HandlerInterceptorAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(PermissionInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(StudentPermissionInterceptor.class);
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         String userId = UserAccoutUtil.getUserLoginId();
 
         HandlerMethod method = (HandlerMethod) handler;
-        PermissionCheck permissionCheck = method.getMethodAnnotation(PermissionCheck.class);
+        StudentPermissionCheck permissionCheck = method.getMethodAnnotation(StudentPermissionCheck.class);
 
         if (permissionCheck == null) {
             logger.info(" 没有申明权限 ,  所有级别权限放行  ！ ");
