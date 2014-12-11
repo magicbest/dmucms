@@ -32,4 +32,9 @@ public class TeacherReviewServiceImpl implements ITeacherReviewService {
         teacherReviewDao.updateReviewStudentProject(teacherReview);
     }
 
+    @Override
+    public int getIsProjectTeacher(String userId) {
+        return teacherReviewDao.queryIsProjectTeacher(userId);
+    }
+
 }

@@ -70,5 +70,9 @@
 	   where
 	      PROJECT_INCREAMENT_ID = #{projectId}
 	</update>
+	
+	<select id="queryIsProjectTeacher" parameterType="String" resultType="int"  >
+       select  count(*) from  "DLMU_DXSCX"."PROJECT" where  "PROJECT_TUTOR_ID" = #{teacherId}
+    </select>
 
 </mapper>
