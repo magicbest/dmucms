@@ -176,4 +176,10 @@ public class AppalicationServiceImpl implements IAppalicationService {
         return teacherInputFlag;
     }
 
+	@Override
+	public int queryProjectStatus(int projectId)
+	{
+		return appalicationDao.queryProjectStatus(projectId);
+	}
+
 }
