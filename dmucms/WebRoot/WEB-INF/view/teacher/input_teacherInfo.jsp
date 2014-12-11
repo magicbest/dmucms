@@ -34,12 +34,10 @@
 </head>
 
 <body>
-	<center>
-		<h2>某某某老师您好，您是第一次登陆，请完善您的个人信息，以便学生申报</h2>
-	</center>
 	<table align="center"
 		style="border-collapse:collapse; margin-top:150px;" border=1
 		bordercolor="#6699cc" cellPadding=4 width="600px;">
+		<h2 align="center">老师您好，您是第一次登陆，请完善您的个人信息，以便学生申报</h2>
 		<form onsubmit="return CheckForm();" action="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser() %>/saveBasicInfo"  name="teacherInfoForm" method="post">
 			<tr>
 				<td><table style="border-collapse:collapse;" border=1
