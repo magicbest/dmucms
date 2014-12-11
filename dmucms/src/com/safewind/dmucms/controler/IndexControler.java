@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.safewind.dmucms.service.IAppalicationService;
+import com.safewind.dmucms.service.ITeacherReviewService;
 import com.safewind.dmucms.util.UserAccoutUtil;
 
 @Controller
@@ -17,6 +18,8 @@ public class IndexControler {
 
     @Autowired
     private IAppalicationService AppalicationServiceImpl;
+    @Autowired
+    private ITeacherReviewService TeacherReviewServiceImpl;
 
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public String getLoginPage(HttpSession session) {
@@ -27,6 +30,12 @@ public class IndexControler {
             {
                 return "teacher/input_teacherInfo";
             }else{
+                int isProjectTeacher = TeacherReviewServiceImpl.getIsProjectTeacher(userId);
+                if(isProjectTeacher != 0)
+                {
+                    session.setAttribute("isProjectTeacher", true);
+                    session.setAttribute("userRoleLevel", 2);
+                }
                 return "teacher/index";
             } 
         } else {

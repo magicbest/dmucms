@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @Documented
-public @interface PermissionCheck {
+public @interface StudentPermissionCheck {
 
     /**
      * 是否是项目负责人

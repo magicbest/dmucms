@@ -17,5 +17,7 @@ public interface TeacherReviewDao {
     List<ProjectBasicInfo> queryProjectListByTeacherId(@Param("teacherId") String teacherId);
 
     void updateReviewStudentProject(TeacherReview teacherReview);
+
+    int queryIsProjectTeacher(@Param("teacherId")String userId);
     
 }

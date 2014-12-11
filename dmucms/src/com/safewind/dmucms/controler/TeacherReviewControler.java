@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.safewind.dmucms.annotation.TeacherPermissionCheck;
 import com.safewind.dmucms.domain.Teacher;
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
@@ -33,7 +34,8 @@ public class TeacherReviewControler {
     private ITeacherReviewService TeacherReviewServiceImpl;
     @Autowired
     private IAppalicationService AppalicationServiceImpl;
-
+    
+    
     @RequestMapping(value = "/teacher/{teacherId}/saveBasicInfo", method = RequestMethod.POST)
     public String saveTeacherInfo(@PathVariable String teacherId ,Teacher teacher) {
         teacherId = UserAccoutUtil.getUserLoginId();
@@ -41,6 +43,7 @@ public class TeacherReviewControler {
         TeacherReviewServiceImpl.saveTeacherBasicInfo(teacher);
         return "redirect:/";
     }
+    
     
     @RequestMapping(value = "/teacher/{teacherId}/viewProjectList", method = RequestMethod.GET)
     public String viewStudentProjectList(@PathVariable String teacherId,Model model) {
@@ -51,6 +54,7 @@ public class TeacherReviewControler {
         return "teacher/project_list";
     }
     
+    @TeacherPermissionCheck(isProjectTeacher = true , permissionLevel = 2)
     @RequestMapping(value = "/teacher/{teacherId}/view/{shamStudentId}", method = RequestMethod.POST)
     public String viewStudentProjectDetail(
             @PathVariable String teacherId,
@@ -83,16 +87,13 @@ public class TeacherReviewControler {
         }
     }
     
-    
-    @RequestMapping(value = "/teacher/{teacherId}/review/{shamProjectId}", method = RequestMethod.GET)
+    @TeacherPermissionCheck(isProjectTeacher = true , permissionLevel = 2)
+    @RequestMapping(value = "/teacher/{teacherId}/review/{shamProjectId}", method = RequestMethod.POST)
     public String passStudentProject(
             @PathVariable String teacherId,
             @PathVariable String shamProjectId,
             TeacherReview teacherReview,
             Model model) {
-    	teacherReview.setProjectId(161);
-    	teacherReview.setProjectResult(2);
-    	teacherReview.setTeacherComment("项目很好");
         teacherId = UserAccoutUtil.getUserLoginId();
         TeacherReviewServiceImpl.reviewStudentProject(teacherReview);
         return "redirect:/teacher/"+ teacherId +"/viewProjectList";
