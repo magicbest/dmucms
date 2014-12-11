@@ -136,20 +136,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											  <c:if test="${project.projectCost != null}">${project.projectCost}</c:if>
 											 </td>
 											<td> 
-											  <c:if test="${project.projectStatus == '0'}">未提交</c:if> 
-											  <c:if test="${project.projectStatus == '1'}">已提交</c:if> 
+											  <c:if test="${project.projectStatus == 0}">未提交</c:if> 
+											  <c:if test="${project.projectStatus == 1}">已提交</c:if> 
+											  <c:if test="${project.projectStatus == 2}">导师通过</c:if> 
 										   </td>
 											<td>
-											   <form method="post"  action="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser() %>/view/${project.projectMannagerId}">
+											   <form method="post"  target="_blank"  action="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser() %>/view/${project.projectMannagerId}">
 											        <input type="hidden"  name="projectMannagerId" value="${project.projectMannagerId}">
 											        <input type="hidden"  name="projectId" value="${project.projectId}">
 											        <input type="submit"  class="btn btn-info btn-mini" value="查看" >
 											   </form>
 											</td>
 											<td>
-											  <c:if test="${project.projectStatus == '0'}">
-											     <a href="#passAlert" data-toggle="modal" class="btn btn-success btn-mini">通过</a>
-											   </c:if>
+											    <c:if test="${project.projectStatus != 0}">
+											       <a href="#passAlert${index.count}" data-toggle="modal" class="btn btn-success btn-mini">操作</a>
+											    </c:if> 
 											</td>
 										</tr>
 									  </c:forEach>
@@ -159,20 +160,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>					
 					</div>
 				</div>
-				<div id="passAlert" class="modal hide">
+				
+			  <c:forEach items="${projectList}" var="project" varStatus="index">
+				<div id="passAlert${index.count}" class="modal hide">
 					<div class="modal-header">
 						<button data-dismiss="modal" class="close" type="button"></button>
 						<h3>确认通过</h3>
 					</div>
+				  <form action="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser() %>/review/${project.projectId}" method="post">
 					<div class="modal-body">
-						<p>确认通过该学生的项目,请输入对该项目的评语.</p>
+					       <p><strong>请选择是否通过该项目</strong></p>
+					       <div class="control-group"> 
+							   <div class="controls"> 
+							    <label class="radio inline"> <input type="radio" value="2" checked="checked" name="projectResult" /> 通过该项目</label> 
+							    <label class="radio inline"> <input type="radio" value="0" name="projectResult" /> 退回该项目 </label> 
+							   </div> 
+							</div>
+						<p><strong>请输入对该项目的评语.</strong></p>
+						<input type="hidden"  name="projectId" value="${project.projectId}" >
 						<textarea rows="3" name="teacherComment"  style="width:500px;"></textarea>
 					</div>
 					<div class="modal-footer">
-						<a  class="btn btn-primary" href="${pageContext.request.contextPath}/#">确认</a>
+					    <input class="btn btn-primary"  type="submit" value="确认" >
 						<a data-dismiss="modal" class="btn" href="#">取消</a>
 					</div>
+				</form>
               </div>
+            </c:forEach>
                                 
 			  <div class="row-fluid">
 					<div id="footer" class="span12">
