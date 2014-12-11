@@ -56,4 +56,6 @@ public interface IAppalicationService
 	public void submitApplication(int projectId);
 
     public int queryTeacherInputFlag(String userId);
+
+	public int queryProjectStatus(int projectId);
 }
