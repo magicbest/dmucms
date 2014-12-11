@@ -66,4 +66,6 @@ public interface AppalicationDao
 	void updateProjectStatus(@Param("projectId")int projectId);
 
     int queryTeacherInputFlag(@Param("teacherId")String userId);
+
+	int queryProjectStatus(@Param("projectId")int projectId);
 }
