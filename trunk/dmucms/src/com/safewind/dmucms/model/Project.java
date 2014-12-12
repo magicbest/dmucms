@@ -15,6 +15,7 @@ public class Project {
 	private String  projectTeacherId;
 	private String  projectContent;
 	private String  projectSpecial;
+	private int  projectStatus;
 	
 	
 	public Integer getProjectId() {
@@ -100,6 +101,12 @@ public class Project {
 	}
 	public void setProjectMasterId(String projectMasterId) {
 		this.projectMasterId = projectMasterId;
+	}
+	public int getProjectStatus() {
+		return projectStatus;
+	}
+	public void setProjectStatus(int projectStatus) {
+		this.projectStatus = projectStatus;
 	}
 	
 }
