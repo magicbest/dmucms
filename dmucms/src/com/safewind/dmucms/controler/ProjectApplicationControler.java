@@ -54,8 +54,8 @@ public class ProjectApplicationControler {
     }
 
     @RequestMapping(value = "/innovationApplication", method = RequestMethod.POST)
-    public String saveApplication(@RequestParam(value = "projectMemberId") String[] projectMemberId,
-            @RequestParam(value = "projectMemberWork") String[] projectMemberWork, Project project, Cost cost, Student student,
+    public String saveApplication(@RequestParam(value = "projectMemberId" , required = false) String[] projectMemberId,
+            @RequestParam(value = "projectMemberWork" , required = false) String[] projectMemberWork, Project project, Cost cost, Student student,
             Model model, HttpSession session) {
         AppalicationServiceImpl.saveInnovationApplication(projectMemberId, projectMemberWork, project, cost, student);
         session.setAttribute("isProjectMannager", true);
@@ -63,8 +63,8 @@ public class ProjectApplicationControler {
     }
 
     @RequestMapping(value = "/businessApplication", method = RequestMethod.POST)
-    public String saveBusinessApplication(@RequestParam(value = "projectMemberId") String[] projectMemberId,
-            @RequestParam(value = "projectMemberWork") String[] projectMemberWork, Project project, BusinessTeacher businessTeacher,
+    public String saveBusinessApplication(@RequestParam(value = "projectMemberId" , required = false) String[] projectMemberId,
+            @RequestParam(value = "projectMemberWork" , required = false) String[] projectMemberWork, Project project, BusinessTeacher businessTeacher,
             Cost cost, Student student, Model model, HttpSession session) {
 
         AppalicationServiceImpl.saveBusinessApplication(projectMemberId, projectMemberWork, project, businessTeacher, cost, student);
