@@ -30,6 +30,7 @@
        <result column="PROJECT_SUBJECT" property="projectSubject"/>
        <result column="PROJECT_SPECIAL" property="projectSpecial"/>
        <result column="PROJECT_TYPE" property="projectType"/>
+       <result column="PROJECT_STATUS" property="projectStatus"/> 
        <result column="TEACHER_NAME" property="projectTeacherName"/>
    </resultMap>
    
@@ -227,6 +228,7 @@
         "PROJECT_FROM_NAME",
         "PROJECT_TUTOR_ID",
         "PROJECT_CONTENT",
+        "PROJECT_STATUS",
         "PROJECT_COST",
         "PROJECT_SUBJECT",
         "PROJECT_SPECIAL",
