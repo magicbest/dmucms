@@ -6,7 +6,7 @@
 
 	<title>大连海事创新创业申请书</title>
 	<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
-	<link rel="stylesheet" type="text/css" href="../css/h1.css">
+	
 	
 </head>
 <body>
@@ -21,6 +21,11 @@
 
 <div id="contect" align="center">
       <p style="font-size:xx-large"><a name="h2" id="h2"></a>一、基本情况</p>
+      <div><h3 style="color:blue">项目状态：
+      <c:if test="${project.projectStatus == 0}">未提交</c:if> 
+	  <c:if test="${project.projectStatus == 1}">已提交</c:if> 
+	  <c:if test="${project.projectStatus == 2}">导师通过</c:if>
+	  </h3></div>
       <table width="800" height="30" border="1px"  cellpadding="0" cellspacing="0" style="border-bottom:0px;">
         <tr>
           <td width="140">项目名称</td>
