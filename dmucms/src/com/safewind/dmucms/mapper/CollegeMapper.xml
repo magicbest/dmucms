@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+
+
+<mapper namespace="com.safewind.dmucms.dao.CollegeDao">
+   <resultMap  id="userResultMap"  type="com.safewind.dmucms.domain.User" >
+       <id column="id" property="userId" jdbcType="INTEGER" />
+       <result column="name" property="userName" jdbcType="VARCHAR" />
+   </resultMap>
+   
+   <select id="checkUserLogin"  parameterType="Integer" resultMap="userResultMap" >       
+              select * from user where id = #{userId}
+   </select>
+   
+   <select id="checkUserLoginInfo"  parameterType="String" resultType="Integer" >       
+              select count(*) from GY_USER where USER_ID = #{id} AND USERPW = #{password}
+   </select>
+   
+</mapper>
