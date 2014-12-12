@@ -26,6 +26,30 @@
     </bean>
     
     
+    <!-- mail  config -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<property name="protocol" value="smtp"/>
+	<property name="host" value="smtp.gmail.com"/>
+	<property name="port" value="465" /><!--Gmail的SMTP端口-->
+	<property name="username" value="shugang.cpp@gmail.com"/>
+	<property name="password" value="GM19691992123"/>
+	<property name="javaMailProperties">
+		<props>
+			<prop key="mail.smtp.auth">true</prop>
+			<prop key="mail.smtp.starttls.enable">true</prop>
+			<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+            <!--gmail要求的ssl连接-->
+		</props>
+	 </property>
+   </bean>
+
+<!--②异步线程执行器-->
+<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	<property name="corePoolSize" value="10"/>
+	<property name="maxPoolSize" value="30"/>
+</bean>
+    
+    
     
 <!-- <context:component-scan base-package="com.safewind.dmucms">
   <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -44,7 +68,7 @@
     
        <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/*" />
+            <!-- <mvc:mapping path="/*" /> -->
 			<mvc:mapping path="/appalication/**" />
 			<mvc:exclude-mapping path="/permissionDenied" />
 			<bean class="com.safewind.dmucms.interceptor.StudentPermissionInterceptor"></bean>
