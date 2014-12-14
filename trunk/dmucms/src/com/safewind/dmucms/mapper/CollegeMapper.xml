@@ -5,17 +5,74 @@
 
 
 <mapper namespace="com.safewind.dmucms.dao.CollegeDao">
-   <resultMap  id="userResultMap"  type="com.safewind.dmucms.domain.User" >
-       <id column="id" property="userId" jdbcType="INTEGER" />
-       <result column="name" property="userName" jdbcType="VARCHAR" />
+   <resultMap  id="projectListResultMap"  type="com.safewind.dmucms.model.ProjectInfoForCollege" >
+       <result column="PROJECT_INCREAMENT_ID" property="projectId"  />
+       <result column="PROJECT_NAME" property="projectName"  />
+       <result column="XM" property="projectMannagerName"  />
+       <result column="XH" property="projectMannagerId"  />
+       <result column="STUDENT_PHONE" property="studentPhone"  />
+       <result column="TEACHER_NAME" property="projectTeacher"  />
+       <result column="PROJECT_COST" property="projectCost"  />
+       <result column="PROJECT_RANK" property="projectRank"  />
+       <result column="PROJECT_STATUS" property="projectStatus"  />
    </resultMap>
    
-   <select id="checkUserLogin"  parameterType="Integer" resultMap="userResultMap" >       
-              select * from user where id = #{userId}
+   <select id="queryProjectListByCollege"  parameterType="com.safewind.dmucms.model.CollegeProjectSearchParm" resultMap="projectListResultMap" >       
+      select  * from 
+       (select
+        ROWNUM as ROWNO,
+		a.PROJECT_INCREAMENT_ID ,
+		a.PROJECT_NAME ,
+		b.XM ,
+		b.XH,
+		c.STUDENT_PHONE,
+		d.XM  TEACHER_NAME,
+		a.PROJECT_COST ,
+		a.PROJECT_RANK ,
+		a.PROJECT_STATUS
+		from
+		"DLMU_DXSCX"."PROJECT" a
+		LEFT JOIN
+		"DATACT"."VI_XG_DXS_XSXJ" b
+		on (a.PROJECT_HEAD_ID = b.XH)
+		LEFT JOIN "DLMU_DXSCX"."STUDENT" C
+		on(b.XH = c.STUDENT_ID)
+		LEFT JOIN "DATACT"."VI_XG_DXS_JZG"  d
+		ON(d.GH = a.PROJECT_TUTOR_ID)
+		where b.XYM = #{collegeName} 
+	  ) t
+      where 
+        <![CDATA[ROWNO > #{startRow}]]> 
+        and    
+        <![CDATA[ROWNO <= #{endRow}]]> 
    </select>
    
-   <select id="checkUserLoginInfo"  parameterType="String" resultType="Integer" >       
-              select count(*) from GY_USER where USER_ID = #{id} AND USERPW = #{password}
+   
+   
+    <select id="getProjectCount"  parameterType="String" resultType="int" >       
+    select count(*)
+      from 
+       (select
+		a.PROJECT_INCREAMENT_ID ,
+		a.PROJECT_NAME ,
+		b.XM ,
+		b.XH,
+		c.STUDENT_PHONE,
+		d.XM  TEACHER_NAME,
+		a.PROJECT_COST ,
+		a.PROJECT_RANK ,
+		a.PROJECT_STATUS
+		from
+		"DLMU_DXSCX"."PROJECT" a
+		LEFT JOIN
+		"DATACT"."VI_XG_DXS_XSXJ" b
+		on (a.PROJECT_HEAD_ID = b.XH)
+		LEFT JOIN "DLMU_DXSCX"."STUDENT" C
+		on(b.XH = c.STUDENT_ID)
+		LEFT JOIN "DATACT"."VI_XG_DXS_JZG"  d
+		ON(d.GH = a.PROJECT_TUTOR_ID)
+		where b.XYM = #{collegeName}
+    ) t   
    </select>
    
 </mapper>
