@@ -5,12 +5,25 @@ public class ProjectInfoForCollege {
     private String projectId ;
     private String projectName ;
     private String projectMannagerName ;
+    private String projectMannagerId ; 
     private String projectTeacher ;
     private String projectStatus ;
     private String studentPhone ;
     private String projectRank ;
     private String projectCost ;
-    public String getProjectId() {
+    
+    
+    
+    
+    public String getProjectMannagerId()
+	{
+		return projectMannagerId;
+	}
+	public void setProjectMannagerId(String projectMannagerId)
+	{
+		this.projectMannagerId = projectMannagerId;
+	}
+	public String getProjectId() {
         return projectId;
     }
     public void setProjectId(String projectId) {
