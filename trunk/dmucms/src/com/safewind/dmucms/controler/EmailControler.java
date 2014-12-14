@@ -1,6 +1,7 @@
 package com.safewind.dmucms.controler;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,36 +29,43 @@ public class EmailControler {
     
     @RequestMapping(value = "/center/sendMail", method=RequestMethod.GET)
     public String getSendMailPage(){
-        return "center/edit_mail";
+        return "center/mail_page";
       }
     
     @RequestMapping(value = "/center/sendMail", method=RequestMethod.POST)
     public String doSendMail(
+    		@RequestParam(value="sendAll" , required = false) String sendAll ,
             @RequestParam(value="EmailAddressee") String EmailAddressee ,
             @RequestParam(value="EmailSubject") String EmailSubject ,
             @RequestParam(value="EmailContent") String EmailContent ,
             HttpServletRequest request
             ){
         
-        logger.info("------------------谢谢 ----------------");
-        
-        String array[] = {"593985368@qq.com","906165957@qq.com"} ;
-        
-        String temp = "<html> <body> <h2 style=" + "color:red" + ">你好，你好！</h2> </body> </html>" ;
-        
-        logger.info(" -------- "  + temp);
-        
-        Email email = new Email();
-        email.setEmailAddressee(array);
-        email.setEmailContent(temp);
-        email.setEmailSubject("大创系统-----");
-        try {
-            EmailServiceImpl.sendMail(email);  //大于5个收件人时，分流器会自动选择异步方式发送
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }  
-        return "message";
+    	logger.info("---------" + sendAll) ;
+    	
+    	if(sendAll != null)
+    	{
+    		List<String> emaiList =  EmailServiceImpl.getAllEmailAdress();
+    		logger.info("需要发送多少分邮件 ： " + emaiList.size());
+            String[] array =new String[emaiList.size()];
+            for(int i = 0 ;  i < emaiList.size() ;  i ++)
+            {
+            	array[i] = (String)emaiList.get(i);
+            }
+            
+            Email email = new Email();
+            email.setEmailAddressee(array);
+            email.setEmailContent(EmailContent);
+            email.setEmailSubject(EmailSubject);
+            try {
+                EmailServiceImpl.sendMail(email);  
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }  
+            
+    	}
+        return "redirect:/";
       }
 }
