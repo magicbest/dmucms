@@ -152,7 +152,7 @@
 <div class="hu44">&nbsp;</div>
 <div class="hu44">&nbsp;</div>
 <div class="hu44">&nbsp;</div>
-<div  align="center">
+<div  style="width:800px;margin:0 auto;">
 <p style="font-size:xx-large"><a name="h3" id="h3"></a>二、立项依据</p>
 <table width="800" border="1px"  cellpadding="0" cellspacing="0">
 <tr><td>
