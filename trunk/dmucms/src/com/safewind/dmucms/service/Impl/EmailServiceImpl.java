@@ -1,6 +1,7 @@
 package com.safewind.dmucms.service.Impl;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -11,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.safewind.dmucms.dao.EmailDao;
 import com.safewind.dmucms.domain.Email;
 import com.safewind.dmucms.service.IEmailService;
 
@@ -22,6 +24,8 @@ public class EmailServiceImpl implements IEmailService {
     JavaMailSender mailSender;  //装配Spring封装的javamail 
     @Autowired 
     TaskExecutor taskExecutor;   //装配Spring封装的异步执行器
+    @Autowired
+    private EmailDao emailDao ; 
 
     public void sendMail(Email email) throws MessagingException, IOException {
 
@@ -72,4 +76,10 @@ public class EmailServiceImpl implements IEmailService {
             mailSender.send(mime);
         }
     }
+
+	@Override
+	public List<String> getAllEmailAdress()
+	{
+		return emailDao.queryAllEmailAdress();
+	}
 }
