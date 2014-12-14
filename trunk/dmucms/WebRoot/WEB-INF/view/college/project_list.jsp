@@ -97,17 +97,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 			</div>
 			
-	    <input id="totalPage" type="hidden" th:value="${page.totalPageCount}"> </input>     
-        <input id="pageNow" type="hidden" th:value="${page.pageNow}"> </input>   
-          
-    	<div align="right" style="margin-right:20px"   id="prolist" > </div>  
-			
-			
-			<script type='text/javascript'>  
+	    <input id="totalPage" type="hidden" value="${page.totalPages}"> </input>     
+        <input id="pageNow" type="hidden" value="${page.currentPage}"> </input>   
+        <input id="deanId" type="hidden" value="<%=request.getRemoteUser() %>"> </input> 
+        <input id="host" type="hidden" value="${pageContext.request.contextPath}"> </input> 
+        
+     <div align="right" style="margin-right:20px;margin-bottom: -15px;"   id="prolist" > </div>  
+ 	<script type='text/javascript'>  
         var total=$("#totalPage").val();
         var pageNow=$("#pageNow").val();    
-        var fromDate = $("#datepicker").val(); 
-        var toDate = $("#datepicker2").val(); 
+        var deanId = $("#deanId").val();
+        var host = $("host").val() ;
         var options = {
         	
             currentPage:pageNow ,
@@ -128,13 +128,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             },
             pageUrl: function(type, page, current){            
-            		return "/queryWorkNumInHref?roundPram="+fromDate+"@"+toDate+"@"+ page ;
+            		return  "/dmucms/college/"+ deanId +"/viewProjectList?currentPage=" + page;
             }
       
         }  
         
     	   $('#prolist').bootstrapPaginator(options);
-           $('#prolist2').bootstrapPaginator(options);
    		</script>
 			
 			
@@ -152,7 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-										    <th>序号</th>
+										    <th>编号</th>
 											<th>项目名称</th>
 											<th>项目负责人</th>
 											<th>负责人电话</th>
@@ -167,10 +166,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<tbody>
 									   <c:forEach items="${projectList}" var="project" varStatus="index">
 										<tr>
-										    <td >${index.count}</td>
+										    <td >${project.projectId}</td>
 											<td  ><c:out value="${project.projectName}" /></td>
 											<td><c:out value="${project.projectMannagerName}" /></td>
-											<td><c:out value="${project.projectMannagerPhone}" /></td>
+											<td><c:out value="${project.studentPhone}" /></td>
 											<td>
 											  <c:if test="${project.projectRank == null}">校级</c:if> 
 											  <c:if test="${project.projectRank != null}">${project.projectRank}</c:if>
@@ -184,9 +183,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											  <c:if test="${project.projectStatus == 1}">已提交</c:if> 
 											  <c:if test="${project.projectStatus == 2}">导师通过</c:if> 
 										   </td>
+										   <td><c:out value="${project.projectTeacher}" /></td>
 											<td>
-											   <form method="post"  target="_blank"  action="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser() %>/view/${project.projectMannagerId}">
-											        <input type="hidden"  name="projectMannagerId" value="${project.projectMannagerId}">
+											   <form method="post"  target="_blank"  action="${pageContext.request.contextPath}/college/<%=request.getRemoteUser() %>/view/${project.projectMannagerId}">
+											        <input type="hidden"  name="studentId" value="${project.projectMannagerId}">
 											        <input type="hidden"  name="projectId" value="${project.projectId}">
 											        <input type="submit"  class="btn btn-info btn-mini" value="查看" >
 											   </form>
