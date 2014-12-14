@@ -3,5 +3,9 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
 <mapper namespace="com.safewind.dmucms.dao.EmailDao">
-
+  
+  <select id="queryAllEmailAdress" resultType="String" >
+    select STUDENT_EMAIL from "DLMU_DXSCX"."STUDENT" 
+  </select>
+  
 </mapper>
