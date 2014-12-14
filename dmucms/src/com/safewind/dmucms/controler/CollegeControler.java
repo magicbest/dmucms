@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.safewind.dmucms.domain.Pager;
 import com.safewind.dmucms.model.BusinessTeacher;
+import com.safewind.dmucms.model.CollegeProjectSearchParm;
 import com.safewind.dmucms.model.CollegeReview;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
@@ -36,13 +38,21 @@ public class CollegeControler {
     
     @RequestMapping(value = "/college/{shamDeanId}/viewProjectList", method=RequestMethod.GET)
     public String getProjectList(
-                @PathVariable String shamDeanId ,Model  model
+                @PathVariable String shamDeanId ,
+                @RequestParam(value="currentPage") Integer currentPage ,
+                 Model  model
             ){
-        
-        String collegeName   =  "" ;
-        List<ProjectInfoForCollege>  projectList = CollegeServiceImpl.getProjectListByCollege(collegeName);
+        String collegeName   =  "轮机工程学院" ;
+        int  projectCount  = CollegeServiceImpl.getProjectCount(collegeName);
+        Pager page = new Pager(projectCount, currentPage);
+        CollegeProjectSearchParm searchParm = new CollegeProjectSearchParm() ;
+        searchParm.setCollegeName(collegeName);
+        searchParm.setStartRow(page.getStartRow());
+        searchParm.setEndRow(page.getEndRow());
+        List<ProjectInfoForCollege>  projectList = CollegeServiceImpl.getProjectListByCollege(searchParm);
         model.addAttribute("projectList", projectList);
-        return "center/edit_mail";
+        model.addAttribute("page", page);
+        return "college/project_list";
       }
       
     @RequestMapping(value = "/college/{deanId}/view/{shamStudentId}", method=RequestMethod.POST)

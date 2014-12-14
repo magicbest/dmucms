@@ -36,7 +36,7 @@ public class IndexControler {
                     session.setAttribute("isProjectTeacher", true);
                     session.setAttribute("userRoleLevel", 2);
                 }
-                return "teacher/index";
+                return "college/index";
             } 
         } else {
             int isProjectMannager = AppalicationServiceImpl.getStudentInputFlag(userId);
