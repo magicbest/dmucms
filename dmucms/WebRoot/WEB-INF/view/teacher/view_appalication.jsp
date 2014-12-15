@@ -57,7 +57,7 @@
      <table width="800" height="30" border="1px"  cellpadding="0" cellspacing="0" style="border-top:0px; border-bottom:0px;" >
          <tr>
           <td width="140">学号</td>
-          <td width="100"><%=request.getRemoteUser()%></td>
+          <td width="100"><c:out value="${student.studentId}" ></c:out></td>
           <td width="80">联系方式</td>
           <td><c:out value="${student.studentPhone}" ></c:out></td>
           <td>学院：<c:out value="${student.studentCollega}" ></c:out></td>
