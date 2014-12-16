@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.safewind.dmucms.annotation.StudentPermissionCheck;
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
+import com.safewind.dmucms.model.ProjectInfoForStudent;
 import com.safewind.dmucms.model.Student;
 import com.safewind.dmucms.model.TeamMember;
 import com.safewind.dmucms.service.IAppalicationService;
@@ -175,8 +177,15 @@ public class ProjectApplicationControler {
             return "student/no_appalication";
         } else {
             int projectId = AppalicationServiceImpl.queryProjectId(studentId);
-            AppalicationServiceImpl.deleteApplication(studentId, projectId);
-            return "student/delete_success";
+            int projectStatus = AppalicationServiceImpl.queryProjectStatus(projectId) ;
+            if(projectStatus < 2)
+            {
+            	AppalicationServiceImpl.deleteApplication(studentId, projectId);
+            	return "student/delete_success";
+            }else {
+            	
+            	return "redirect:/prompt?promptType=deleteRefuse";
+			}
         }
 
     }
@@ -198,6 +207,23 @@ public class ProjectApplicationControler {
                 return "redirect:/prompt?promptType=submitRefuse";
             }
             return "student/submit_success";
+        }
+    }
+    
+    
+    @StudentPermissionCheck(isProjectMannagerCheck = true, permissionLevel = 1)
+    @RequestMapping(value = "/application/{studentId}/myApplication", method = RequestMethod.GET)
+    public String viewMyApplication(@PathVariable String studentId, Model model) {
+        studentId = UserAccoutUtil.getUserLoginId();
+        int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
+        if (inputFlag == 0) {
+            return "student/no_appalication";
+        } else {
+            int projectId = AppalicationServiceImpl.queryProjectId(studentId);
+            ProjectInfoForStudent project = AppalicationServiceImpl.getProjectInfoByProjectId(projectId);
+            logger.info("-------------- "  + project.getTeacherComment() );
+            model.addAttribute("project", project);
+            return "student/my_application";
         }
     }
 
