@@ -87,7 +87,7 @@ public class ProjectApplicationControler {
             int projectId = AppalicationServiceImpl.queryProjectId(studentId);
             int projectStatus = AppalicationServiceImpl.queryProjectStatus(projectId);
             if (projectStatus >= 2) {
-                return "student/edit_refuse";
+                return "redirect:/prompt?promptType=editRefuse";
             }
             Student student = AppalicationServiceImpl.getStudentTotalInfo(studentId);
             Project project = AppalicationServiceImpl.getProjectInfo(projectId);
@@ -190,7 +190,13 @@ public class ProjectApplicationControler {
             return "student/no_appalication";
         } else {
             int projectId = AppalicationServiceImpl.queryProjectId(studentId);
-            AppalicationServiceImpl.submitApplication(projectId);
+            int projectStatus = AppalicationServiceImpl.queryProjectStatus(projectId) ;
+            if(projectStatus == 0)
+            {
+                AppalicationServiceImpl.submitApplication(projectId);
+            }else {
+                return "redirect:/prompt?promptType=submitRefuse";
+            }
             return "student/submit_success";
         }
     }

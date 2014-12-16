@@ -34,7 +34,7 @@ public class IndexControler {
                     session.setAttribute("isProjectTeacher", true);
                     session.setAttribute("userRoleLevel", 2);
                 }
-                return "college/index";
+                return "teacher/index";
             }
         } else {
             int isProjectMannager = AppalicationServiceImpl.getStudentInputFlag(userId);
@@ -57,6 +57,16 @@ public class IndexControler {
             model.addAttribute("permissionInfo", "对不起,您的权限还不能进行此项操作！");
         }
         return "fail/permission_denied";
+    }
+    
+    @RequestMapping(value = "/prompt", method = RequestMethod.GET)
+    public String promptFail(@RequestParam(value = "promptType") String promptType, Model model) {
+        if (promptType.equals("submitRefuse")) {
+            model.addAttribute("promptInfo", "您已经提交给老师！");
+        } else if (promptType.equals("editRefuse")) {
+            model.addAttribute("promptInfo", "对不起,当前状态下不能修改申请书");
+        }
+        return "prompt/prompt";
     }
 
 }
