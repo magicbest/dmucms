@@ -10,6 +10,7 @@ import com.safewind.dmucms.dao.AppalicationDao;
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
+import com.safewind.dmucms.model.ProjectInfoForStudent;
 import com.safewind.dmucms.model.Student;
 import com.safewind.dmucms.model.TeamMember;
 import com.safewind.dmucms.service.IAppalicationService;
@@ -180,5 +181,11 @@ public class AppalicationServiceImpl implements IAppalicationService {
 	public int queryProjectStatus(int projectId)
 	{
 		return appalicationDao.queryProjectStatus(projectId);
+	}
+
+	@Override
+	public ProjectInfoForStudent getProjectInfoByProjectId(int projectId)
+	{
+		return appalicationDao.queryProjectInfoByProjectId(projectId);
 	}
 }
