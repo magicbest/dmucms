@@ -149,6 +149,11 @@
 	<listener>
 		<listener-class>com.safewind.dmucms.util.LogbackConfigListener</listener-class>
 	</listener>
+	
+    <session-config>
+        <session-timeout>120</session-timeout>
+    </session-config>
+	
     
     <error-page> 
        <error-code>404</error-code> 
