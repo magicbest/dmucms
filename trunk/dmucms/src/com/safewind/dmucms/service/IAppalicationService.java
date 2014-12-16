@@ -5,6 +5,7 @@ import java.util.List;
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
+import com.safewind.dmucms.model.ProjectInfoForStudent;
 import com.safewind.dmucms.model.Student;
 import com.safewind.dmucms.model.TeamMember;
 
@@ -58,5 +59,7 @@ public interface IAppalicationService
     public int queryTeacherInputFlag(String userId);
 
 	public int queryProjectStatus(int projectId);
+
+	public ProjectInfoForStudent getProjectInfoByProjectId(int projectId);
 
 }
