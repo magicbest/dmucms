@@ -65,8 +65,8 @@ public class EmailServiceImpl implements IEmailService {
         String[] emailAdrressArray = email.getEmailAddressee();
         MimeMessage mime = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mime, true, "utf-8");
-        helper.setFrom("shugang.cpp@gmail.com");// 发件人       
-        helper.setReplyTo("shugang.cpp@gmail.com");// 回复到
+        helper.setFrom("dlmucms@gmail.com");// 发件人       
+        helper.setReplyTo("dlmucms@gmail.com");// 回复到
         helper.setSubject(email.getEmailSubject());// 邮件主题
         helper.setText(email.getEmailContent(), true);// true表示设定html格式
         
