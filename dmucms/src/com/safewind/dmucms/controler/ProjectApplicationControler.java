@@ -54,18 +54,18 @@ public class ProjectApplicationControler {
     }
 
     @RequestMapping(value = "/innovationApplication", method = RequestMethod.POST)
-    public String saveApplication(@RequestParam(value = "projectMemberId" , required = false) String[] projectMemberId,
-            @RequestParam(value = "projectMemberWork" , required = false) String[] projectMemberWork, Project project, Cost cost, Student student,
-            Model model, HttpSession session) {
+    public String saveApplication(@RequestParam(value = "projectMemberId", required = false) String[] projectMemberId,
+            @RequestParam(value = "projectMemberWork", required = false) String[] projectMemberWork, Project project, Cost cost,
+            Student student, Model model, HttpSession session) {
         AppalicationServiceImpl.saveInnovationApplication(projectMemberId, projectMemberWork, project, cost, student);
         session.setAttribute("isProjectMannager", true);
         return "student/save_success";
     }
 
     @RequestMapping(value = "/businessApplication", method = RequestMethod.POST)
-    public String saveBusinessApplication(@RequestParam(value = "projectMemberId" , required = false) String[] projectMemberId,
-            @RequestParam(value = "projectMemberWork" , required = false) String[] projectMemberWork, Project project, BusinessTeacher businessTeacher,
-            Cost cost, Student student, Model model, HttpSession session) {
+    public String saveBusinessApplication(@RequestParam(value = "projectMemberId", required = false) String[] projectMemberId,
+            @RequestParam(value = "projectMemberWork", required = false) String[] projectMemberWork, Project project,
+            BusinessTeacher businessTeacher, Cost cost, Student student, Model model, HttpSession session) {
 
         AppalicationServiceImpl.saveBusinessApplication(projectMemberId, projectMemberWork, project, businessTeacher, cost, student);
         session.setAttribute("isProjectMannager", true);
@@ -86,9 +86,8 @@ public class ProjectApplicationControler {
             studentId = UserAccoutUtil.getUserLoginId();
             int projectId = AppalicationServiceImpl.queryProjectId(studentId);
             int projectStatus = AppalicationServiceImpl.queryProjectStatus(projectId);
-            if(projectStatus >= 2)
-            {
-            	return "student/edit_refuse";
+            if (projectStatus >= 2) {
+                return "student/edit_refuse";
             }
             Student student = AppalicationServiceImpl.getStudentTotalInfo(studentId);
             Project project = AppalicationServiceImpl.getProjectInfo(projectId);

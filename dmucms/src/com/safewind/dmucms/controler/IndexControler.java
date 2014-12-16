@@ -26,18 +26,16 @@ public class IndexControler {
         String userId = UserAccoutUtil.getUserLoginId();
         if (userId.length() == 8) {
             int teacherInputBasicInfoFlag = AppalicationServiceImpl.queryTeacherInputFlag(userId);
-            if(teacherInputBasicInfoFlag == 0)
-            {
+            if (teacherInputBasicInfoFlag == 0) {
                 return "teacher/input_teacherInfo";
-            }else{
+            } else {
                 int isProjectTeacher = TeacherReviewServiceImpl.getIsProjectTeacher(userId);
-                if(isProjectTeacher != 0)
-                {
+                if (isProjectTeacher != 0) {
                     session.setAttribute("isProjectTeacher", true);
                     session.setAttribute("userRoleLevel", 2);
                 }
                 return "college/index";
-            } 
+            }
         } else {
             int isProjectMannager = AppalicationServiceImpl.getStudentInputFlag(userId);
             if (isProjectMannager != 0) {
