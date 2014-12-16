@@ -75,4 +75,14 @@
     ) t   
    </select>
    
+   <update id="updateProjectCollegeStatus" parameterType="com.safewind.dmucms.model.CollegeReview">
+	   update 
+	     "DLMU_DXSCX"."PROJECT"
+	   set 
+	      PROJECT_STATUS = #{projectResult} ,
+	      COLLEGE_COMMENT = #{collegeComment}
+	   where
+	      PROJECT_INCREAMENT_ID = #{projectId}
+	</update>
+   
 </mapper>
