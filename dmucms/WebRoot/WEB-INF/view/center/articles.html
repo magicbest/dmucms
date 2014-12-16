@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html layout:decorator="dashboard/support/layout">
+ <head>
+   <script type="text/javascript">
+    function prePage(){
+    	var currentPage = $("#currentPage").val() ;
+        var nextPage = parseInt(currentPage) - 1 ;
+    	$("#currentPage").val(nextPage); 
+    	$("#form2").submit();
+    }
+    
+    function nextPage(){
+        var currentPage = $("#currentPage").val() ;
+        var nextPage = parseInt(currentPage) + 1 ;
+    	$("#currentPage").val(nextPage); 
+    	$("#form2").submit();
+    }
+   </script>
+ </head>
+ <body>
+  <div layout:fragment="detail"> 
+  
+  	<style>
+		td,th {
+			text-align:center;
+			vertical-align: middle;
+		} 
+	</style>
+  
+   <link rel="stylesheet" th:href="|${urlStatic}/common/datetimepicker/default/css/bootstrap-datetimepicker.min.css|" /> 
+   <link rel="stylesheet" th:href="@{'/js/bootstrap-select.min.css'}" /> 
+   <script th:src="@{'/js/bootstrap-select.min.js'}" charset="UTF-8"></script> 
+   <script th:src="|${urlStatic}/common/datetimepicker/default/js/bootstrap-datetimepicker.min.js|" charset="UTF-8"></script> 
+   <h1> <small> Support </small> </h1> 
+   
+ 
+  <th:block th:if="${params == null}">
+   <div class="panel panel-default"> 
+    <div class="panel-body"> 
+     <form class="form-inline" role="form" th:action="@{/dashboard/support/articles}" method="POST" id="form"> 
+      <div class="form-group"> 
+       <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd"> 
+        <input class="form-control" type="text" placeholder="Start Date" style="background-color:white;cursor:default" name="startDate" readonly="readonly" /> 
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span> 
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd"> 
+        <input class="form-control" type="text" placeholder="End Date" style="background-color:white;cursor:default" name="endDate" readonly="readonly" /> 
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span> 
+       </div> 
+      </div> 
+      <br />
+      <br /> 
+      <div class="form-group"> 
+       <select class=" form-control selectpicker" name="boardType" data-live-search="false">
+          <option value="BUSINESS">PM</option>
+          <option value="TECHNICAL">PL</option> 
+       </select> 
+      </div> 
+      <div class="form-group"> 
+       <select class=" form-control selectpicker" name="supportBbsType" data-live-search="false"> 
+         <option value="Share">Share</option>
+          <option value="Request">Ticket</option>
+       </select> 
+      </div> 
+      
+      <div class="form-group"> 
+       <select class=" form-control selectpicker" name="category" data-live-search="false"> 
+         <option value="LAUNCHING">LAUNCHING</option>
+          <option value="RELEASE">RELEASE</option>
+       </select> 
+      </div> 
+      
+      <div class="form-group"> 
+       <select class=" form-control selectpicker" name="writter" data-live-search="true"> 
+          <option value="All">All Member</option> 
+        <th:block th:each="member:${memberList}">
+          <option th:value="${member.userKey}"  th:text="${member.name}" ></option> 
+        </th:block>
+        </select> 
+      </div> 
+      <div class="form-group"> 
+       <select class=" form-control selectpicker" name="assigned" data-live-search="false"> 
+        <option value="Not Assigned">Not Assigned</option>
+         <option value="Assigned">Assigned</option>
+       </select> 
+      </div> 
+      <div class="form-group"> 
+        <select class=" form-control selectpicker" name="compeleted" data-live-search="false">
+        <option value="Not compeleted">Not compeleted</option>
+        <option value="Compeleted">Compeleted</option> 
+       </select> 
+      </div> 
+      <div  class="form-group"> 
+       <input type="submit" value="seach" class="btn btn-success" /> 
+      </div> 
+      
+     </form> 
+    </div> 
+   </div> 
+  </th:block>
+  
+  <th:block th:if="${params != null}">
+   <div class="panel panel-default"> 
+    <div class="panel-body"> 
+     <form class="form-inline" role="form"  th:action="@{/dashboard/support/articles}" method="POST" id="form2"> 
+      <div class="form-group"> 
+       <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd"> 
+        <input th:value="${params.startDate}" class="form-control" type="text" placeholder="Start Date" style="background-color:white;cursor:default" name="startDate"  readonly="readonly" /> 
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span> 
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd"> 
+        <input th:value="${params.endDate}" class="form-control" type="text" placeholder="End Date" style="background-color:white;cursor:default" name="endDate" readonly="readonly" /> 
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span> 
+       </div> 
+      </div> 
+      <br />
+      <br /> 
+      <div class="form-group"> 
+       <select class=" form-control selectpicker" name="boardType" data-live-search="true">
+          <option th:selected="${params.bbsType.name() == 'technical'}?'selected':false"   value="TECHNICAL">PM</option>
+          <option th:selected="${params.bbsType.name() == 'business'}?'selected':false"  value="BUSINESS">PL</option> 
+       </select> 
+      </div> 
+      <div class="form-group"> 
+       <select class=" form-control selectpicker" name="supportBbsType" data-live-search="false"> 
+          <option  th:selected="${params.supportArticleType.name() == 'SHARE'}?'selected':false" value="Share">Share</option>
+          <option  th:selected="${params.supportArticleType.name() == 'REQUEST'}?'selected':false" value="Request">Ticket</option>
+       </select> 
+      </div> 
+      
+      <div class="form-group"> 
+       <select class=" form-control selectpicker" name="category" data-live-search="false"> 
+          <option th:selected="${params.category.name() == 'LAUNCHING'}?'selected':false"  value="LAUNCHING">LAUNCHING</option>
+          <option th:selected="${params.category.name() == 'RELEASE'}?'selected':false" value="RELEASE">RELEASE</option>
+       </select> 
+      </div> 
+      
+      <div class="form-group"> 
+       <select class=" form-control selectpicker" name="writter" data-live-search="true"> 
+            <option value="All">All Member</option> 
+            <th:block th:each="member:${memberList}">
+             <option th:value="${member.userKey}"  th:text="${member.name}" ></option> 
+            </th:block>
+        </select> 
+      </div> 
+      <div class="form-group"> 
+       <select class=" form-control selectpicker" name="assigned" data-live-search="false"> 
+        <option value="Not Assigned">Not Assigned</option>
+         <option value="Assigned">Assigned</option>
+       </select> 
+      </div> 
+      <div class="form-group"> 
+        <select class=" form-control selectpicker" name="compeleted" data-live-search="false">
+        <option value="Not compeleted">Not compeleted</option>
+        <option value="Compeleted">Compeleted</option> 
+       </select> 
+      </div> 
+      
+      <div  class="form-group"> 
+       <input type="submit" value="seach" class="btn btn-success" /> 
+      </div> 
+      <input type="hidden" id="currentPage" name="page" th:value="${paginationData.currentPage}"></input>
+     </form> 
+    </div> 
+   </div> 
+  </th:block>
+   
+   <th:block th:if="${params != null}">
+   
+    <div align="right">
+      <nav>
+   <ul class="pagination">
+   
+    <th:block th:if="${paginationData.currentPage == 1}">
+      <li><a href="#" th:text="${paginationData.currentPage}" ></a></li>
+      <li><a onclick="nextPage()">&raquo;</a></li>
+    </th:block>
+    
+    <th:block th:if="${paginationData.currentPage > 1 and  paginationData.allPageCount > paginationData.currentPage}" >
+      <li><a onclick="prePage()">&laquo;</a></li>
+      <li><a href="#" th:text="${paginationData.currentPage}" ></a></li>
+    <li><a onclick="nextPage()">&raquo;</a></li>
+    </th:block>
+    
+    <th:block th:if="${paginationData.currentPage == paginationData.allPageCount}">
+      <li><a onclick="prePage()">&laquo;</a></li>
+      <li><a href="#" th:text="${paginationData.currentPage}" ></a></li>
+    </th:block>
+  </ul>
+</nav>
+    </div>
+   
+    <th:block th:if="${params.supportArticleType.text == 'Share'}">
+   <h3> <small>Share</small> </h3> 
+   <div class="panel panel-default"> 
+    <div class="panel-body"> 
+     <div class="MdTbl01"> 
+      <table class="table table-striped table-bordered table-hover" style="table-layout:fixed ;"> 
+       
+       <thead> 
+        <tr> 
+         <th class="col-xs-2">Channel Name</th> 
+         <th class="col-xs-4">Title</th> 
+         <th class="col-xs-2">Categary</th> 
+         <th class="col-xs-2">Post by</th> 
+         <th class="col-xs-2">Post Time</th> 
+        </tr> 
+       </thead> 
+       <tbody> 
+        <tr th:each="supportBbsArticle:${supportBbsArticleList}"> 
+         <td th:text="${supportBbsArticle.channelId}"></td> 
+         <td style="overflow:hidden;white-space:nowrap;" th:text="${supportBbsArticle.title}"></td> 
+         <td th:text="${supportBbsArticle.supportCatName}"></td> 
+         <td th:text="${supportBbsArticle.writerName}"></td> 
+         <td th:text="${#dates.format(supportBbsArticle.registDate,'yyyy/MM/dd HH:mm:ss') }"></td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </div> 
+    </div> 
+   </div> 
+  </th:block>
+   <th:block th:if="${params.supportArticleType.text == 'Request'}">
+   <h3> <small>Request</small> </h3> 
+   <div class="panel panel-default"> 
+    <div class="panel-body"> 
+     <div class="MdTbl01"> 
+      <table class="table table-striped table-bordered table-hover"> 
+       <thead> 
+        <tr> 
+         <th>Channel Name</th> 
+         <th>Title</th> 
+         <th>Categary</th> 
+         <th>Post by</th> 
+         <th>Post Time</th> 
+         <th>assigned time</th> 
+         <th>completed time</th> 
+         <th>assigned duration</th> 
+         <th>processing duration</th> 
+         <th>assignee</th> 
+        </tr> 
+       </thead> 
+       <tbody> 
+        <tr th:each="supportBbsArticle:${supportBbsArticleList}"> 
+         <td th:text="${supportBbsArticle.channelId}"></td> 
+         <td th:text="${supportBbsArticle.title}"></td> 
+         <td th:text="${supportBbsArticle.supportCatName}"></td> 
+         <td th:text="${supportBbsArticle.writerName}"></td> 
+         <td th:text="${supportBbsArticle.registDate}"></td> 
+         <td th:text="${supportBbsArticle.assignTime}"></td> 
+         <td th:text="${supportBbsArticle.completeTime}"></td> 
+         <td th:text="${supportBbsArticle.assignDuration}"></td> 
+         <td th:text="${supportBbsArticle.processingDuration}"></td> 
+         <td th:text="${supportBbsArticle.assignee}"></td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </div> 
+    </div> 
+   </div> 
+   </th:block>
+  </th:block>
+   <script th:inline="javascript">
+		$(function() {
+			$('.form_date').datetimepicker({
+				weekStart : 1,
+				todayBtn : 1,
+				autoclose : 1,
+				todayHighlight : 1,
+				startView : 2,
+				minView : 2,
+				forceParse : 0
+			});
+		})
+	</script> 
+  </div> 
+ </body>
+</html>
