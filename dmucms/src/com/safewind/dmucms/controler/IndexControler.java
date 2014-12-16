@@ -65,7 +65,9 @@ public class IndexControler {
             model.addAttribute("promptInfo", "您已经提交给老师！");
         } else if (promptType.equals("editRefuse")) {
             model.addAttribute("promptInfo", "对不起,当前状态下不能修改申请书");
-        }
+        }else if(promptType.equals("deleteRefuse")){
+        	model.addAttribute("promptInfo", "项目在当前状态下不能删除");
+		}
         return "prompt/prompt";
     }
 

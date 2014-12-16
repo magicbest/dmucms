@@ -40,7 +40,7 @@ public class EmailControler {
 
         if (sendAll != null) {
             List<String> emaiList = EmailServiceImpl.getAllEmailAdress();
-            logger.info("需要发送多少分邮件 ： " + emaiList.size());
+            logger.info("需要发送多少封邮件 ： " + emaiList.size());
             String[] array = new String[emaiList.size()];
             for (int i = 0; i < emaiList.size(); i++) {
                 array[i] = (String) emaiList.get(i);
