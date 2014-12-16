@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace和定义的Mapper接口对应，并实现其中的方法 -->
+
+
+<mapper namespace="com.safewind.dmucms.dao.CenterDao">
+   <resultMap  id="projectListResultMap"  type="com.safewind.dmucms.model.ProjectInfoForCenter" >
+       <result column="PROJECT_INCREAMENT_ID" property="projectId"  />
+       <result column="PROJECT_NAME" property="projectName"  />
+       <result column="XM" property="projectMannagerName"  />
+       <result column="XYM" property="studentCollege"  />
+       <result column="XH" property="projectMannagerId"  />
+       <result column="STUDENT_PHONE" property="studentPhone"  />
+       <result column="TEACHER_NAME" property="projectTeacher"  />
+       <result column="PROJECT_COST" property="projectCost"  />
+       <result column="PROJECT_RANK" property="projectRank"  />
+       <result column="PROJECT_STATUS" property="projectStatus"  />
+   </resultMap>
+   
+   <select id="queryAllProjectByCenter"  parameterType="int" resultMap="projectListResultMap" >       
+      select  * from 
+       (select
+        ROWNUM as ROWNO,
+		a.PROJECT_INCREAMENT_ID ,
+		a.PROJECT_NAME ,
+		b.XM ,
+		b.XYM,
+		b.XH,
+		c.STUDENT_PHONE,
+		d.XM  TEACHER_NAME,
+		a.PROJECT_COST ,
+		a.PROJECT_RANK ,
+		a.PROJECT_STATUS
+		from
+		"DLMU_DXSCX"."PROJECT" a
+		LEFT JOIN
+		"DATACT"."VI_XG_DXS_XSXJ" b
+		on (a.PROJECT_HEAD_ID = b.XH)
+		LEFT JOIN "DLMU_DXSCX"."STUDENT" C
+		on(b.XH = c.STUDENT_ID)
+		LEFT JOIN "DATACT"."VI_XG_DXS_JZG"  d
+		ON(d.GH = a.PROJECT_TUTOR_ID)
+	  ) t
+      where 
+        <![CDATA[ROWNO > #{startRow}]]> 
+        and    
+        <![CDATA[ROWNO <= #{endRow}]]> 
+   </select>
+   
+   
+   
+    <select id="queryProjectCount"   resultType="int" >       
+    select count(*)
+      from 
+       (select
+		a.PROJECT_INCREAMENT_ID ,
+		a.PROJECT_NAME ,
+		b.XM ,
+		b.XYM,
+		b.XH,
+		c.STUDENT_PHONE,
+		d.XM  TEACHER_NAME,
+		a.PROJECT_COST ,
+		a.PROJECT_RANK ,
+		a.PROJECT_STATUS
+		from
+		"DLMU_DXSCX"."PROJECT" a
+		LEFT JOIN
+		"DATACT"."VI_XG_DXS_XSXJ" b
+		on (a.PROJECT_HEAD_ID = b.XH)
+		LEFT JOIN "DLMU_DXSCX"."STUDENT" C
+		on(b.XH = c.STUDENT_ID)
+		LEFT JOIN "DATACT"."VI_XG_DXS_JZG"  d
+		ON(d.GH = a.PROJECT_TUTOR_ID)
+    ) t   
+   </select>
+   
+   <update id="saveProjectCenterReviewResult" parameterType="com.safewind.dmucms.model.CenterReview">
+	   update 
+	     "DLMU_DXSCX"."PROJECT"
+	   set 
+	      PROJECT_STATUS = #{projectResult} ,
+	      COLLEGE_COMMENT = #{collegeComment}
+	   where
+	      PROJECT_INCREAMENT_ID = #{projectId}
+	</update>
+   
+</mapper>
