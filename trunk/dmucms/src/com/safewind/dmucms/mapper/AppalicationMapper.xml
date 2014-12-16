@@ -70,6 +70,21 @@
    </resultMap>
    
    
+   <resultMap  id="studentProjectResultMap"  type="com.safewind.dmucms.model.ProjectInfoForStudent" >
+       <result column="PROJECT_INCREAMENT_ID" property="projectId"/>
+       <result column="PROJECT_REAL_ID" property="projectRealId"/>
+       <result column="PROJECT_NAME" property="projectName"/>
+       <result column="STUDENT_NAME" property="projectMannagerName"/>
+       <result column="TEACHER_NAME" property="projectTeacher"/>
+       <result column="PROJECT_RANK" property="projectRank"/>
+       <result column="PROJECT_COST" property="projectCost"/>
+       <result column="PROJECT_STATUS" property="projectStatus"/>
+       <result column="TEACHER_COMMENT" property="teacherComment"/>
+       <result column="COLLEGE_COMMENT" property="collegeComment"/>
+       <result column="CENTER_COMMENT" property="centerComment"/>
+   </resultMap>
+   
+   
    <select id="getStudentInputFlag"  parameterType="String" resultType="Integer" >
       select  count(*) from  "DLMU_DXSCX"."PROJECT" where  "PROJECT_HEAD_ID" = #{studentId}
    </select>
@@ -416,5 +431,35 @@
     <select id="queryProjectStatus" parameterType="int" resultType="int"  >
        select  PROJECT_STATUS  from  "DLMU_DXSCX"."PROJECT" where  PROJECT_INCREAMENT_ID = #{projectId} 
     </select>
+    
+     <select id="queryProjectInfoByProjectId" parameterType="int" resultMap="studentProjectResultMap"  >
+      select
+        a."PROJECT_INCREAMENT_ID",
+        a."PROJECT_REAL_ID",
+        a."PROJECT_NAME",
+        b.XM STUDENT_NAME,
+        c.XM TEACHER_NAME,
+        a."PROJECT_RANK",
+        a."PROJECT_COST",
+        a."PROJECT_STATUS",
+        a."TEACHER_COMMENT",
+        a."COLLEGE_COMMENT",
+        a."CENTER_COMMENT" 
+    from
+        "DLMU_DXSCX"."PROJECT" a 
+    left join 
+        "DATACT"."VI_XG_DXS_XSXJ"  b
+    on 
+        (a.PROJECT_HEAD_ID = b.XH)
+    left join 
+        "DATACT"."VI_XG_DXS_JZG"   c
+    on
+        (a."PROJECT_TUTOR_ID" = c.GH)
+     where  
+      PROJECT_INCREAMENT_ID = #{projectId}
+       
+    </select>
+    
+    
     
 </mapper>
