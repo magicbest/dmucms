@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<h1><a href="#">大创客户端</a></h1>		
 		</div>
 
-		<%@ include file="student/sidebar.html"%>
+		<%@ include file="../student/sidebar.html"%>
 		
 		<div id="style-switcher">
 			<i class="icon-arrow-left icon-white"></i>
