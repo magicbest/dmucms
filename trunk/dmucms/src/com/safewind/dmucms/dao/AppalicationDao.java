@@ -8,6 +8,7 @@ import org.mybatis.spring.annotation.Mapper;
 import com.safewind.dmucms.model.BusinessTeacher;
 import com.safewind.dmucms.model.Cost;
 import com.safewind.dmucms.model.Project;
+import com.safewind.dmucms.model.ProjectInfoForStudent;
 import com.safewind.dmucms.model.Student;
 import com.safewind.dmucms.model.TeamMember;
 
@@ -68,4 +69,6 @@ public interface AppalicationDao
     int queryTeacherInputFlag(@Param("teacherId")String userId);
 
 	int queryProjectStatus(@Param("projectId")int projectId);
+
+	ProjectInfoForStudent queryProjectInfoByProjectId(@Param("projectId")int projectId);
 }
