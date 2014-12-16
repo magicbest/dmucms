@@ -59,7 +59,9 @@ public class ProjectApplicationControler {
     public String saveApplication(@RequestParam(value = "projectMemberId", required = false) String[] projectMemberId,
             @RequestParam(value = "projectMemberWork", required = false) String[] projectMemberWork, Project project, Cost cost,
             Student student, Model model, HttpSession session) {
+    	logger.info(UserAccoutUtil.getUserLoginId() + " 保存创新申请书开始.....");
         AppalicationServiceImpl.saveInnovationApplication(projectMemberId, projectMemberWork, project, cost, student);
+        logger.info(UserAccoutUtil.getUserLoginId() + " 保存创新申请书结束.....");
         session.setAttribute("isProjectMannager", true);
         return "student/save_success";
     }
@@ -68,8 +70,10 @@ public class ProjectApplicationControler {
     public String saveBusinessApplication(@RequestParam(value = "projectMemberId", required = false) String[] projectMemberId,
             @RequestParam(value = "projectMemberWork", required = false) String[] projectMemberWork, Project project,
             BusinessTeacher businessTeacher, Cost cost, Student student, Model model, HttpSession session) {
-
+    	
+    	logger.info(UserAccoutUtil.getUserLoginId() + " 保存创业申请书开始.....");
         AppalicationServiceImpl.saveBusinessApplication(projectMemberId, projectMemberWork, project, businessTeacher, cost, student);
+        logger.info(UserAccoutUtil.getUserLoginId() + " 保存创业申请书结束.....");
         session.setAttribute("isProjectMannager", true);
         return "student/save_success";
     }
@@ -78,7 +82,7 @@ public class ProjectApplicationControler {
     @RequestMapping(value = "/appalication/{studentId}/edit", method = RequestMethod.GET)
     public String editApplicationPage(@PathVariable String studentId, Model model) {
 
-        logger.info("--------  进入修改页面 -------");
+        logger.info("-----" +  studentId  +  "---  进入修改页面 -------");
 
         int inputFlag = AppalicationServiceImpl.getStudentInputFlag(studentId);
         if (inputFlag == 0) {
@@ -125,9 +129,10 @@ public class ProjectApplicationControler {
             @RequestParam(value = "projectMemberWork") String[] projectMemberWork, Project project, BusinessTeacher businessTeacher,
             Cost cost, Student student) {
         studentId = UserAccoutUtil.getUserLoginId();
-        logger.info("当前登录学生 : " + studentId);
+        logger.info("-----" +  studentId  +  "---保存修改 开始-------");
         AppalicationServiceImpl.updateApplicationInfo(studentId, projectMemberId, projectMemberWork, project, businessTeacher, cost,
                 student);
+        logger.info("-----" +  studentId  +  "---保存修改结束 -------");
         return "student/update_success";
     }
 
@@ -180,7 +185,9 @@ public class ProjectApplicationControler {
             int projectStatus = AppalicationServiceImpl.queryProjectStatus(projectId) ;
             if(projectStatus < 2)
             {
+            	logger.info("-----" +  studentId  +  "---删除申请书开始 -------");
             	AppalicationServiceImpl.deleteApplication(studentId, projectId);
+            	logger.info("-----" +  studentId  +  "---删除申请书结束 -------");
             	return "student/delete_success";
             }else {
             	
@@ -202,7 +209,9 @@ public class ProjectApplicationControler {
             int projectStatus = AppalicationServiceImpl.queryProjectStatus(projectId) ;
             if(projectStatus == 0)
             {
+            	logger.info("-----" +  studentId  +  "---提交申请书开始 -------");
                 AppalicationServiceImpl.submitApplication(projectId);
+                logger.info("-----" +  studentId  +  "---提交申请书结束 -------");
             }else {
                 return "redirect:/prompt?promptType=submitRefuse";
             }
