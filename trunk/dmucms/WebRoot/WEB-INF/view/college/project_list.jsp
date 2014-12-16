@@ -222,6 +222,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						<p><strong>请输入对该项目的评语.</strong></p>
 						<input type="hidden"  name="projectId" value="${project.projectId}" >
+						<input type="hidden"  name="currentPage" value="${page.currentPage}" >
 						<textarea rows="3" name="teacherComment"  style="width:500px;"></textarea>
 					</div>
 					<div class="modal-footer">
