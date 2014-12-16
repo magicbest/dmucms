@@ -20,6 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/unicorn.grey.css" class="skin-color" />	
 	     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	     <script src="${pageContext.request.contextPath}/js/bootstrap-paginator.min.js"></script>
 	     <script>       
 		    function myBrowser(){  
 		    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
@@ -95,6 +96,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a href="${pageContext.request.contextPath}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>主页</a>
 				
 			</div>
+			
+	    <input id="totalPage" type="hidden" value="${page.totalPages}"> </input>     
+        <input id="pageNow" type="hidden" value="${page.currentPage}"> </input>   
+        <input id="deanId" type="hidden" value="<%=request.getRemoteUser() %>"> </input> 
+        <input id="host" type="hidden" value="${pageContext.request.contextPath}"> </input> 
+        
+     <div align="right" style="margin-right:20px;margin-bottom: -15px;"   id="prolist" > </div>  
+ 	<script type='text/javascript'>  
+        var total=$("#totalPage").val();
+        var pageNow=$("#pageNow").val();    
+        var deanId = $("#deanId").val();
+        var host = $("host").val() ;
+        var options = {
+        	
+            currentPage:pageNow ,
+            totalPages: total,
+            numberOfPages:10,
+            itemTexts: function (type, page, current) {
+                switch (type) {
+                case "first":
+                    return "First";
+                case "prev":
+                    return "&lt;";
+                case "next":
+                    return "&gt;";
+                case "last":
+                    return "Last";
+                case "page":
+                    return ""+page;
+                }
+            },
+            pageUrl: function(type, page, current){            
+            		return  "/dmucms/college/"+ deanId +"/viewProjectList?currentPage=" + page;
+            }
+      
+        }  
+        
+    	   $('#prolist').bootstrapPaginator(options);
+   		</script>
+			
+			
 			<div class="container-fluid">
 				<div class="row-fluid">
 					<div class="span12">
@@ -109,13 +151,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-										    <th>序号</th>
+										    <th>编号</th>
 											<th>项目名称</th>
 											<th>项目负责人</th>
 											<th>负责人电话</th>
 											<th>项目等级</th>
 											<th>项目经费</th>
 											<th>项目状态</th>
+											<th>指导教师</th>
 											<th>项目详情</th>
 											<th>操作</th>
 										</tr>
@@ -123,10 +166,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<tbody>
 									   <c:forEach items="${projectList}" var="project" varStatus="index">
 										<tr>
-										    <td >${index.count}</td>
+										    <td >${project.projectId}</td>
 											<td  ><c:out value="${project.projectName}" /></td>
 											<td><c:out value="${project.projectMannagerName}" /></td>
-											<td><c:out value="${project.projectMannagerPhone}" /></td>
+											<td><c:out value="${project.studentPhone}" /></td>
 											<td>
 											  <c:if test="${project.projectRank == null}">校级</c:if> 
 											  <c:if test="${project.projectRank != null}">${project.projectRank}</c:if>
@@ -140,9 +183,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											  <c:if test="${project.projectStatus == 1}">已提交</c:if> 
 											  <c:if test="${project.projectStatus == 2}">导师通过</c:if> 
 										   </td>
+										   <td><c:out value="${project.projectTeacher}" /></td>
 											<td>
-											   <form method="post"  target="_blank"  action="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser() %>/view/${project.projectMannagerId}">
-											        <input type="hidden"  name="projectMannagerId" value="${project.projectMannagerId}">
+											   <form method="post"  target="_blank"  action="${pageContext.request.contextPath}/college/<%=request.getRemoteUser() %>/view/${project.projectMannagerId}">
+											        <input type="hidden"  name="studentId" value="${project.projectMannagerId}">
 											        <input type="hidden"  name="projectId" value="${project.projectId}">
 											        <input type="submit"  class="btn btn-info btn-mini" value="查看" >
 											   </form>
@@ -178,6 +222,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						<p><strong>请输入对该项目的评语.</strong></p>
 						<input type="hidden"  name="projectId" value="${project.projectId}" >
+						<input type="hidden"  name="currentPage" value="${page.currentPage}" >
 						<textarea rows="3" name="teacherComment"  style="width:500px;"></textarea>
 					</div>
 					<div class="modal-footer">

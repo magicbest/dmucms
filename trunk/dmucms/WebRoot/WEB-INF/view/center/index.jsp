@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>大连海事大学大创管理系统</title>
+		<title>大连海事大学大创管理系统——中心端</title>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
@@ -108,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    <a href="http://202.118.89.12:8080/files/操作说明.doc" class="btn btn-primary" target="_blank">操作说明下载</a>
 						    </center>  -->
 						    <center>
-							<a href="${pageContext.request.contextPath}/college/<%=request.getRemoteUser()%>/viewProjectList" class="btn btn-success">审核申请书</a>
+							<a href="${pageContext.request.contextPath}/college/<%=request.getRemoteUser()%>/viewProjectList?currentPage=1" class="btn btn-success">审核申请书</a>
 						    </center>	    						   
 						    <hr/>
 						    <center>
