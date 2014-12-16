@@ -181,5 +181,4 @@ public class AppalicationServiceImpl implements IAppalicationService {
 	{
 		return appalicationDao.queryProjectStatus(projectId);
 	}
-
 }
