@@ -51,7 +51,7 @@ public class CenterControler {
             @RequestParam(value = "studentId") String studentId, @RequestParam(value = "projectId") Integer projectId, Model model) {
 
         adminId = UserAccoutUtil.getUserLoginId();
-        logger.debug("管理员教工号 ： " + adminId + "  --学生学号 ： " + studentId);
+        logger.info("管理员教工号 ： " + adminId + "  --学生学号 ： " + studentId);
         Student student = AppalicationServiceImpl.getStudentTotalInfo(studentId);
         Project project = AppalicationServiceImpl.getProjectInfo(projectId);
         if ("CY".equals(project.getProjectType())) {
