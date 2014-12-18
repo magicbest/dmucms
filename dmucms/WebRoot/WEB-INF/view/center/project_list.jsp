@@ -151,10 +151,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-										    <th>编号</th>
+										    <th>项目编号</th>
 											<th>项目名称</th>
 											<th>项目负责人</th>
 											<th>负责人电话</th>
+											<th>所在学院</th>
 											<th>项目等级</th>
 											<th>项目经费</th>
 											<th>项目状态</th>
@@ -170,6 +171,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<td  ><c:out value="${project.projectName}" /></td>
 											<td><c:out value="${project.projectMannagerName}" /></td>
 											<td><c:out value="${project.studentPhone}" /></td>
+											<td><c:out value="${project.studentCollege}" /></td>
 											<td>
 											  <c:if test="${project.projectRank == null}">校级</c:if> 
 											  <c:if test="${project.projectRank != null}">${project.projectRank}</c:if>
@@ -182,6 +184,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											  <c:if test="${project.projectStatus == 0}">未提交</c:if> 
 											  <c:if test="${project.projectStatus == 1}">已提交</c:if> 
 											  <c:if test="${project.projectStatus == 2}">导师通过</c:if> 
+											  <c:if test="${project.projectStatus == 3}">学院通过</c:if> 
+											  <c:if test="${project.projectStatus == 4}">学院不通过</c:if> 
+											  <c:if test="${project.projectStatus == 5}">中心通过</c:if> 
+											  <c:if test="${project.projectStatus == 6}">中心不通过</c:if> 
 										   </td>
 										   <td><c:out value="${project.projectTeacher}" /></td>
 											<td>
@@ -216,8 +222,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					       <p><strong>请选择是否通过该项目</strong></p>
 					       <div class="control-group"> 
 							   <div class="controls"> 
-							    <label class="radio inline"> <input type="radio" value="2" checked="checked" name="projectResult" /> 通过该项目</label> 
+							    <label class="radio inline"> <input type="radio" value="5" checked="checked" name="projectResult" /> 通过该项目</label> 
 							    <label class="radio inline"> <input type="radio" value="0" name="projectResult" /> 退回该项目 </label> 
+							    <label class="radio inline"> <input type="radio" value="6" name="projectResult" /> 不通过该项目 </label>
 							   </div> 
 							</div>
 						<p><strong>请输入对该项目的评语.</strong></p>
