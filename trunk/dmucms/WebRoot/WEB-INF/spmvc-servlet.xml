@@ -31,7 +31,7 @@
 	<property name="protocol" value="smtp"/>
 	<property name="host" value="smtp.gmail.com"/>
 	<property name="port" value="465" /><!--Gmail的SMTP端口-->
-	<property name="username" value="dlmucms@gmail.com"/>
+	<property name="username" value="shugang.cpp@gmail.com"/>
 	<property name="password" value="GM19691992123"/>
 	<property name="javaMailProperties">
 		<props>
