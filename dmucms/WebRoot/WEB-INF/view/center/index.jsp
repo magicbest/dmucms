@@ -108,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    <a href="http://202.118.89.12:8080/files/操作说明.doc" class="btn btn-primary" target="_blank">操作说明下载</a>
 						    </center>  -->
 						    <center>
-							<a href="${pageContext.request.contextPath}/college/<%=request.getRemoteUser()%>/viewProjectList?currentPage=1" class="btn btn-success">审核申请书</a>
+							<a href="${pageContext.request.contextPath}/center/<%=request.getRemoteUser()%>/viewProjectList?currentPage=1" class="btn btn-success">审核申请书</a>
 						    </center>	    						   
 						    <hr/>
 						    <center>

@@ -128,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }
             },
             pageUrl: function(type, page, current){            
-            		return  "/dmucms/college/"+ deanId +"/viewProjectList?currentPage=" + page;
+            		return  "/dmucms/center/"+ deanId +"/viewProjectList?currentPage=" + page;
             }
       
         }  
@@ -182,7 +182,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											 </td>
 											<td> 
 											  <c:if test="${project.projectStatus == 0}">未提交</c:if> 
-											  <c:if test="${project.projectStatus == 1}">已提交</c:if> 
+											  <c:if test="${project.projectStatus == 1}">提交至老师</c:if> 
 											  <c:if test="${project.projectStatus == 2}">导师通过</c:if> 
 											  <c:if test="${project.projectStatus == 3}">学院通过</c:if> 
 											  <c:if test="${project.projectStatus == 4}">学院不通过</c:if> 
@@ -217,7 +217,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<button data-dismiss="modal" class="close" type="button"></button>
 						<h3>确认通过</h3>
 					</div>
-				  <form action="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser() %>/review/${project.projectId}" method="post">
+				  <form action="${pageContext.request.contextPath}/center/<%=request.getRemoteUser() %>/review/${project.projectId}" method="post">
 					<div class="modal-body">
 					       <p><strong>请选择是否通过该项目</strong></p>
 					       <div class="control-group"> 
