@@ -43,7 +43,7 @@ public class CenterControler {
         List<ProjectInfoForCenter> projectList = CenterServiceImpl.getAllProjectList(page.getStartRow(),page.getEndRow());
         model.addAttribute("projectList", projectList);
         model.addAttribute("page", page);
-        return "college/project_list";
+        return "center/project_list";
     }
     
     @RequestMapping(value = "/center/{adminId}/view/{shamStudentId}", method = RequestMethod.POST)
@@ -63,7 +63,7 @@ public class CenterControler {
             model.addAttribute("project", project);
             model.addAttribute("cost", cost);
             model.addAttribute("businessTeacher", businessTeacher);
-            return "college/view_appalication";
+            return "center/view_appalication";
         } else {
             Cost cost = AppalicationServiceImpl.getCostInfo(projectId);
             List<TeamMember> memberList = AppalicationServiceImpl.getTeamMemberInfo(projectId);
@@ -71,7 +71,7 @@ public class CenterControler {
             model.addAttribute("student", student);
             model.addAttribute("project", project);
             model.addAttribute("cost", cost);
-            return "college/view_appalication";
+            return "center/view_appalication";
         }
     }
     
@@ -85,7 +85,7 @@ public class CenterControler {
             Model model) {
         adminId = UserAccoutUtil.getUserLoginId();
         CenterServiceImpl.saveProjectCenterReview(centerReview);
-        return "redirect:/college/" + adminId + "/viewProjectList?currentPage=" + currentPage;
+        return "redirect:/center/" + adminId + "/viewProjectList?currentPage=" + currentPage;
     }
     
     

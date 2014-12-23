@@ -37,6 +37,12 @@ public class IndexControler {
                 return "teacher/index";
             }
         } else {
+        	
+        	if(userId.equals("2220122088"))
+        	{
+        		return "center/index";
+        	}
+        	
             int isProjectMannager = AppalicationServiceImpl.getStudentInputFlag(userId);
             if (isProjectMannager != 0) {
                 session.setAttribute("userRoleLevel", 1);
