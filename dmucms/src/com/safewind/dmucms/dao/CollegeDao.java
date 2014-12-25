@@ -18,4 +18,6 @@ public interface CollegeDao {
 
 	int getProjectCount(@Param("collegeName")String collegeName);
 
+	String queryCollegeName(@Param("userId")String userId);
+
 }

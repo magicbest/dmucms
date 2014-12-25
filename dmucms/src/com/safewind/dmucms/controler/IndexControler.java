@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.safewind.dmucms.service.IAppalicationService;
+import com.safewind.dmucms.service.ICollegeService;
 import com.safewind.dmucms.service.ITeacherReviewService;
 import com.safewind.dmucms.util.UserAccoutUtil;
 
@@ -20,28 +21,34 @@ public class IndexControler {
     private IAppalicationService AppalicationServiceImpl;
     @Autowired
     private ITeacherReviewService TeacherReviewServiceImpl;
+    @Autowired
+    private ICollegeService CollegeServiceImpl;
 
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public String getLoginPage(HttpSession session) {
         String userId = UserAccoutUtil.getUserLoginId();
         if (userId.length() == 8) {
-            int teacherInputBasicInfoFlag = AppalicationServiceImpl.queryTeacherInputFlag(userId);
-            if (teacherInputBasicInfoFlag == 0) {
-                return "teacher/input_teacherInfo";
-            } else {
-                int isProjectTeacher = TeacherReviewServiceImpl.getIsProjectTeacher(userId);
-                if (isProjectTeacher != 0) {
-                    session.setAttribute("isProjectTeacher", true);
-                    session.setAttribute("userRoleLevel", 2);
-                }
-                return "teacher/index";
-            }
+        	String collegeName = CollegeServiceImpl.getMasterCollegeName(userId);
+        	session.setAttribute("collegeName", collegeName);
+        	if(collegeName!=null){
+        		 return "college/index";
+        	}
+        	else{
+	            int teacherInputBasicInfoFlag = AppalicationServiceImpl.queryTeacherInputFlag(userId);
+	            if (teacherInputBasicInfoFlag == 0) {
+	                return "teacher/input_teacherInfo";
+	            } else {
+	                int isProjectTeacher = TeacherReviewServiceImpl.getIsProjectTeacher(userId);
+	                if (isProjectTeacher != 0) {
+	                    session.setAttribute("isProjectTeacher", true);
+	                    session.setAttribute("userRoleLevel", 2);
+	                }
+	                return "teacher/index";
+	            }
+        	}
         } else {
         	
-        	if(userId.equals("2220122088"))
-        	{
-        		return "center/index";
-        	}
+        	
         	
             int isProjectMannager = AppalicationServiceImpl.getStudentInputFlag(userId);
             if (isProjectMannager != 0) {

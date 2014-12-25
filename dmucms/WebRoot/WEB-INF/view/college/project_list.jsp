@@ -182,6 +182,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											  <c:if test="${project.projectStatus == 0}">未提交</c:if> 
 											  <c:if test="${project.projectStatus == 1}">已提交</c:if> 
 											  <c:if test="${project.projectStatus == 2}">导师通过</c:if> 
+											  <c:if test="${project.projectStatus == 3}">院长通过</c:if> 
+											  <c:if test="${project.projectStatus == 4}">院长不通过</c:if> 
 										   </td>
 										   <td><c:out value="${project.projectTeacher}" /></td>
 											<td>
@@ -211,13 +213,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<button data-dismiss="modal" class="close" type="button"></button>
 						<h3>确认通过</h3>
 					</div>
-				  <form action="${pageContext.request.contextPath}/teacher/<%=request.getRemoteUser() %>/review/${project.projectId}" method="post">
+				  <form action="${pageContext.request.contextPath}/college/<%=request.getRemoteUser() %>/review/${project.projectId}" method="post">
 					<div class="modal-body">
 					       <p><strong>请选择是否通过该项目</strong></p>
 					       <div class="control-group"> 
 							   <div class="controls"> 
-							    <label class="radio inline"> <input type="radio" value="2" checked="checked" name="projectResult" /> 通过该项目</label> 
-							    <label class="radio inline"> <input type="radio" value="0" name="projectResult" /> 退回该项目 </label> 
+							    <label class="radio inline"> <input type="radio" value="3" checked="checked" name="projectResult" /> 通过该项目</label> 
+							    <label class="radio inline"> <input type="radio" value="4" name="projectResult" />  不通过</label> 
 							   </div> 
 							</div>
 						<p><strong>请输入对该项目的评语.</strong></p>

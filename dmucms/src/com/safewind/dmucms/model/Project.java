@@ -15,9 +15,17 @@ public class Project {
 	private String  projectTeacherId;
 	private String  projectContent;
 	private String  projectSpecial;
+	private String  teacherComment;
 	private int  projectStatus;
 	
 	
+	
+	public String getTeacherComment() {
+		return teacherComment;
+	}
+	public void setTeacherComment(String teacherComment) {
+		this.teacherComment = teacherComment;
+	}
 	public Integer getProjectId() {
 		return projectId;
 	}

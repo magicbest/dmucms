@@ -3,7 +3,7 @@ package com.safewind.dmucms.domain;
 public class Pager
 {
 	private int totalRows;      // 总行数
-	private int pageSize = 8;  // 每页显示的行数
+	private int pageSize = 20;  // 每页显示的行数
 	private int currentPage ;  // 当前页号
 	private int totalPages;   // 总页数
 	private int startRow;    // 当前页在数据库中的起始行
