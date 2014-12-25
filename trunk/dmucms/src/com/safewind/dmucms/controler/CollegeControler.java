@@ -36,7 +36,8 @@ public class CollegeControler {
 
     @RequestMapping(value = "/college/{shamDeanId}/viewProjectList", method = RequestMethod.GET)
     public String getProjectList(@PathVariable String shamDeanId, @RequestParam(value = "currentPage") Integer currentPage, Model model) {
-        String collegeName = "轮机工程学院";
+    	 String userId = UserAccoutUtil.getUserLoginId();
+    	String collegeName = CollegeServiceImpl.getMasterCollegeName(userId);
         int projectCount = CollegeServiceImpl.getProjectCount(collegeName);
         Pager page = new Pager(projectCount, currentPage);
         CollegeProjectSearchParm searchParm = new CollegeProjectSearchParm();

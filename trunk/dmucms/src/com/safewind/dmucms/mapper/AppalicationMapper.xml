@@ -32,6 +32,7 @@
        <result column="PROJECT_TYPE" property="projectType"/>
        <result column="PROJECT_STATUS" property="projectStatus"/> 
        <result column="TEACHER_NAME" property="projectTeacherName"/>
+       <result column="TEACHER_COMMENT" property="teacherComment"/>
    </resultMap>
    
    
@@ -250,6 +251,7 @@
         PROJECT_TUTOR_NAME,
         "PROJECT_TYPE",
         "XM" TEACHER_NAME ,
+        "TEACHER_COMMENT",
         "PROJECT_YEAR" 
     from
         "DLMU_DXSCX"."PROJECT" a

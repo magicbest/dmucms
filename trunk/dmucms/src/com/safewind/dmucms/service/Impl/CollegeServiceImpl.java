@@ -33,4 +33,10 @@ public class CollegeServiceImpl implements ICollegeService {
 		return collegeDao.getProjectCount(collegeName);
 	}
 
+	@Override
+	public String getMasterCollegeName(String userId) {
+		
+		return collegeDao.queryCollegeName(userId);
+	}
+
 }

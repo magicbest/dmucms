@@ -14,4 +14,6 @@ public interface ICollegeService {
 
 	int getProjectCount(String collegeName);
 
+	String getMasterCollegeName(String userId);
+
 }

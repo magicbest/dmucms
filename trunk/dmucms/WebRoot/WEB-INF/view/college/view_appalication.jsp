@@ -102,7 +102,7 @@
         <tr height="30">
           <td width="140" rowspan="4">指导教师对本项目的支持情况</td>
           
-          <td width="660"></td>
+          <td width="660"><c:out value="${project.teacherComment}" /></td>
           
         </tr>
     </table>

@@ -19,8 +19,10 @@
    
    <select id="queryProjectListByCollege"  parameterType="com.safewind.dmucms.model.CollegeProjectSearchParm" resultMap="projectListResultMap" >       
       select  * from 
+      (select
+      ROWNUM as ROWNO,
+      t.* from
        (select
-        ROWNUM as ROWNO,
 		a.PROJECT_INCREAMENT_ID ,
 		a.PROJECT_NAME ,
 		b.XM ,
@@ -30,8 +32,8 @@
 		a.PROJECT_COST ,
 		a.PROJECT_RANK ,
 		a.PROJECT_STATUS
-		from
-		"DLMU_DXSCX"."PROJECT" a
+		from 
+		"DLMU_DXSCX"."PROJECT"  a
 		LEFT JOIN
 		"DATACT"."VI_XG_DXS_XSXJ" b
 		on (a.PROJECT_HEAD_ID = b.XH)
@@ -39,12 +41,14 @@
 		on(b.XH = c.STUDENT_ID)
 		LEFT JOIN "DATACT"."VI_XG_DXS_JZG"  d
 		ON(d.GH = a.PROJECT_TUTOR_ID)
-		where b.XYM = #{collegeName} 
+		where b.XYM = #{collegeName} and a.PROJECT_STATUS > 1 order by a.PROJECT_STATUS 
 	  ) t
+	  )f
       where 
         <![CDATA[ROWNO > #{startRow}]]> 
         and    
         <![CDATA[ROWNO <= #{endRow}]]> 
+      
    </select>
    
    
@@ -71,7 +75,7 @@
 		on(b.XH = c.STUDENT_ID)
 		LEFT JOIN "DATACT"."VI_XG_DXS_JZG"  d
 		ON(d.GH = a.PROJECT_TUTOR_ID)
-		where b.XYM = #{collegeName}
+		where b.XYM = #{collegeName} and a.PROJECT_STATUS > 1
     ) t   
    </select>
    
@@ -80,9 +84,13 @@
 	     "DLMU_DXSCX"."PROJECT"
 	   set 
 	      PROJECT_STATUS = #{projectResult} ,
-	      COLLEGE_COMMENT = #{collegeComment}
+	      COLLEGE_COMMENT = #{collegeComment,javaType=String, jdbcType=VARCHAR}
 	   where
 	      PROJECT_INCREAMENT_ID = #{projectId}
 	</update>
-   
+    <select id="queryCollegeName"  parameterType="String" resultType="String" >       
+    select COLLEGE_NAME from "DLMU_DXSCX"."COLLEGE"  where MASTER_ID
+     = #{userId}
+    
+   </select>
 </mapper>
